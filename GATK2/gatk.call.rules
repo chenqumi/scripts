@@ -1,0 +1,117 @@
+# GATK realign2vcf rules
+
+# software
+# ===========================
+configfile: "./rules/snp.config.json"
+BWA = config["biosoft"]["bwa"]
+GATK = config["biosoft"]["gatk"]
+ITOOLS = config["biosoft"]["itools"]
+JAVA = config["biosoft"]["java"]
+PICARD = config["biosoft"]["picard"]
+SAMTOOLS = config["biosoft"]["samtools"]
+SPLIT = config["biosoft"]["split"]
+COMBINEVCF = config["biosoft"]["combinevcf"]
+
+# input info
+# ==========================================
+samples = config["samples"]
+pseudochrom_num = config["pseudochrom_num"]
+split_blocks_num = config["split_blocks_num"]
+#pseudochroms = config["pseudochroms"]
+pseudochroms = ["Chrom{}".format(i+1) for i in range(int(split_blocks_num))]
+#split_ref_file = config["split_ref_file"]
+split_ref_file = ["{0}/Index/{0}.fa".format(i) for i in  pseudochroms]
+gvcf_files = ["{{chrom}}/GVCF/{}.g.vcf".format(i) for i in samples]
+vcf_files = ["{0}/VCF/{0}.gatk.vcf".format(i) for i in pseudochroms]
+#
+# ==========================================
+include:
+    "./fq2realinbam.rules"
+localrules:
+    vcf_files_lst
+#
+# ==========================================
+rule gatk_realign2vcf_all:
+    input:
+        expand(gvcf_files, chrom=pseudochroms),
+        "Stat/bwa_stat.xls",
+        "AllChr/gatk_vcf.lst",
+        "AllChr/AllChr.gatk.raw.vcf"
+
+#
+# ==========================================
+rule gatk_gvcf:
+    input:
+        ref = "{chrom}/Index/{chrom}.fa",
+        realign = "{chrom}/Realign/{sample}.realign.bam",
+
+    output:
+        gvcf = "{chrom}/GVCF/{sample}.g.vcf"
+
+    resources:
+        qsub_vf = 40, qsub_p = 4
+
+    shell:
+        """
+        {JAVA} -Xmx30G -jar {GATK} -T HaplotypeCaller -R {input.ref} \
+        -I {input.realign} -o {output.gvcf} -ERC GVCF
+        """
+#
+# ==========================================
+rule gatk_vcf:
+    input:
+        gvcf_files,
+        ref = "{chrom}/Index/{chrom}.fa"
+        #gvcf = "{chrom}/GVCF/{sample}.g.vcf"
+        #lambda wildcards: wildcards.gvcf
+
+    output:
+        "{chrom}/VCF/{chrom}.gatk.vcf"
+
+    params:
+        " ".join(["-V {}".format(i) for i in gvcf_files])
+
+    resources:
+        qsub_vf = 40, qsub_p = 4
+
+    shell:
+        """
+        {JAVA} -Xmx30G -jar {GATK} -T GenotypeGVCFs -R {input.ref} \
+        {params} -o {output}
+        """
+
+#
+# ==========================================
+rule vcf_files_lst:
+    input:
+        lst = expand("{chrom}/VCF/{chrom}.gatk.vcf",chrom=pseudochroms)
+        # "expand" in a specific rule, all expanded file will be push
+        # into a list;
+        # while "expand" in the first "all rule", file will expand as
+        # many file;
+    output:
+        "AllChr/gatk_vcf.lst"
+
+    run:
+        with open("AllChr/gatk_vcf.lst","w") as fd:
+            for i in vcf_files:
+                fd.write(i+"\n")
+
+#
+# ==========================================
+rule combine_vcf:
+    input:
+        ref = "Reference/ref.merge.fa",
+        lst = "AllChr/gatk_vcf.lst"
+
+    output:
+        "AllChr/AllChr.gatk.raw.vcf"
+
+
+    resources:
+        qsub_vf = 2, qsub_p = 2
+
+    shell:
+        """
+        {COMBINEVCF} {input.ref} {input.lst} > {output}
+        """

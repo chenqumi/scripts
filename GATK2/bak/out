@@ -1,0 +1,1482 @@
+rule combine_pseudo:
+	input: Reference/ref.fa
+	output: Reference/ref.merge.fa.merlist, Reference/ref.merge.fa
+	reason: Missing output files: Reference/ref.merge.fa
+	resources: qsub_p=2, qsub_vf=2000
+
+        /p299/user/og06/pipe/pub/baozhigui/biosoft/iTools_Code/iTools Fatools regenerate -InPut Reference/ref.fa -OutPut Reference/ref.merge.fa         -InsertN 500 -NumSeq 7 -NoOutgz
+        
+rule split_ref:
+	input: Reference/ref.merge.fa
+	output: Chrom1/Index/Chrom1.fa, Chrom2/Index/Chrom2.fa, Chrom3/Index/Chrom3.fa, Chrom4/Index/Chrom4.fa, Chrom5/Index/Chrom5.fa, Chrom6/Index/Chrom6.fa, Chrom7/Index/Chrom7.fa
+	reason: Missing output files: Chrom1/Index/Chrom1.fa, Chrom2/Index/Chrom2.fa, Chrom6/Index/Chrom6.fa, Chrom4/Index/Chrom4.fa, Chrom7/Index/Chrom7.fa, Chrom5/Index/Chrom5.fa, Chrom3/Index/Chrom3.fa; Input files updated by another job: Reference/ref.merge.fa
+	resources: qsub_p=2, qsub_vf=3000
+
+        perl /p299/user/og03/chenquan1609/Resequencing/script/GATK2/split.pl Reference/ref.merge.fa 7 7 Reference
+        
+rule picard_index:
+	input: Chrom3/Index/Chrom3.fa
+	output: Chrom3/Index/Chrom3.dict
+	reason: Missing output files: Chrom3/Index/Chrom3.dict; Input files updated by another job: Chrom3/Index/Chrom3.fa
+	wildcards: chrom=Chrom3
+	resources: qsub_p=2, qsub_vf=10000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx10G -jar /p299/user/og06/pipe/pub/baozhigui/biosoft/picard-2.8.0/picard.jar CreateSequenceDictionary         R=Chrom3/Index/Chrom3.fa O=Chrom3/Index/Chrom3.dict
+        
+rule bwa_index:
+	input: Chrom4/Index/Chrom4.fa
+	output: Chrom4/Index/Chrom4.fa.amb, Chrom4/Index/Chrom4.fa.ann, Chrom4/Index/Chrom4.fa.bwt, Chrom4/Index/Chrom4.fa.pac, Chrom4/Index/Chrom4.fa.sa
+	reason: Missing output files: Chrom4/Index/Chrom4.fa.amb, Chrom4/Index/Chrom4.fa.pac, Chrom4/Index/Chrom4.fa.ann, Chrom4/Index/Chrom4.fa.sa, Chrom4/Index/Chrom4.fa.bwt; Input files updated by another job: Chrom4/Index/Chrom4.fa
+	wildcards: chrom=Chrom4
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/bwa-0.7.13/bwa index Chrom4/Index/Chrom4.fa
+        
+rule picard_index:
+	input: Chrom4/Index/Chrom4.fa
+	output: Chrom4/Index/Chrom4.dict
+	reason: Missing output files: Chrom4/Index/Chrom4.dict; Input files updated by another job: Chrom4/Index/Chrom4.fa
+	wildcards: chrom=Chrom4
+	resources: qsub_p=2, qsub_vf=10000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx10G -jar /p299/user/og06/pipe/pub/baozhigui/biosoft/picard-2.8.0/picard.jar CreateSequenceDictionary         R=Chrom4/Index/Chrom4.fa O=Chrom4/Index/Chrom4.dict
+        
+rule samtools_index:
+	input: Chrom6/Index/Chrom6.fa
+	output: Chrom6/Index/Chrom6.fa.fai
+	reason: Missing output files: Chrom6/Index/Chrom6.fa.fai; Input files updated by another job: Chrom6/Index/Chrom6.fa
+	wildcards: chrom=Chrom6
+	resources: qsub_p=2, qsub_vf=5000
+
+        /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools faidx Chrom6/Index/Chrom6.fa
+        
+rule bwa_index:
+	input: Chrom5/Index/Chrom5.fa
+	output: Chrom5/Index/Chrom5.fa.amb, Chrom5/Index/Chrom5.fa.ann, Chrom5/Index/Chrom5.fa.bwt, Chrom5/Index/Chrom5.fa.pac, Chrom5/Index/Chrom5.fa.sa
+	reason: Missing output files: Chrom5/Index/Chrom5.fa.ann, Chrom5/Index/Chrom5.fa.bwt, Chrom5/Index/Chrom5.fa.sa, Chrom5/Index/Chrom5.fa.amb, Chrom5/Index/Chrom5.fa.pac; Input files updated by another job: Chrom5/Index/Chrom5.fa
+	wildcards: chrom=Chrom5
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/bwa-0.7.13/bwa index Chrom5/Index/Chrom5.fa
+        
+rule picard_index:
+	input: Chrom2/Index/Chrom2.fa
+	output: Chrom2/Index/Chrom2.dict
+	reason: Missing output files: Chrom2/Index/Chrom2.dict; Input files updated by another job: Chrom2/Index/Chrom2.fa
+	wildcards: chrom=Chrom2
+	resources: qsub_p=2, qsub_vf=10000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx10G -jar /p299/user/og06/pipe/pub/baozhigui/biosoft/picard-2.8.0/picard.jar CreateSequenceDictionary         R=Chrom2/Index/Chrom2.fa O=Chrom2/Index/Chrom2.dict
+        
+rule samtools_index:
+	input: Chrom1/Index/Chrom1.fa
+	output: Chrom1/Index/Chrom1.fa.fai
+	reason: Missing output files: Chrom1/Index/Chrom1.fa.fai; Input files updated by another job: Chrom1/Index/Chrom1.fa
+	wildcards: chrom=Chrom1
+	resources: qsub_p=2, qsub_vf=5000
+
+        /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools faidx Chrom1/Index/Chrom1.fa
+        
+rule samtools_index:
+	input: Chrom2/Index/Chrom2.fa
+	output: Chrom2/Index/Chrom2.fa.fai
+	reason: Missing output files: Chrom2/Index/Chrom2.fa.fai; Input files updated by another job: Chrom2/Index/Chrom2.fa
+	wildcards: chrom=Chrom2
+	resources: qsub_p=2, qsub_vf=5000
+
+        /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools faidx Chrom2/Index/Chrom2.fa
+        
+rule bwa_index:
+	input: Chrom6/Index/Chrom6.fa
+	output: Chrom6/Index/Chrom6.fa.amb, Chrom6/Index/Chrom6.fa.ann, Chrom6/Index/Chrom6.fa.bwt, Chrom6/Index/Chrom6.fa.pac, Chrom6/Index/Chrom6.fa.sa
+	reason: Missing output files: Chrom6/Index/Chrom6.fa.ann, Chrom6/Index/Chrom6.fa.pac, Chrom6/Index/Chrom6.fa.bwt, Chrom6/Index/Chrom6.fa.sa, Chrom6/Index/Chrom6.fa.amb; Input files updated by another job: Chrom6/Index/Chrom6.fa
+	wildcards: chrom=Chrom6
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/bwa-0.7.13/bwa index Chrom6/Index/Chrom6.fa
+        
+rule picard_index:
+	input: Chrom7/Index/Chrom7.fa
+	output: Chrom7/Index/Chrom7.dict
+	reason: Missing output files: Chrom7/Index/Chrom7.dict; Input files updated by another job: Chrom7/Index/Chrom7.fa
+	wildcards: chrom=Chrom7
+	resources: qsub_p=2, qsub_vf=10000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx10G -jar /p299/user/og06/pipe/pub/baozhigui/biosoft/picard-2.8.0/picard.jar CreateSequenceDictionary         R=Chrom7/Index/Chrom7.fa O=Chrom7/Index/Chrom7.dict
+        
+rule samtools_index:
+	input: Chrom5/Index/Chrom5.fa
+	output: Chrom5/Index/Chrom5.fa.fai
+	reason: Missing output files: Chrom5/Index/Chrom5.fa.fai; Input files updated by another job: Chrom5/Index/Chrom5.fa
+	wildcards: chrom=Chrom5
+	resources: qsub_p=2, qsub_vf=5000
+
+        /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools faidx Chrom5/Index/Chrom5.fa
+        
+rule bwa_index:
+	input: Chrom2/Index/Chrom2.fa
+	output: Chrom2/Index/Chrom2.fa.amb, Chrom2/Index/Chrom2.fa.ann, Chrom2/Index/Chrom2.fa.bwt, Chrom2/Index/Chrom2.fa.pac, Chrom2/Index/Chrom2.fa.sa
+	reason: Missing output files: Chrom2/Index/Chrom2.fa.bwt, Chrom2/Index/Chrom2.fa.ann, Chrom2/Index/Chrom2.fa.pac, Chrom2/Index/Chrom2.fa.sa, Chrom2/Index/Chrom2.fa.amb; Input files updated by another job: Chrom2/Index/Chrom2.fa
+	wildcards: chrom=Chrom2
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/bwa-0.7.13/bwa index Chrom2/Index/Chrom2.fa
+        
+rule picard_index:
+	input: Chrom5/Index/Chrom5.fa
+	output: Chrom5/Index/Chrom5.dict
+	reason: Missing output files: Chrom5/Index/Chrom5.dict; Input files updated by another job: Chrom5/Index/Chrom5.fa
+	wildcards: chrom=Chrom5
+	resources: qsub_p=2, qsub_vf=10000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx10G -jar /p299/user/og06/pipe/pub/baozhigui/biosoft/picard-2.8.0/picard.jar CreateSequenceDictionary         R=Chrom5/Index/Chrom5.fa O=Chrom5/Index/Chrom5.dict
+        
+rule samtools_index:
+	input: Chrom3/Index/Chrom3.fa
+	output: Chrom3/Index/Chrom3.fa.fai
+	reason: Missing output files: Chrom3/Index/Chrom3.fa.fai; Input files updated by another job: Chrom3/Index/Chrom3.fa
+	wildcards: chrom=Chrom3
+	resources: qsub_p=2, qsub_vf=5000
+
+        /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools faidx Chrom3/Index/Chrom3.fa
+        
+rule bwa_index:
+	input: Chrom3/Index/Chrom3.fa
+	output: Chrom3/Index/Chrom3.fa.amb, Chrom3/Index/Chrom3.fa.ann, Chrom3/Index/Chrom3.fa.bwt, Chrom3/Index/Chrom3.fa.pac, Chrom3/Index/Chrom3.fa.sa
+	reason: Missing output files: Chrom3/Index/Chrom3.fa.sa, Chrom3/Index/Chrom3.fa.bwt, Chrom3/Index/Chrom3.fa.pac, Chrom3/Index/Chrom3.fa.ann, Chrom3/Index/Chrom3.fa.amb; Input files updated by another job: Chrom3/Index/Chrom3.fa
+	wildcards: chrom=Chrom3
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/bwa-0.7.13/bwa index Chrom3/Index/Chrom3.fa
+        
+rule bwa_index:
+	input: Chrom7/Index/Chrom7.fa
+	output: Chrom7/Index/Chrom7.fa.amb, Chrom7/Index/Chrom7.fa.ann, Chrom7/Index/Chrom7.fa.bwt, Chrom7/Index/Chrom7.fa.pac, Chrom7/Index/Chrom7.fa.sa
+	reason: Missing output files: Chrom7/Index/Chrom7.fa.sa, Chrom7/Index/Chrom7.fa.pac, Chrom7/Index/Chrom7.fa.ann, Chrom7/Index/Chrom7.fa.bwt, Chrom7/Index/Chrom7.fa.amb; Input files updated by another job: Chrom7/Index/Chrom7.fa
+	wildcards: chrom=Chrom7
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/bwa-0.7.13/bwa index Chrom7/Index/Chrom7.fa
+        
+rule picard_index:
+	input: Chrom6/Index/Chrom6.fa
+	output: Chrom6/Index/Chrom6.dict
+	reason: Missing output files: Chrom6/Index/Chrom6.dict; Input files updated by another job: Chrom6/Index/Chrom6.fa
+	wildcards: chrom=Chrom6
+	resources: qsub_p=2, qsub_vf=10000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx10G -jar /p299/user/og06/pipe/pub/baozhigui/biosoft/picard-2.8.0/picard.jar CreateSequenceDictionary         R=Chrom6/Index/Chrom6.fa O=Chrom6/Index/Chrom6.dict
+        
+rule samtools_index:
+	input: Chrom4/Index/Chrom4.fa
+	output: Chrom4/Index/Chrom4.fa.fai
+	reason: Missing output files: Chrom4/Index/Chrom4.fa.fai; Input files updated by another job: Chrom4/Index/Chrom4.fa
+	wildcards: chrom=Chrom4
+	resources: qsub_p=2, qsub_vf=5000
+
+        /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools faidx Chrom4/Index/Chrom4.fa
+        
+rule picard_index:
+	input: Chrom1/Index/Chrom1.fa
+	output: Chrom1/Index/Chrom1.dict
+	reason: Missing output files: Chrom1/Index/Chrom1.dict; Input files updated by another job: Chrom1/Index/Chrom1.fa
+	wildcards: chrom=Chrom1
+	resources: qsub_p=2, qsub_vf=10000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx10G -jar /p299/user/og06/pipe/pub/baozhigui/biosoft/picard-2.8.0/picard.jar CreateSequenceDictionary         R=Chrom1/Index/Chrom1.fa O=Chrom1/Index/Chrom1.dict
+        
+rule bwa_index:
+	input: Chrom1/Index/Chrom1.fa
+	output: Chrom1/Index/Chrom1.fa.amb, Chrom1/Index/Chrom1.fa.ann, Chrom1/Index/Chrom1.fa.bwt, Chrom1/Index/Chrom1.fa.pac, Chrom1/Index/Chrom1.fa.sa
+	reason: Missing output files: Chrom1/Index/Chrom1.fa.pac, Chrom1/Index/Chrom1.fa.amb, Chrom1/Index/Chrom1.fa.ann, Chrom1/Index/Chrom1.fa.bwt, Chrom1/Index/Chrom1.fa.sa; Input files updated by another job: Chrom1/Index/Chrom1.fa
+	wildcards: chrom=Chrom1
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/bwa-0.7.13/bwa index Chrom1/Index/Chrom1.fa
+        
+rule samtools_index:
+	input: Chrom7/Index/Chrom7.fa
+	output: Chrom7/Index/Chrom7.fa.fai
+	reason: Missing output files: Chrom7/Index/Chrom7.fa.fai; Input files updated by another job: Chrom7/Index/Chrom7.fa
+	wildcards: chrom=Chrom7
+	resources: qsub_p=2, qsub_vf=5000
+
+        /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools faidx Chrom7/Index/Chrom7.fa
+        
+rule bwa_align:
+	input: Chrom2/Index/Chrom2.fa.amb, Chrom2/Index/Chrom2.fa.ann, Chrom2/Index/Chrom2.fa.bwt, Chrom2/Index/Chrom2.fa.pac, Chrom2/Index/Chrom2.fa.sa, Chrom2/Index/Chrom2.dict, Chrom2/Index/Chrom2.fa.fai, Data/D8-1-D8-22_R2.fastq.gz, Data/D8-1-D8-22_R1.fastq.gz, Chrom2/Index/Chrom2.fa
+	output: Chrom2/Align/D8-1-D8-22.bam
+	reason: Missing output files: Chrom2/Align/D8-1-D8-22.bam; Input files updated by another job: Chrom2/Index/Chrom2.fa.bwt, Chrom2/Index/Chrom2.dict, Chrom2/Index/Chrom2.fa, Chrom2/Index/Chrom2.fa.ann, Chrom2/Index/Chrom2.fa.pac, Chrom2/Index/Chrom2.fa.sa, Chrom2/Index/Chrom2.fa.fai, Chrom2/Index/Chrom2.fa.amb
+	wildcards: chrom=Chrom2, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/bwa-0.7.13/bwa mem -M -t 8 -k 32 -R "@RG\tID:D8-1-D8-22\tLB:D8-1-D8-22\tSM:D8-1-D8-22\tPL:ILLUMINA" Chrom2/Index/Chrom2.fa Data/D8-1-D8-22_R1.fastq.gz         Data/D8-1-D8-22_R2.fastq.gz | /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools view -bS > Chrom2/Align/D8-1-D8-22.bam
+        
+rule bwa_align:
+	input: Chrom5/Index/Chrom5.fa.amb, Chrom5/Index/Chrom5.fa.ann, Chrom5/Index/Chrom5.fa.bwt, Chrom5/Index/Chrom5.fa.pac, Chrom5/Index/Chrom5.fa.sa, Chrom5/Index/Chrom5.dict, Chrom5/Index/Chrom5.fa.fai, Data/N2-P30_R2.fastq.gz, Data/N2-P30_R1.fastq.gz, Chrom5/Index/Chrom5.fa
+	output: Chrom5/Align/N2-P30.bam
+	reason: Missing output files: Chrom5/Align/N2-P30.bam; Input files updated by another job: Chrom5/Index/Chrom5.fa.ann, Chrom5/Index/Chrom5.fa.bwt, Chrom5/Index/Chrom5.fa.fai, Chrom5/Index/Chrom5.fa.sa, Chrom5/Index/Chrom5.fa.amb, Chrom5/Index/Chrom5.fa, Chrom5/Index/Chrom5.dict, Chrom5/Index/Chrom5.fa.pac
+	wildcards: chrom=Chrom5, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/bwa-0.7.13/bwa mem -M -t 8 -k 32 -R "@RG\tID:N2-P30\tLB:N2-P30\tSM:N2-P30\tPL:ILLUMINA" Chrom5/Index/Chrom5.fa Data/N2-P30_R1.fastq.gz         Data/N2-P30_R2.fastq.gz | /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools view -bS > Chrom5/Align/N2-P30.bam
+        
+rule bwa_align:
+	input: Chrom6/Index/Chrom6.fa.amb, Chrom6/Index/Chrom6.fa.ann, Chrom6/Index/Chrom6.fa.bwt, Chrom6/Index/Chrom6.fa.pac, Chrom6/Index/Chrom6.fa.sa, Chrom6/Index/Chrom6.dict, Chrom6/Index/Chrom6.fa.fai, Data/C-1-C-22_R2.fastq.gz, Data/C-1-C-22_R1.fastq.gz, Chrom6/Index/Chrom6.fa
+	output: Chrom6/Align/C-1-C-22.bam
+	reason: Missing output files: Chrom6/Align/C-1-C-22.bam; Input files updated by another job: Chrom6/Index/Chrom6.fa.ann, Chrom6/Index/Chrom6.fa, Chrom6/Index/Chrom6.fa.pac, Chrom6/Index/Chrom6.fa.bwt, Chrom6/Index/Chrom6.dict, Chrom6/Index/Chrom6.fa.sa, Chrom6/Index/Chrom6.fa.amb, Chrom6/Index/Chrom6.fa.fai
+	wildcards: chrom=Chrom6, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/bwa-0.7.13/bwa mem -M -t 8 -k 32 -R "@RG\tID:C-1-C-22\tLB:C-1-C-22\tSM:C-1-C-22\tPL:ILLUMINA" Chrom6/Index/Chrom6.fa Data/C-1-C-22_R1.fastq.gz         Data/C-1-C-22_R2.fastq.gz | /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools view -bS > Chrom6/Align/C-1-C-22.bam
+        
+rule bwa_align:
+	input: Chrom3/Index/Chrom3.fa.amb, Chrom3/Index/Chrom3.fa.ann, Chrom3/Index/Chrom3.fa.bwt, Chrom3/Index/Chrom3.fa.pac, Chrom3/Index/Chrom3.fa.sa, Chrom3/Index/Chrom3.dict, Chrom3/Index/Chrom3.fa.fai, Data/R4-R88_R2.fastq.gz, Data/R4-R88_R1.fastq.gz, Chrom3/Index/Chrom3.fa
+	output: Chrom3/Align/R4-R88.bam
+	reason: Missing output files: Chrom3/Align/R4-R88.bam; Input files updated by another job: Chrom3/Index/Chrom3.dict, Chrom3/Index/Chrom3.fa.fai, Chrom3/Index/Chrom3.fa.bwt, Chrom3/Index/Chrom3.fa.pac, Chrom3/Index/Chrom3.fa.sa, Chrom3/Index/Chrom3.fa, Chrom3/Index/Chrom3.fa.ann, Chrom3/Index/Chrom3.fa.amb
+	wildcards: chrom=Chrom3, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/bwa-0.7.13/bwa mem -M -t 8 -k 32 -R "@RG\tID:R4-R88\tLB:R4-R88\tSM:R4-R88\tPL:ILLUMINA" Chrom3/Index/Chrom3.fa Data/R4-R88_R1.fastq.gz         Data/R4-R88_R2.fastq.gz | /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools view -bS > Chrom3/Align/R4-R88.bam
+        
+rule bwa_align:
+	input: Chrom4/Index/Chrom4.fa.amb, Chrom4/Index/Chrom4.fa.ann, Chrom4/Index/Chrom4.fa.bwt, Chrom4/Index/Chrom4.fa.pac, Chrom4/Index/Chrom4.fa.sa, Chrom4/Index/Chrom4.dict, Chrom4/Index/Chrom4.fa.fai, Data/N2-P30_R2.fastq.gz, Data/N2-P30_R1.fastq.gz, Chrom4/Index/Chrom4.fa
+	output: Chrom4/Align/N2-P30.bam
+	reason: Missing output files: Chrom4/Align/N2-P30.bam; Input files updated by another job: Chrom4/Index/Chrom4.fa.amb, Chrom4/Index/Chrom4.fa.pac, Chrom4/Index/Chrom4.dict, Chrom4/Index/Chrom4.fa.fai, Chrom4/Index/Chrom4.fa.ann, Chrom4/Index/Chrom4.fa, Chrom4/Index/Chrom4.fa.sa, Chrom4/Index/Chrom4.fa.bwt
+	wildcards: chrom=Chrom4, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/bwa-0.7.13/bwa mem -M -t 8 -k 32 -R "@RG\tID:N2-P30\tLB:N2-P30\tSM:N2-P30\tPL:ILLUMINA" Chrom4/Index/Chrom4.fa Data/N2-P30_R1.fastq.gz         Data/N2-P30_R2.fastq.gz | /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools view -bS > Chrom4/Align/N2-P30.bam
+        
+rule bwa_align:
+	input: Chrom5/Index/Chrom5.fa.amb, Chrom5/Index/Chrom5.fa.ann, Chrom5/Index/Chrom5.fa.bwt, Chrom5/Index/Chrom5.fa.pac, Chrom5/Index/Chrom5.fa.sa, Chrom5/Index/Chrom5.dict, Chrom5/Index/Chrom5.fa.fai, Data/C-1-C-22_R2.fastq.gz, Data/C-1-C-22_R1.fastq.gz, Chrom5/Index/Chrom5.fa
+	output: Chrom5/Align/C-1-C-22.bam
+	reason: Missing output files: Chrom5/Align/C-1-C-22.bam; Input files updated by another job: Chrom5/Index/Chrom5.fa.ann, Chrom5/Index/Chrom5.fa.bwt, Chrom5/Index/Chrom5.fa.fai, Chrom5/Index/Chrom5.fa.sa, Chrom5/Index/Chrom5.fa.amb, Chrom5/Index/Chrom5.fa, Chrom5/Index/Chrom5.dict, Chrom5/Index/Chrom5.fa.pac
+	wildcards: chrom=Chrom5, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/bwa-0.7.13/bwa mem -M -t 8 -k 32 -R "@RG\tID:C-1-C-22\tLB:C-1-C-22\tSM:C-1-C-22\tPL:ILLUMINA" Chrom5/Index/Chrom5.fa Data/C-1-C-22_R1.fastq.gz         Data/C-1-C-22_R2.fastq.gz | /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools view -bS > Chrom5/Align/C-1-C-22.bam
+        
+rule bwa_align:
+	input: Chrom7/Index/Chrom7.fa.amb, Chrom7/Index/Chrom7.fa.ann, Chrom7/Index/Chrom7.fa.bwt, Chrom7/Index/Chrom7.fa.pac, Chrom7/Index/Chrom7.fa.sa, Chrom7/Index/Chrom7.dict, Chrom7/Index/Chrom7.fa.fai, Data/N2-P30_R2.fastq.gz, Data/N2-P30_R1.fastq.gz, Chrom7/Index/Chrom7.fa
+	output: Chrom7/Align/N2-P30.bam
+	reason: Missing output files: Chrom7/Align/N2-P30.bam; Input files updated by another job: Chrom7/Index/Chrom7.fa.fai, Chrom7/Index/Chrom7.dict, Chrom7/Index/Chrom7.fa.sa, Chrom7/Index/Chrom7.fa.pac, Chrom7/Index/Chrom7.fa.ann, Chrom7/Index/Chrom7.fa.bwt, Chrom7/Index/Chrom7.fa.amb, Chrom7/Index/Chrom7.fa
+	wildcards: chrom=Chrom7, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/bwa-0.7.13/bwa mem -M -t 8 -k 32 -R "@RG\tID:N2-P30\tLB:N2-P30\tSM:N2-P30\tPL:ILLUMINA" Chrom7/Index/Chrom7.fa Data/N2-P30_R1.fastq.gz         Data/N2-P30_R2.fastq.gz | /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools view -bS > Chrom7/Align/N2-P30.bam
+        
+rule bwa_align:
+	input: Chrom3/Index/Chrom3.fa.amb, Chrom3/Index/Chrom3.fa.ann, Chrom3/Index/Chrom3.fa.bwt, Chrom3/Index/Chrom3.fa.pac, Chrom3/Index/Chrom3.fa.sa, Chrom3/Index/Chrom3.dict, Chrom3/Index/Chrom3.fa.fai, Data/C-1-C-22_R2.fastq.gz, Data/C-1-C-22_R1.fastq.gz, Chrom3/Index/Chrom3.fa
+	output: Chrom3/Align/C-1-C-22.bam
+	reason: Missing output files: Chrom3/Align/C-1-C-22.bam; Input files updated by another job: Chrom3/Index/Chrom3.dict, Chrom3/Index/Chrom3.fa.fai, Chrom3/Index/Chrom3.fa.bwt, Chrom3/Index/Chrom3.fa.pac, Chrom3/Index/Chrom3.fa.sa, Chrom3/Index/Chrom3.fa, Chrom3/Index/Chrom3.fa.ann, Chrom3/Index/Chrom3.fa.amb
+	wildcards: chrom=Chrom3, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/bwa-0.7.13/bwa mem -M -t 8 -k 32 -R "@RG\tID:C-1-C-22\tLB:C-1-C-22\tSM:C-1-C-22\tPL:ILLUMINA" Chrom3/Index/Chrom3.fa Data/C-1-C-22_R1.fastq.gz         Data/C-1-C-22_R2.fastq.gz | /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools view -bS > Chrom3/Align/C-1-C-22.bam
+        
+rule bwa_align:
+	input: Chrom1/Index/Chrom1.fa.amb, Chrom1/Index/Chrom1.fa.ann, Chrom1/Index/Chrom1.fa.bwt, Chrom1/Index/Chrom1.fa.pac, Chrom1/Index/Chrom1.fa.sa, Chrom1/Index/Chrom1.dict, Chrom1/Index/Chrom1.fa.fai, Data/C-1-C-22_R2.fastq.gz, Data/C-1-C-22_R1.fastq.gz, Chrom1/Index/Chrom1.fa
+	output: Chrom1/Align/C-1-C-22.bam
+	reason: Missing output files: Chrom1/Align/C-1-C-22.bam; Input files updated by another job: Chrom1/Index/Chrom1.fa.pac, Chrom1/Index/Chrom1.fa, Chrom1/Index/Chrom1.fa.amb, Chrom1/Index/Chrom1.fa.ann, Chrom1/Index/Chrom1.fa.bwt, Chrom1/Index/Chrom1.fa.sa, Chrom1/Index/Chrom1.dict, Chrom1/Index/Chrom1.fa.fai
+	wildcards: chrom=Chrom1, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/bwa-0.7.13/bwa mem -M -t 8 -k 32 -R "@RG\tID:C-1-C-22\tLB:C-1-C-22\tSM:C-1-C-22\tPL:ILLUMINA" Chrom1/Index/Chrom1.fa Data/C-1-C-22_R1.fastq.gz         Data/C-1-C-22_R2.fastq.gz | /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools view -bS > Chrom1/Align/C-1-C-22.bam
+        
+rule bwa_align:
+	input: Chrom1/Index/Chrom1.fa.amb, Chrom1/Index/Chrom1.fa.ann, Chrom1/Index/Chrom1.fa.bwt, Chrom1/Index/Chrom1.fa.pac, Chrom1/Index/Chrom1.fa.sa, Chrom1/Index/Chrom1.dict, Chrom1/Index/Chrom1.fa.fai, Data/N2-P30_R2.fastq.gz, Data/N2-P30_R1.fastq.gz, Chrom1/Index/Chrom1.fa
+	output: Chrom1/Align/N2-P30.bam
+	reason: Missing output files: Chrom1/Align/N2-P30.bam; Input files updated by another job: Chrom1/Index/Chrom1.fa.pac, Chrom1/Index/Chrom1.fa, Chrom1/Index/Chrom1.fa.amb, Chrom1/Index/Chrom1.fa.ann, Chrom1/Index/Chrom1.fa.bwt, Chrom1/Index/Chrom1.fa.sa, Chrom1/Index/Chrom1.dict, Chrom1/Index/Chrom1.fa.fai
+	wildcards: chrom=Chrom1, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/bwa-0.7.13/bwa mem -M -t 8 -k 32 -R "@RG\tID:N2-P30\tLB:N2-P30\tSM:N2-P30\tPL:ILLUMINA" Chrom1/Index/Chrom1.fa Data/N2-P30_R1.fastq.gz         Data/N2-P30_R2.fastq.gz | /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools view -bS > Chrom1/Align/N2-P30.bam
+        
+rule bwa_align:
+	input: Chrom3/Index/Chrom3.fa.amb, Chrom3/Index/Chrom3.fa.ann, Chrom3/Index/Chrom3.fa.bwt, Chrom3/Index/Chrom3.fa.pac, Chrom3/Index/Chrom3.fa.sa, Chrom3/Index/Chrom3.dict, Chrom3/Index/Chrom3.fa.fai, Data/N2-P30_R2.fastq.gz, Data/N2-P30_R1.fastq.gz, Chrom3/Index/Chrom3.fa
+	output: Chrom3/Align/N2-P30.bam
+	reason: Missing output files: Chrom3/Align/N2-P30.bam; Input files updated by another job: Chrom3/Index/Chrom3.dict, Chrom3/Index/Chrom3.fa.fai, Chrom3/Index/Chrom3.fa.bwt, Chrom3/Index/Chrom3.fa.pac, Chrom3/Index/Chrom3.fa.sa, Chrom3/Index/Chrom3.fa, Chrom3/Index/Chrom3.fa.ann, Chrom3/Index/Chrom3.fa.amb
+	wildcards: chrom=Chrom3, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/bwa-0.7.13/bwa mem -M -t 8 -k 32 -R "@RG\tID:N2-P30\tLB:N2-P30\tSM:N2-P30\tPL:ILLUMINA" Chrom3/Index/Chrom3.fa Data/N2-P30_R1.fastq.gz         Data/N2-P30_R2.fastq.gz | /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools view -bS > Chrom3/Align/N2-P30.bam
+        
+rule bwa_align:
+	input: Chrom2/Index/Chrom2.fa.amb, Chrom2/Index/Chrom2.fa.ann, Chrom2/Index/Chrom2.fa.bwt, Chrom2/Index/Chrom2.fa.pac, Chrom2/Index/Chrom2.fa.sa, Chrom2/Index/Chrom2.dict, Chrom2/Index/Chrom2.fa.fai, Data/C-1-C-22_R2.fastq.gz, Data/C-1-C-22_R1.fastq.gz, Chrom2/Index/Chrom2.fa
+	output: Chrom2/Align/C-1-C-22.bam
+	reason: Missing output files: Chrom2/Align/C-1-C-22.bam; Input files updated by another job: Chrom2/Index/Chrom2.fa.bwt, Chrom2/Index/Chrom2.dict, Chrom2/Index/Chrom2.fa, Chrom2/Index/Chrom2.fa.ann, Chrom2/Index/Chrom2.fa.pac, Chrom2/Index/Chrom2.fa.sa, Chrom2/Index/Chrom2.fa.fai, Chrom2/Index/Chrom2.fa.amb
+	wildcards: chrom=Chrom2, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/bwa-0.7.13/bwa mem -M -t 8 -k 32 -R "@RG\tID:C-1-C-22\tLB:C-1-C-22\tSM:C-1-C-22\tPL:ILLUMINA" Chrom2/Index/Chrom2.fa Data/C-1-C-22_R1.fastq.gz         Data/C-1-C-22_R2.fastq.gz | /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools view -bS > Chrom2/Align/C-1-C-22.bam
+        
+rule bwa_align:
+	input: Chrom1/Index/Chrom1.fa.amb, Chrom1/Index/Chrom1.fa.ann, Chrom1/Index/Chrom1.fa.bwt, Chrom1/Index/Chrom1.fa.pac, Chrom1/Index/Chrom1.fa.sa, Chrom1/Index/Chrom1.dict, Chrom1/Index/Chrom1.fa.fai, Data/R4-R88_R2.fastq.gz, Data/R4-R88_R1.fastq.gz, Chrom1/Index/Chrom1.fa
+	output: Chrom1/Align/R4-R88.bam
+	reason: Missing output files: Chrom1/Align/R4-R88.bam; Input files updated by another job: Chrom1/Index/Chrom1.fa.pac, Chrom1/Index/Chrom1.fa, Chrom1/Index/Chrom1.fa.amb, Chrom1/Index/Chrom1.fa.ann, Chrom1/Index/Chrom1.fa.bwt, Chrom1/Index/Chrom1.fa.sa, Chrom1/Index/Chrom1.dict, Chrom1/Index/Chrom1.fa.fai
+	wildcards: chrom=Chrom1, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/bwa-0.7.13/bwa mem -M -t 8 -k 32 -R "@RG\tID:R4-R88\tLB:R4-R88\tSM:R4-R88\tPL:ILLUMINA" Chrom1/Index/Chrom1.fa Data/R4-R88_R1.fastq.gz         Data/R4-R88_R2.fastq.gz | /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools view -bS > Chrom1/Align/R4-R88.bam
+        
+rule bwa_align:
+	input: Chrom1/Index/Chrom1.fa.amb, Chrom1/Index/Chrom1.fa.ann, Chrom1/Index/Chrom1.fa.bwt, Chrom1/Index/Chrom1.fa.pac, Chrom1/Index/Chrom1.fa.sa, Chrom1/Index/Chrom1.dict, Chrom1/Index/Chrom1.fa.fai, Data/D8-1-D8-22_R2.fastq.gz, Data/D8-1-D8-22_R1.fastq.gz, Chrom1/Index/Chrom1.fa
+	output: Chrom1/Align/D8-1-D8-22.bam
+	reason: Missing output files: Chrom1/Align/D8-1-D8-22.bam; Input files updated by another job: Chrom1/Index/Chrom1.fa.pac, Chrom1/Index/Chrom1.fa, Chrom1/Index/Chrom1.fa.amb, Chrom1/Index/Chrom1.fa.ann, Chrom1/Index/Chrom1.fa.bwt, Chrom1/Index/Chrom1.fa.sa, Chrom1/Index/Chrom1.dict, Chrom1/Index/Chrom1.fa.fai
+	wildcards: chrom=Chrom1, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/bwa-0.7.13/bwa mem -M -t 8 -k 32 -R "@RG\tID:D8-1-D8-22\tLB:D8-1-D8-22\tSM:D8-1-D8-22\tPL:ILLUMINA" Chrom1/Index/Chrom1.fa Data/D8-1-D8-22_R1.fastq.gz         Data/D8-1-D8-22_R2.fastq.gz | /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools view -bS > Chrom1/Align/D8-1-D8-22.bam
+        
+rule bwa_align:
+	input: Chrom2/Index/Chrom2.fa.amb, Chrom2/Index/Chrom2.fa.ann, Chrom2/Index/Chrom2.fa.bwt, Chrom2/Index/Chrom2.fa.pac, Chrom2/Index/Chrom2.fa.sa, Chrom2/Index/Chrom2.dict, Chrom2/Index/Chrom2.fa.fai, Data/N2-P30_R2.fastq.gz, Data/N2-P30_R1.fastq.gz, Chrom2/Index/Chrom2.fa
+	output: Chrom2/Align/N2-P30.bam
+	reason: Missing output files: Chrom2/Align/N2-P30.bam; Input files updated by another job: Chrom2/Index/Chrom2.fa.bwt, Chrom2/Index/Chrom2.dict, Chrom2/Index/Chrom2.fa, Chrom2/Index/Chrom2.fa.ann, Chrom2/Index/Chrom2.fa.pac, Chrom2/Index/Chrom2.fa.sa, Chrom2/Index/Chrom2.fa.fai, Chrom2/Index/Chrom2.fa.amb
+	wildcards: chrom=Chrom2, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/bwa-0.7.13/bwa mem -M -t 8 -k 32 -R "@RG\tID:N2-P30\tLB:N2-P30\tSM:N2-P30\tPL:ILLUMINA" Chrom2/Index/Chrom2.fa Data/N2-P30_R1.fastq.gz         Data/N2-P30_R2.fastq.gz | /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools view -bS > Chrom2/Align/N2-P30.bam
+        
+rule bwa_align:
+	input: Chrom7/Index/Chrom7.fa.amb, Chrom7/Index/Chrom7.fa.ann, Chrom7/Index/Chrom7.fa.bwt, Chrom7/Index/Chrom7.fa.pac, Chrom7/Index/Chrom7.fa.sa, Chrom7/Index/Chrom7.dict, Chrom7/Index/Chrom7.fa.fai, Data/C-1-C-22_R2.fastq.gz, Data/C-1-C-22_R1.fastq.gz, Chrom7/Index/Chrom7.fa
+	output: Chrom7/Align/C-1-C-22.bam
+	reason: Missing output files: Chrom7/Align/C-1-C-22.bam; Input files updated by another job: Chrom7/Index/Chrom7.fa.fai, Chrom7/Index/Chrom7.dict, Chrom7/Index/Chrom7.fa.sa, Chrom7/Index/Chrom7.fa.pac, Chrom7/Index/Chrom7.fa.ann, Chrom7/Index/Chrom7.fa.bwt, Chrom7/Index/Chrom7.fa.amb, Chrom7/Index/Chrom7.fa
+	wildcards: chrom=Chrom7, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/bwa-0.7.13/bwa mem -M -t 8 -k 32 -R "@RG\tID:C-1-C-22\tLB:C-1-C-22\tSM:C-1-C-22\tPL:ILLUMINA" Chrom7/Index/Chrom7.fa Data/C-1-C-22_R1.fastq.gz         Data/C-1-C-22_R2.fastq.gz | /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools view -bS > Chrom7/Align/C-1-C-22.bam
+        
+rule bwa_align:
+	input: Chrom2/Index/Chrom2.fa.amb, Chrom2/Index/Chrom2.fa.ann, Chrom2/Index/Chrom2.fa.bwt, Chrom2/Index/Chrom2.fa.pac, Chrom2/Index/Chrom2.fa.sa, Chrom2/Index/Chrom2.dict, Chrom2/Index/Chrom2.fa.fai, Data/R4-R88_R2.fastq.gz, Data/R4-R88_R1.fastq.gz, Chrom2/Index/Chrom2.fa
+	output: Chrom2/Align/R4-R88.bam
+	reason: Missing output files: Chrom2/Align/R4-R88.bam; Input files updated by another job: Chrom2/Index/Chrom2.fa.bwt, Chrom2/Index/Chrom2.dict, Chrom2/Index/Chrom2.fa, Chrom2/Index/Chrom2.fa.ann, Chrom2/Index/Chrom2.fa.pac, Chrom2/Index/Chrom2.fa.sa, Chrom2/Index/Chrom2.fa.fai, Chrom2/Index/Chrom2.fa.amb
+	wildcards: chrom=Chrom2, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/bwa-0.7.13/bwa mem -M -t 8 -k 32 -R "@RG\tID:R4-R88\tLB:R4-R88\tSM:R4-R88\tPL:ILLUMINA" Chrom2/Index/Chrom2.fa Data/R4-R88_R1.fastq.gz         Data/R4-R88_R2.fastq.gz | /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools view -bS > Chrom2/Align/R4-R88.bam
+        
+rule bwa_align:
+	input: Chrom6/Index/Chrom6.fa.amb, Chrom6/Index/Chrom6.fa.ann, Chrom6/Index/Chrom6.fa.bwt, Chrom6/Index/Chrom6.fa.pac, Chrom6/Index/Chrom6.fa.sa, Chrom6/Index/Chrom6.dict, Chrom6/Index/Chrom6.fa.fai, Data/D8-1-D8-22_R2.fastq.gz, Data/D8-1-D8-22_R1.fastq.gz, Chrom6/Index/Chrom6.fa
+	output: Chrom6/Align/D8-1-D8-22.bam
+	reason: Missing output files: Chrom6/Align/D8-1-D8-22.bam; Input files updated by another job: Chrom6/Index/Chrom6.fa.ann, Chrom6/Index/Chrom6.fa, Chrom6/Index/Chrom6.fa.pac, Chrom6/Index/Chrom6.fa.bwt, Chrom6/Index/Chrom6.dict, Chrom6/Index/Chrom6.fa.sa, Chrom6/Index/Chrom6.fa.amb, Chrom6/Index/Chrom6.fa.fai
+	wildcards: chrom=Chrom6, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/bwa-0.7.13/bwa mem -M -t 8 -k 32 -R "@RG\tID:D8-1-D8-22\tLB:D8-1-D8-22\tSM:D8-1-D8-22\tPL:ILLUMINA" Chrom6/Index/Chrom6.fa Data/D8-1-D8-22_R1.fastq.gz         Data/D8-1-D8-22_R2.fastq.gz | /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools view -bS > Chrom6/Align/D8-1-D8-22.bam
+        
+rule bwa_align:
+	input: Chrom7/Index/Chrom7.fa.amb, Chrom7/Index/Chrom7.fa.ann, Chrom7/Index/Chrom7.fa.bwt, Chrom7/Index/Chrom7.fa.pac, Chrom7/Index/Chrom7.fa.sa, Chrom7/Index/Chrom7.dict, Chrom7/Index/Chrom7.fa.fai, Data/D8-1-D8-22_R2.fastq.gz, Data/D8-1-D8-22_R1.fastq.gz, Chrom7/Index/Chrom7.fa
+	output: Chrom7/Align/D8-1-D8-22.bam
+	reason: Missing output files: Chrom7/Align/D8-1-D8-22.bam; Input files updated by another job: Chrom7/Index/Chrom7.fa.fai, Chrom7/Index/Chrom7.dict, Chrom7/Index/Chrom7.fa.sa, Chrom7/Index/Chrom7.fa.pac, Chrom7/Index/Chrom7.fa.ann, Chrom7/Index/Chrom7.fa.bwt, Chrom7/Index/Chrom7.fa.amb, Chrom7/Index/Chrom7.fa
+	wildcards: chrom=Chrom7, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/bwa-0.7.13/bwa mem -M -t 8 -k 32 -R "@RG\tID:D8-1-D8-22\tLB:D8-1-D8-22\tSM:D8-1-D8-22\tPL:ILLUMINA" Chrom7/Index/Chrom7.fa Data/D8-1-D8-22_R1.fastq.gz         Data/D8-1-D8-22_R2.fastq.gz | /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools view -bS > Chrom7/Align/D8-1-D8-22.bam
+        
+rule bwa_align:
+	input: Chrom5/Index/Chrom5.fa.amb, Chrom5/Index/Chrom5.fa.ann, Chrom5/Index/Chrom5.fa.bwt, Chrom5/Index/Chrom5.fa.pac, Chrom5/Index/Chrom5.fa.sa, Chrom5/Index/Chrom5.dict, Chrom5/Index/Chrom5.fa.fai, Data/D8-1-D8-22_R2.fastq.gz, Data/D8-1-D8-22_R1.fastq.gz, Chrom5/Index/Chrom5.fa
+	output: Chrom5/Align/D8-1-D8-22.bam
+	reason: Missing output files: Chrom5/Align/D8-1-D8-22.bam; Input files updated by another job: Chrom5/Index/Chrom5.fa.ann, Chrom5/Index/Chrom5.fa.bwt, Chrom5/Index/Chrom5.fa.fai, Chrom5/Index/Chrom5.fa.sa, Chrom5/Index/Chrom5.fa.amb, Chrom5/Index/Chrom5.fa, Chrom5/Index/Chrom5.dict, Chrom5/Index/Chrom5.fa.pac
+	wildcards: chrom=Chrom5, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/bwa-0.7.13/bwa mem -M -t 8 -k 32 -R "@RG\tID:D8-1-D8-22\tLB:D8-1-D8-22\tSM:D8-1-D8-22\tPL:ILLUMINA" Chrom5/Index/Chrom5.fa Data/D8-1-D8-22_R1.fastq.gz         Data/D8-1-D8-22_R2.fastq.gz | /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools view -bS > Chrom5/Align/D8-1-D8-22.bam
+        
+rule bwa_align:
+	input: Chrom6/Index/Chrom6.fa.amb, Chrom6/Index/Chrom6.fa.ann, Chrom6/Index/Chrom6.fa.bwt, Chrom6/Index/Chrom6.fa.pac, Chrom6/Index/Chrom6.fa.sa, Chrom6/Index/Chrom6.dict, Chrom6/Index/Chrom6.fa.fai, Data/N2-P30_R2.fastq.gz, Data/N2-P30_R1.fastq.gz, Chrom6/Index/Chrom6.fa
+	output: Chrom6/Align/N2-P30.bam
+	reason: Missing output files: Chrom6/Align/N2-P30.bam; Input files updated by another job: Chrom6/Index/Chrom6.fa.ann, Chrom6/Index/Chrom6.fa, Chrom6/Index/Chrom6.fa.pac, Chrom6/Index/Chrom6.fa.bwt, Chrom6/Index/Chrom6.dict, Chrom6/Index/Chrom6.fa.sa, Chrom6/Index/Chrom6.fa.amb, Chrom6/Index/Chrom6.fa.fai
+	wildcards: chrom=Chrom6, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/bwa-0.7.13/bwa mem -M -t 8 -k 32 -R "@RG\tID:N2-P30\tLB:N2-P30\tSM:N2-P30\tPL:ILLUMINA" Chrom6/Index/Chrom6.fa Data/N2-P30_R1.fastq.gz         Data/N2-P30_R2.fastq.gz | /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools view -bS > Chrom6/Align/N2-P30.bam
+        
+rule bwa_align:
+	input: Chrom3/Index/Chrom3.fa.amb, Chrom3/Index/Chrom3.fa.ann, Chrom3/Index/Chrom3.fa.bwt, Chrom3/Index/Chrom3.fa.pac, Chrom3/Index/Chrom3.fa.sa, Chrom3/Index/Chrom3.dict, Chrom3/Index/Chrom3.fa.fai, Data/D8-1-D8-22_R2.fastq.gz, Data/D8-1-D8-22_R1.fastq.gz, Chrom3/Index/Chrom3.fa
+	output: Chrom3/Align/D8-1-D8-22.bam
+	reason: Missing output files: Chrom3/Align/D8-1-D8-22.bam; Input files updated by another job: Chrom3/Index/Chrom3.dict, Chrom3/Index/Chrom3.fa.fai, Chrom3/Index/Chrom3.fa.bwt, Chrom3/Index/Chrom3.fa.pac, Chrom3/Index/Chrom3.fa.sa, Chrom3/Index/Chrom3.fa, Chrom3/Index/Chrom3.fa.ann, Chrom3/Index/Chrom3.fa.amb
+	wildcards: chrom=Chrom3, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/bwa-0.7.13/bwa mem -M -t 8 -k 32 -R "@RG\tID:D8-1-D8-22\tLB:D8-1-D8-22\tSM:D8-1-D8-22\tPL:ILLUMINA" Chrom3/Index/Chrom3.fa Data/D8-1-D8-22_R1.fastq.gz         Data/D8-1-D8-22_R2.fastq.gz | /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools view -bS > Chrom3/Align/D8-1-D8-22.bam
+        
+rule bwa_align:
+	input: Chrom5/Index/Chrom5.fa.amb, Chrom5/Index/Chrom5.fa.ann, Chrom5/Index/Chrom5.fa.bwt, Chrom5/Index/Chrom5.fa.pac, Chrom5/Index/Chrom5.fa.sa, Chrom5/Index/Chrom5.dict, Chrom5/Index/Chrom5.fa.fai, Data/R4-R88_R2.fastq.gz, Data/R4-R88_R1.fastq.gz, Chrom5/Index/Chrom5.fa
+	output: Chrom5/Align/R4-R88.bam
+	reason: Missing output files: Chrom5/Align/R4-R88.bam; Input files updated by another job: Chrom5/Index/Chrom5.fa.ann, Chrom5/Index/Chrom5.fa.bwt, Chrom5/Index/Chrom5.fa.fai, Chrom5/Index/Chrom5.fa.sa, Chrom5/Index/Chrom5.fa.amb, Chrom5/Index/Chrom5.fa, Chrom5/Index/Chrom5.dict, Chrom5/Index/Chrom5.fa.pac
+	wildcards: chrom=Chrom5, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/bwa-0.7.13/bwa mem -M -t 8 -k 32 -R "@RG\tID:R4-R88\tLB:R4-R88\tSM:R4-R88\tPL:ILLUMINA" Chrom5/Index/Chrom5.fa Data/R4-R88_R1.fastq.gz         Data/R4-R88_R2.fastq.gz | /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools view -bS > Chrom5/Align/R4-R88.bam
+        
+rule bwa_align:
+	input: Chrom6/Index/Chrom6.fa.amb, Chrom6/Index/Chrom6.fa.ann, Chrom6/Index/Chrom6.fa.bwt, Chrom6/Index/Chrom6.fa.pac, Chrom6/Index/Chrom6.fa.sa, Chrom6/Index/Chrom6.dict, Chrom6/Index/Chrom6.fa.fai, Data/R4-R88_R2.fastq.gz, Data/R4-R88_R1.fastq.gz, Chrom6/Index/Chrom6.fa
+	output: Chrom6/Align/R4-R88.bam
+	reason: Missing output files: Chrom6/Align/R4-R88.bam; Input files updated by another job: Chrom6/Index/Chrom6.fa.ann, Chrom6/Index/Chrom6.fa, Chrom6/Index/Chrom6.fa.pac, Chrom6/Index/Chrom6.fa.bwt, Chrom6/Index/Chrom6.dict, Chrom6/Index/Chrom6.fa.sa, Chrom6/Index/Chrom6.fa.amb, Chrom6/Index/Chrom6.fa.fai
+	wildcards: chrom=Chrom6, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/bwa-0.7.13/bwa mem -M -t 8 -k 32 -R "@RG\tID:R4-R88\tLB:R4-R88\tSM:R4-R88\tPL:ILLUMINA" Chrom6/Index/Chrom6.fa Data/R4-R88_R1.fastq.gz         Data/R4-R88_R2.fastq.gz | /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools view -bS > Chrom6/Align/R4-R88.bam
+        
+rule bwa_align:
+	input: Chrom4/Index/Chrom4.fa.amb, Chrom4/Index/Chrom4.fa.ann, Chrom4/Index/Chrom4.fa.bwt, Chrom4/Index/Chrom4.fa.pac, Chrom4/Index/Chrom4.fa.sa, Chrom4/Index/Chrom4.dict, Chrom4/Index/Chrom4.fa.fai, Data/R4-R88_R2.fastq.gz, Data/R4-R88_R1.fastq.gz, Chrom4/Index/Chrom4.fa
+	output: Chrom4/Align/R4-R88.bam
+	reason: Missing output files: Chrom4/Align/R4-R88.bam; Input files updated by another job: Chrom4/Index/Chrom4.fa.amb, Chrom4/Index/Chrom4.fa.pac, Chrom4/Index/Chrom4.dict, Chrom4/Index/Chrom4.fa.fai, Chrom4/Index/Chrom4.fa.ann, Chrom4/Index/Chrom4.fa, Chrom4/Index/Chrom4.fa.sa, Chrom4/Index/Chrom4.fa.bwt
+	wildcards: chrom=Chrom4, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/bwa-0.7.13/bwa mem -M -t 8 -k 32 -R "@RG\tID:R4-R88\tLB:R4-R88\tSM:R4-R88\tPL:ILLUMINA" Chrom4/Index/Chrom4.fa Data/R4-R88_R1.fastq.gz         Data/R4-R88_R2.fastq.gz | /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools view -bS > Chrom4/Align/R4-R88.bam
+        
+rule bwa_align:
+	input: Chrom7/Index/Chrom7.fa.amb, Chrom7/Index/Chrom7.fa.ann, Chrom7/Index/Chrom7.fa.bwt, Chrom7/Index/Chrom7.fa.pac, Chrom7/Index/Chrom7.fa.sa, Chrom7/Index/Chrom7.dict, Chrom7/Index/Chrom7.fa.fai, Data/R4-R88_R2.fastq.gz, Data/R4-R88_R1.fastq.gz, Chrom7/Index/Chrom7.fa
+	output: Chrom7/Align/R4-R88.bam
+	reason: Missing output files: Chrom7/Align/R4-R88.bam; Input files updated by another job: Chrom7/Index/Chrom7.fa.fai, Chrom7/Index/Chrom7.dict, Chrom7/Index/Chrom7.fa.sa, Chrom7/Index/Chrom7.fa.pac, Chrom7/Index/Chrom7.fa.ann, Chrom7/Index/Chrom7.fa.bwt, Chrom7/Index/Chrom7.fa.amb, Chrom7/Index/Chrom7.fa
+	wildcards: chrom=Chrom7, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/bwa-0.7.13/bwa mem -M -t 8 -k 32 -R "@RG\tID:R4-R88\tLB:R4-R88\tSM:R4-R88\tPL:ILLUMINA" Chrom7/Index/Chrom7.fa Data/R4-R88_R1.fastq.gz         Data/R4-R88_R2.fastq.gz | /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools view -bS > Chrom7/Align/R4-R88.bam
+        
+rule bwa_align:
+	input: Chrom4/Index/Chrom4.fa.amb, Chrom4/Index/Chrom4.fa.ann, Chrom4/Index/Chrom4.fa.bwt, Chrom4/Index/Chrom4.fa.pac, Chrom4/Index/Chrom4.fa.sa, Chrom4/Index/Chrom4.dict, Chrom4/Index/Chrom4.fa.fai, Data/C-1-C-22_R2.fastq.gz, Data/C-1-C-22_R1.fastq.gz, Chrom4/Index/Chrom4.fa
+	output: Chrom4/Align/C-1-C-22.bam
+	reason: Missing output files: Chrom4/Align/C-1-C-22.bam; Input files updated by another job: Chrom4/Index/Chrom4.fa.amb, Chrom4/Index/Chrom4.fa.pac, Chrom4/Index/Chrom4.dict, Chrom4/Index/Chrom4.fa.fai, Chrom4/Index/Chrom4.fa.ann, Chrom4/Index/Chrom4.fa, Chrom4/Index/Chrom4.fa.sa, Chrom4/Index/Chrom4.fa.bwt
+	wildcards: chrom=Chrom4, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/bwa-0.7.13/bwa mem -M -t 8 -k 32 -R "@RG\tID:C-1-C-22\tLB:C-1-C-22\tSM:C-1-C-22\tPL:ILLUMINA" Chrom4/Index/Chrom4.fa Data/C-1-C-22_R1.fastq.gz         Data/C-1-C-22_R2.fastq.gz | /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools view -bS > Chrom4/Align/C-1-C-22.bam
+        
+rule bwa_align:
+	input: Chrom4/Index/Chrom4.fa.amb, Chrom4/Index/Chrom4.fa.ann, Chrom4/Index/Chrom4.fa.bwt, Chrom4/Index/Chrom4.fa.pac, Chrom4/Index/Chrom4.fa.sa, Chrom4/Index/Chrom4.dict, Chrom4/Index/Chrom4.fa.fai, Data/D8-1-D8-22_R2.fastq.gz, Data/D8-1-D8-22_R1.fastq.gz, Chrom4/Index/Chrom4.fa
+	output: Chrom4/Align/D8-1-D8-22.bam
+	reason: Missing output files: Chrom4/Align/D8-1-D8-22.bam; Input files updated by another job: Chrom4/Index/Chrom4.fa.amb, Chrom4/Index/Chrom4.fa.pac, Chrom4/Index/Chrom4.dict, Chrom4/Index/Chrom4.fa.fai, Chrom4/Index/Chrom4.fa.ann, Chrom4/Index/Chrom4.fa, Chrom4/Index/Chrom4.fa.sa, Chrom4/Index/Chrom4.fa.bwt
+	wildcards: chrom=Chrom4, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/bwa-0.7.13/bwa mem -M -t 8 -k 32 -R "@RG\tID:D8-1-D8-22\tLB:D8-1-D8-22\tSM:D8-1-D8-22\tPL:ILLUMINA" Chrom4/Index/Chrom4.fa Data/D8-1-D8-22_R1.fastq.gz         Data/D8-1-D8-22_R2.fastq.gz | /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools view -bS > Chrom4/Align/D8-1-D8-22.bam
+        
+rule bwa_sort:
+	input: Chrom3/Align/C-1-C-22.bam
+	output: Chrom3/Sort/C-1-C-22.sort.bam
+	reason: Missing output files: Chrom3/Sort/C-1-C-22.sort.bam; Input files updated by another job: Chrom3/Align/C-1-C-22.bam
+	wildcards: chrom=Chrom3, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools sort -o Chrom3/Sort/C-1-C-22.sort.bam Chrom3/Align/C-1-C-22.bam
+        
+rule bwa_sort:
+	input: Chrom6/Align/N2-P30.bam
+	output: Chrom6/Sort/N2-P30.sort.bam
+	reason: Missing output files: Chrom6/Sort/N2-P30.sort.bam; Input files updated by another job: Chrom6/Align/N2-P30.bam
+	wildcards: chrom=Chrom6, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools sort -o Chrom6/Sort/N2-P30.sort.bam Chrom6/Align/N2-P30.bam
+        
+rule bwa_sort:
+	input: Chrom5/Align/N2-P30.bam
+	output: Chrom5/Sort/N2-P30.sort.bam
+	reason: Missing output files: Chrom5/Sort/N2-P30.sort.bam; Input files updated by another job: Chrom5/Align/N2-P30.bam
+	wildcards: chrom=Chrom5, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools sort -o Chrom5/Sort/N2-P30.sort.bam Chrom5/Align/N2-P30.bam
+        
+rule bwa_sort:
+	input: Chrom6/Align/C-1-C-22.bam
+	output: Chrom6/Sort/C-1-C-22.sort.bam
+	reason: Missing output files: Chrom6/Sort/C-1-C-22.sort.bam; Input files updated by another job: Chrom6/Align/C-1-C-22.bam
+	wildcards: chrom=Chrom6, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools sort -o Chrom6/Sort/C-1-C-22.sort.bam Chrom6/Align/C-1-C-22.bam
+        
+rule bwa_sort:
+	input: Chrom7/Align/N2-P30.bam
+	output: Chrom7/Sort/N2-P30.sort.bam
+	reason: Missing output files: Chrom7/Sort/N2-P30.sort.bam; Input files updated by another job: Chrom7/Align/N2-P30.bam
+	wildcards: chrom=Chrom7, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools sort -o Chrom7/Sort/N2-P30.sort.bam Chrom7/Align/N2-P30.bam
+        
+rule bwa_sort:
+	input: Chrom3/Align/D8-1-D8-22.bam
+	output: Chrom3/Sort/D8-1-D8-22.sort.bam
+	reason: Missing output files: Chrom3/Sort/D8-1-D8-22.sort.bam; Input files updated by another job: Chrom3/Align/D8-1-D8-22.bam
+	wildcards: chrom=Chrom3, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools sort -o Chrom3/Sort/D8-1-D8-22.sort.bam Chrom3/Align/D8-1-D8-22.bam
+        
+rule bwa_sort:
+	input: Chrom7/Align/C-1-C-22.bam
+	output: Chrom7/Sort/C-1-C-22.sort.bam
+	reason: Missing output files: Chrom7/Sort/C-1-C-22.sort.bam; Input files updated by another job: Chrom7/Align/C-1-C-22.bam
+	wildcards: chrom=Chrom7, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools sort -o Chrom7/Sort/C-1-C-22.sort.bam Chrom7/Align/C-1-C-22.bam
+        
+rule bwa_sort:
+	input: Chrom1/Align/N2-P30.bam
+	output: Chrom1/Sort/N2-P30.sort.bam
+	reason: Missing output files: Chrom1/Sort/N2-P30.sort.bam; Input files updated by another job: Chrom1/Align/N2-P30.bam
+	wildcards: chrom=Chrom1, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools sort -o Chrom1/Sort/N2-P30.sort.bam Chrom1/Align/N2-P30.bam
+        
+rule bwa_sort:
+	input: Chrom3/Align/N2-P30.bam
+	output: Chrom3/Sort/N2-P30.sort.bam
+	reason: Missing output files: Chrom3/Sort/N2-P30.sort.bam; Input files updated by another job: Chrom3/Align/N2-P30.bam
+	wildcards: chrom=Chrom3, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools sort -o Chrom3/Sort/N2-P30.sort.bam Chrom3/Align/N2-P30.bam
+        
+rule bwa_sort:
+	input: Chrom5/Align/D8-1-D8-22.bam
+	output: Chrom5/Sort/D8-1-D8-22.sort.bam
+	reason: Missing output files: Chrom5/Sort/D8-1-D8-22.sort.bam; Input files updated by another job: Chrom5/Align/D8-1-D8-22.bam
+	wildcards: chrom=Chrom5, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools sort -o Chrom5/Sort/D8-1-D8-22.sort.bam Chrom5/Align/D8-1-D8-22.bam
+        
+rule bwa_sort:
+	input: Chrom5/Align/R4-R88.bam
+	output: Chrom5/Sort/R4-R88.sort.bam
+	reason: Missing output files: Chrom5/Sort/R4-R88.sort.bam; Input files updated by another job: Chrom5/Align/R4-R88.bam
+	wildcards: chrom=Chrom5, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools sort -o Chrom5/Sort/R4-R88.sort.bam Chrom5/Align/R4-R88.bam
+        
+rule bwa_sort:
+	input: Chrom7/Align/D8-1-D8-22.bam
+	output: Chrom7/Sort/D8-1-D8-22.sort.bam
+	reason: Missing output files: Chrom7/Sort/D8-1-D8-22.sort.bam; Input files updated by another job: Chrom7/Align/D8-1-D8-22.bam
+	wildcards: chrom=Chrom7, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools sort -o Chrom7/Sort/D8-1-D8-22.sort.bam Chrom7/Align/D8-1-D8-22.bam
+        
+rule bwa_sort:
+	input: Chrom1/Align/C-1-C-22.bam
+	output: Chrom1/Sort/C-1-C-22.sort.bam
+	reason: Missing output files: Chrom1/Sort/C-1-C-22.sort.bam; Input files updated by another job: Chrom1/Align/C-1-C-22.bam
+	wildcards: chrom=Chrom1, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools sort -o Chrom1/Sort/C-1-C-22.sort.bam Chrom1/Align/C-1-C-22.bam
+        
+rule bwa_sort:
+	input: Chrom5/Align/C-1-C-22.bam
+	output: Chrom5/Sort/C-1-C-22.sort.bam
+	reason: Missing output files: Chrom5/Sort/C-1-C-22.sort.bam; Input files updated by another job: Chrom5/Align/C-1-C-22.bam
+	wildcards: chrom=Chrom5, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools sort -o Chrom5/Sort/C-1-C-22.sort.bam Chrom5/Align/C-1-C-22.bam
+        
+rule bwa_sort:
+	input: Chrom2/Align/R4-R88.bam
+	output: Chrom2/Sort/R4-R88.sort.bam
+	reason: Missing output files: Chrom2/Sort/R4-R88.sort.bam; Input files updated by another job: Chrom2/Align/R4-R88.bam
+	wildcards: chrom=Chrom2, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools sort -o Chrom2/Sort/R4-R88.sort.bam Chrom2/Align/R4-R88.bam
+        
+rule bwa_sort:
+	input: Chrom2/Align/N2-P30.bam
+	output: Chrom2/Sort/N2-P30.sort.bam
+	reason: Missing output files: Chrom2/Sort/N2-P30.sort.bam; Input files updated by another job: Chrom2/Align/N2-P30.bam
+	wildcards: chrom=Chrom2, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools sort -o Chrom2/Sort/N2-P30.sort.bam Chrom2/Align/N2-P30.bam
+        
+rule bwa_sort:
+	input: Chrom2/Align/D8-1-D8-22.bam
+	output: Chrom2/Sort/D8-1-D8-22.sort.bam
+	reason: Missing output files: Chrom2/Sort/D8-1-D8-22.sort.bam; Input files updated by another job: Chrom2/Align/D8-1-D8-22.bam
+	wildcards: chrom=Chrom2, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools sort -o Chrom2/Sort/D8-1-D8-22.sort.bam Chrom2/Align/D8-1-D8-22.bam
+        
+rule bwa_sort:
+	input: Chrom1/Align/R4-R88.bam
+	output: Chrom1/Sort/R4-R88.sort.bam
+	reason: Missing output files: Chrom1/Sort/R4-R88.sort.bam; Input files updated by another job: Chrom1/Align/R4-R88.bam
+	wildcards: chrom=Chrom1, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools sort -o Chrom1/Sort/R4-R88.sort.bam Chrom1/Align/R4-R88.bam
+        
+rule bwa_sort:
+	input: Chrom4/Align/D8-1-D8-22.bam
+	output: Chrom4/Sort/D8-1-D8-22.sort.bam
+	reason: Missing output files: Chrom4/Sort/D8-1-D8-22.sort.bam; Input files updated by another job: Chrom4/Align/D8-1-D8-22.bam
+	wildcards: chrom=Chrom4, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools sort -o Chrom4/Sort/D8-1-D8-22.sort.bam Chrom4/Align/D8-1-D8-22.bam
+        
+rule bwa_sort:
+	input: Chrom1/Align/D8-1-D8-22.bam
+	output: Chrom1/Sort/D8-1-D8-22.sort.bam
+	reason: Missing output files: Chrom1/Sort/D8-1-D8-22.sort.bam; Input files updated by another job: Chrom1/Align/D8-1-D8-22.bam
+	wildcards: chrom=Chrom1, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools sort -o Chrom1/Sort/D8-1-D8-22.sort.bam Chrom1/Align/D8-1-D8-22.bam
+        
+rule bwa_sort:
+	input: Chrom6/Align/R4-R88.bam
+	output: Chrom6/Sort/R4-R88.sort.bam
+	reason: Missing output files: Chrom6/Sort/R4-R88.sort.bam; Input files updated by another job: Chrom6/Align/R4-R88.bam
+	wildcards: chrom=Chrom6, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools sort -o Chrom6/Sort/R4-R88.sort.bam Chrom6/Align/R4-R88.bam
+        
+rule bwa_sort:
+	input: Chrom4/Align/C-1-C-22.bam
+	output: Chrom4/Sort/C-1-C-22.sort.bam
+	reason: Missing output files: Chrom4/Sort/C-1-C-22.sort.bam; Input files updated by another job: Chrom4/Align/C-1-C-22.bam
+	wildcards: chrom=Chrom4, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools sort -o Chrom4/Sort/C-1-C-22.sort.bam Chrom4/Align/C-1-C-22.bam
+        
+rule bwa_sort:
+	input: Chrom2/Align/C-1-C-22.bam
+	output: Chrom2/Sort/C-1-C-22.sort.bam
+	reason: Missing output files: Chrom2/Sort/C-1-C-22.sort.bam; Input files updated by another job: Chrom2/Align/C-1-C-22.bam
+	wildcards: chrom=Chrom2, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools sort -o Chrom2/Sort/C-1-C-22.sort.bam Chrom2/Align/C-1-C-22.bam
+        
+rule bwa_sort:
+	input: Chrom6/Align/D8-1-D8-22.bam
+	output: Chrom6/Sort/D8-1-D8-22.sort.bam
+	reason: Missing output files: Chrom6/Sort/D8-1-D8-22.sort.bam; Input files updated by another job: Chrom6/Align/D8-1-D8-22.bam
+	wildcards: chrom=Chrom6, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools sort -o Chrom6/Sort/D8-1-D8-22.sort.bam Chrom6/Align/D8-1-D8-22.bam
+        
+rule bwa_sort:
+	input: Chrom3/Align/R4-R88.bam
+	output: Chrom3/Sort/R4-R88.sort.bam
+	reason: Missing output files: Chrom3/Sort/R4-R88.sort.bam; Input files updated by another job: Chrom3/Align/R4-R88.bam
+	wildcards: chrom=Chrom3, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools sort -o Chrom3/Sort/R4-R88.sort.bam Chrom3/Align/R4-R88.bam
+        
+rule bwa_sort:
+	input: Chrom4/Align/N2-P30.bam
+	output: Chrom4/Sort/N2-P30.sort.bam
+	reason: Missing output files: Chrom4/Sort/N2-P30.sort.bam; Input files updated by another job: Chrom4/Align/N2-P30.bam
+	wildcards: chrom=Chrom4, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools sort -o Chrom4/Sort/N2-P30.sort.bam Chrom4/Align/N2-P30.bam
+        
+rule bwa_sort:
+	input: Chrom7/Align/R4-R88.bam
+	output: Chrom7/Sort/R4-R88.sort.bam
+	reason: Missing output files: Chrom7/Sort/R4-R88.sort.bam; Input files updated by another job: Chrom7/Align/R4-R88.bam
+	wildcards: chrom=Chrom7, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools sort -o Chrom7/Sort/R4-R88.sort.bam Chrom7/Align/R4-R88.bam
+        
+rule bwa_sort:
+	input: Chrom4/Align/R4-R88.bam
+	output: Chrom4/Sort/R4-R88.sort.bam
+	reason: Missing output files: Chrom4/Sort/R4-R88.sort.bam; Input files updated by another job: Chrom4/Align/R4-R88.bam
+	wildcards: chrom=Chrom4, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=8000
+
+        /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools sort -o Chrom4/Sort/R4-R88.sort.bam Chrom4/Align/R4-R88.bam
+        
+rule picard_markdup:
+	input: Chrom6/Sort/D8-1-D8-22.sort.bam
+	output: Chrom6/MarkDup/D8-1-D8-22.markdup.bam.bai, Chrom6/MarkDup/D8-1-D8-22.metrics, Chrom6/MarkDup/D8-1-D8-22.markdup.bam
+	reason: Missing output files: Chrom6/MarkDup/D8-1-D8-22.markdup.bam; Input files updated by another job: Chrom6/Sort/D8-1-D8-22.sort.bam
+	wildcards: chrom=Chrom6, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og06/pipe/pub/baozhigui/biosoft/picard-2.8.0/picard.jar MarkDuplicates         MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=4000         INPUT=Chrom6/Sort/D8-1-D8-22.sort.bam OUTPUT=Chrom6/MarkDup/D8-1-D8-22.markdup.bam         METRICS_FILE=Chrom6/MarkDup/D8-1-D8-22.metrics &&         /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools index Chrom6/MarkDup/D8-1-D8-22.markdup.bam
+        
+rule picard_markdup:
+	input: Chrom5/Sort/R4-R88.sort.bam
+	output: Chrom5/MarkDup/R4-R88.markdup.bam.bai, Chrom5/MarkDup/R4-R88.metrics, Chrom5/MarkDup/R4-R88.markdup.bam
+	reason: Missing output files: Chrom5/MarkDup/R4-R88.markdup.bam; Input files updated by another job: Chrom5/Sort/R4-R88.sort.bam
+	wildcards: chrom=Chrom5, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og06/pipe/pub/baozhigui/biosoft/picard-2.8.0/picard.jar MarkDuplicates         MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=4000         INPUT=Chrom5/Sort/R4-R88.sort.bam OUTPUT=Chrom5/MarkDup/R4-R88.markdup.bam         METRICS_FILE=Chrom5/MarkDup/R4-R88.metrics &&         /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools index Chrom5/MarkDup/R4-R88.markdup.bam
+        
+rule picard_markdup:
+	input: Chrom7/Sort/D8-1-D8-22.sort.bam
+	output: Chrom7/MarkDup/D8-1-D8-22.markdup.bam.bai, Chrom7/MarkDup/D8-1-D8-22.metrics, Chrom7/MarkDup/D8-1-D8-22.markdup.bam
+	reason: Missing output files: Chrom7/MarkDup/D8-1-D8-22.markdup.bam; Input files updated by another job: Chrom7/Sort/D8-1-D8-22.sort.bam
+	wildcards: chrom=Chrom7, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og06/pipe/pub/baozhigui/biosoft/picard-2.8.0/picard.jar MarkDuplicates         MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=4000         INPUT=Chrom7/Sort/D8-1-D8-22.sort.bam OUTPUT=Chrom7/MarkDup/D8-1-D8-22.markdup.bam         METRICS_FILE=Chrom7/MarkDup/D8-1-D8-22.metrics &&         /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools index Chrom7/MarkDup/D8-1-D8-22.markdup.bam
+        
+rule picard_markdup:
+	input: Chrom7/Sort/C-1-C-22.sort.bam
+	output: Chrom7/MarkDup/C-1-C-22.markdup.bam.bai, Chrom7/MarkDup/C-1-C-22.metrics, Chrom7/MarkDup/C-1-C-22.markdup.bam
+	reason: Missing output files: Chrom7/MarkDup/C-1-C-22.markdup.bam; Input files updated by another job: Chrom7/Sort/C-1-C-22.sort.bam
+	wildcards: chrom=Chrom7, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og06/pipe/pub/baozhigui/biosoft/picard-2.8.0/picard.jar MarkDuplicates         MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=4000         INPUT=Chrom7/Sort/C-1-C-22.sort.bam OUTPUT=Chrom7/MarkDup/C-1-C-22.markdup.bam         METRICS_FILE=Chrom7/MarkDup/C-1-C-22.metrics &&         /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools index Chrom7/MarkDup/C-1-C-22.markdup.bam
+        
+rule picard_markdup:
+	input: Chrom3/Sort/C-1-C-22.sort.bam
+	output: Chrom3/MarkDup/C-1-C-22.markdup.bam.bai, Chrom3/MarkDup/C-1-C-22.metrics, Chrom3/MarkDup/C-1-C-22.markdup.bam
+	reason: Missing output files: Chrom3/MarkDup/C-1-C-22.markdup.bam; Input files updated by another job: Chrom3/Sort/C-1-C-22.sort.bam
+	wildcards: chrom=Chrom3, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og06/pipe/pub/baozhigui/biosoft/picard-2.8.0/picard.jar MarkDuplicates         MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=4000         INPUT=Chrom3/Sort/C-1-C-22.sort.bam OUTPUT=Chrom3/MarkDup/C-1-C-22.markdup.bam         METRICS_FILE=Chrom3/MarkDup/C-1-C-22.metrics &&         /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools index Chrom3/MarkDup/C-1-C-22.markdup.bam
+        
+rule picard_markdup:
+	input: Chrom4/Sort/C-1-C-22.sort.bam
+	output: Chrom4/MarkDup/C-1-C-22.markdup.bam.bai, Chrom4/MarkDup/C-1-C-22.metrics, Chrom4/MarkDup/C-1-C-22.markdup.bam
+	reason: Missing output files: Chrom4/MarkDup/C-1-C-22.markdup.bam; Input files updated by another job: Chrom4/Sort/C-1-C-22.sort.bam
+	wildcards: chrom=Chrom4, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og06/pipe/pub/baozhigui/biosoft/picard-2.8.0/picard.jar MarkDuplicates         MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=4000         INPUT=Chrom4/Sort/C-1-C-22.sort.bam OUTPUT=Chrom4/MarkDup/C-1-C-22.markdup.bam         METRICS_FILE=Chrom4/MarkDup/C-1-C-22.metrics &&         /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools index Chrom4/MarkDup/C-1-C-22.markdup.bam
+        
+rule picard_markdup:
+	input: Chrom6/Sort/R4-R88.sort.bam
+	output: Chrom6/MarkDup/R4-R88.markdup.bam.bai, Chrom6/MarkDup/R4-R88.metrics, Chrom6/MarkDup/R4-R88.markdup.bam
+	reason: Missing output files: Chrom6/MarkDup/R4-R88.markdup.bam; Input files updated by another job: Chrom6/Sort/R4-R88.sort.bam
+	wildcards: chrom=Chrom6, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og06/pipe/pub/baozhigui/biosoft/picard-2.8.0/picard.jar MarkDuplicates         MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=4000         INPUT=Chrom6/Sort/R4-R88.sort.bam OUTPUT=Chrom6/MarkDup/R4-R88.markdup.bam         METRICS_FILE=Chrom6/MarkDup/R4-R88.metrics &&         /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools index Chrom6/MarkDup/R4-R88.markdup.bam
+        
+rule picard_markdup:
+	input: Chrom5/Sort/D8-1-D8-22.sort.bam
+	output: Chrom5/MarkDup/D8-1-D8-22.markdup.bam.bai, Chrom5/MarkDup/D8-1-D8-22.metrics, Chrom5/MarkDup/D8-1-D8-22.markdup.bam
+	reason: Missing output files: Chrom5/MarkDup/D8-1-D8-22.markdup.bam; Input files updated by another job: Chrom5/Sort/D8-1-D8-22.sort.bam
+	wildcards: chrom=Chrom5, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og06/pipe/pub/baozhigui/biosoft/picard-2.8.0/picard.jar MarkDuplicates         MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=4000         INPUT=Chrom5/Sort/D8-1-D8-22.sort.bam OUTPUT=Chrom5/MarkDup/D8-1-D8-22.markdup.bam         METRICS_FILE=Chrom5/MarkDup/D8-1-D8-22.metrics &&         /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools index Chrom5/MarkDup/D8-1-D8-22.markdup.bam
+        
+rule picard_markdup:
+	input: Chrom5/Sort/C-1-C-22.sort.bam
+	output: Chrom5/MarkDup/C-1-C-22.markdup.bam.bai, Chrom5/MarkDup/C-1-C-22.metrics, Chrom5/MarkDup/C-1-C-22.markdup.bam
+	reason: Missing output files: Chrom5/MarkDup/C-1-C-22.markdup.bam; Input files updated by another job: Chrom5/Sort/C-1-C-22.sort.bam
+	wildcards: chrom=Chrom5, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og06/pipe/pub/baozhigui/biosoft/picard-2.8.0/picard.jar MarkDuplicates         MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=4000         INPUT=Chrom5/Sort/C-1-C-22.sort.bam OUTPUT=Chrom5/MarkDup/C-1-C-22.markdup.bam         METRICS_FILE=Chrom5/MarkDup/C-1-C-22.metrics &&         /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools index Chrom5/MarkDup/C-1-C-22.markdup.bam
+        
+rule picard_markdup:
+	input: Chrom2/Sort/R4-R88.sort.bam
+	output: Chrom2/MarkDup/R4-R88.markdup.bam.bai, Chrom2/MarkDup/R4-R88.metrics, Chrom2/MarkDup/R4-R88.markdup.bam
+	reason: Missing output files: Chrom2/MarkDup/R4-R88.markdup.bam; Input files updated by another job: Chrom2/Sort/R4-R88.sort.bam
+	wildcards: chrom=Chrom2, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og06/pipe/pub/baozhigui/biosoft/picard-2.8.0/picard.jar MarkDuplicates         MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=4000         INPUT=Chrom2/Sort/R4-R88.sort.bam OUTPUT=Chrom2/MarkDup/R4-R88.markdup.bam         METRICS_FILE=Chrom2/MarkDup/R4-R88.metrics &&         /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools index Chrom2/MarkDup/R4-R88.markdup.bam
+        
+rule picard_markdup:
+	input: Chrom3/Sort/R4-R88.sort.bam
+	output: Chrom3/MarkDup/R4-R88.markdup.bam.bai, Chrom3/MarkDup/R4-R88.metrics, Chrom3/MarkDup/R4-R88.markdup.bam
+	reason: Missing output files: Chrom3/MarkDup/R4-R88.markdup.bam; Input files updated by another job: Chrom3/Sort/R4-R88.sort.bam
+	wildcards: chrom=Chrom3, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og06/pipe/pub/baozhigui/biosoft/picard-2.8.0/picard.jar MarkDuplicates         MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=4000         INPUT=Chrom3/Sort/R4-R88.sort.bam OUTPUT=Chrom3/MarkDup/R4-R88.markdup.bam         METRICS_FILE=Chrom3/MarkDup/R4-R88.metrics &&         /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools index Chrom3/MarkDup/R4-R88.markdup.bam
+        
+rule picard_markdup:
+	input: Chrom4/Sort/R4-R88.sort.bam
+	output: Chrom4/MarkDup/R4-R88.markdup.bam.bai, Chrom4/MarkDup/R4-R88.metrics, Chrom4/MarkDup/R4-R88.markdup.bam
+	reason: Missing output files: Chrom4/MarkDup/R4-R88.markdup.bam; Input files updated by another job: Chrom4/Sort/R4-R88.sort.bam
+	wildcards: chrom=Chrom4, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og06/pipe/pub/baozhigui/biosoft/picard-2.8.0/picard.jar MarkDuplicates         MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=4000         INPUT=Chrom4/Sort/R4-R88.sort.bam OUTPUT=Chrom4/MarkDup/R4-R88.markdup.bam         METRICS_FILE=Chrom4/MarkDup/R4-R88.metrics &&         /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools index Chrom4/MarkDup/R4-R88.markdup.bam
+        
+rule picard_markdup:
+	input: Chrom1/Sort/D8-1-D8-22.sort.bam
+	output: Chrom1/MarkDup/D8-1-D8-22.markdup.bam.bai, Chrom1/MarkDup/D8-1-D8-22.metrics, Chrom1/MarkDup/D8-1-D8-22.markdup.bam
+	reason: Missing output files: Chrom1/MarkDup/D8-1-D8-22.markdup.bam; Input files updated by another job: Chrom1/Sort/D8-1-D8-22.sort.bam
+	wildcards: chrom=Chrom1, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og06/pipe/pub/baozhigui/biosoft/picard-2.8.0/picard.jar MarkDuplicates         MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=4000         INPUT=Chrom1/Sort/D8-1-D8-22.sort.bam OUTPUT=Chrom1/MarkDup/D8-1-D8-22.markdup.bam         METRICS_FILE=Chrom1/MarkDup/D8-1-D8-22.metrics &&         /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools index Chrom1/MarkDup/D8-1-D8-22.markdup.bam
+        
+rule picard_markdup:
+	input: Chrom6/Sort/N2-P30.sort.bam
+	output: Chrom6/MarkDup/N2-P30.markdup.bam.bai, Chrom6/MarkDup/N2-P30.metrics, Chrom6/MarkDup/N2-P30.markdup.bam
+	reason: Missing output files: Chrom6/MarkDup/N2-P30.markdup.bam; Input files updated by another job: Chrom6/Sort/N2-P30.sort.bam
+	wildcards: chrom=Chrom6, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og06/pipe/pub/baozhigui/biosoft/picard-2.8.0/picard.jar MarkDuplicates         MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=4000         INPUT=Chrom6/Sort/N2-P30.sort.bam OUTPUT=Chrom6/MarkDup/N2-P30.markdup.bam         METRICS_FILE=Chrom6/MarkDup/N2-P30.metrics &&         /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools index Chrom6/MarkDup/N2-P30.markdup.bam
+        
+rule picard_markdup:
+	input: Chrom7/Sort/R4-R88.sort.bam
+	output: Chrom7/MarkDup/R4-R88.markdup.bam.bai, Chrom7/MarkDup/R4-R88.metrics, Chrom7/MarkDup/R4-R88.markdup.bam
+	reason: Missing output files: Chrom7/MarkDup/R4-R88.markdup.bam; Input files updated by another job: Chrom7/Sort/R4-R88.sort.bam
+	wildcards: chrom=Chrom7, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og06/pipe/pub/baozhigui/biosoft/picard-2.8.0/picard.jar MarkDuplicates         MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=4000         INPUT=Chrom7/Sort/R4-R88.sort.bam OUTPUT=Chrom7/MarkDup/R4-R88.markdup.bam         METRICS_FILE=Chrom7/MarkDup/R4-R88.metrics &&         /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools index Chrom7/MarkDup/R4-R88.markdup.bam
+        
+rule picard_markdup:
+	input: Chrom6/Sort/C-1-C-22.sort.bam
+	output: Chrom6/MarkDup/C-1-C-22.markdup.bam.bai, Chrom6/MarkDup/C-1-C-22.metrics, Chrom6/MarkDup/C-1-C-22.markdup.bam
+	reason: Missing output files: Chrom6/MarkDup/C-1-C-22.markdup.bam; Input files updated by another job: Chrom6/Sort/C-1-C-22.sort.bam
+	wildcards: chrom=Chrom6, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og06/pipe/pub/baozhigui/biosoft/picard-2.8.0/picard.jar MarkDuplicates         MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=4000         INPUT=Chrom6/Sort/C-1-C-22.sort.bam OUTPUT=Chrom6/MarkDup/C-1-C-22.markdup.bam         METRICS_FILE=Chrom6/MarkDup/C-1-C-22.metrics &&         /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools index Chrom6/MarkDup/C-1-C-22.markdup.bam
+        
+rule picard_markdup:
+	input: Chrom5/Sort/N2-P30.sort.bam
+	output: Chrom5/MarkDup/N2-P30.markdup.bam.bai, Chrom5/MarkDup/N2-P30.metrics, Chrom5/MarkDup/N2-P30.markdup.bam
+	reason: Missing output files: Chrom5/MarkDup/N2-P30.markdup.bam; Input files updated by another job: Chrom5/Sort/N2-P30.sort.bam
+	wildcards: chrom=Chrom5, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og06/pipe/pub/baozhigui/biosoft/picard-2.8.0/picard.jar MarkDuplicates         MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=4000         INPUT=Chrom5/Sort/N2-P30.sort.bam OUTPUT=Chrom5/MarkDup/N2-P30.markdup.bam         METRICS_FILE=Chrom5/MarkDup/N2-P30.metrics &&         /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools index Chrom5/MarkDup/N2-P30.markdup.bam
+        
+rule picard_markdup:
+	input: Chrom3/Sort/D8-1-D8-22.sort.bam
+	output: Chrom3/MarkDup/D8-1-D8-22.markdup.bam.bai, Chrom3/MarkDup/D8-1-D8-22.metrics, Chrom3/MarkDup/D8-1-D8-22.markdup.bam
+	reason: Missing output files: Chrom3/MarkDup/D8-1-D8-22.markdup.bam; Input files updated by another job: Chrom3/Sort/D8-1-D8-22.sort.bam
+	wildcards: chrom=Chrom3, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og06/pipe/pub/baozhigui/biosoft/picard-2.8.0/picard.jar MarkDuplicates         MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=4000         INPUT=Chrom3/Sort/D8-1-D8-22.sort.bam OUTPUT=Chrom3/MarkDup/D8-1-D8-22.markdup.bam         METRICS_FILE=Chrom3/MarkDup/D8-1-D8-22.metrics &&         /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools index Chrom3/MarkDup/D8-1-D8-22.markdup.bam
+        
+rule picard_markdup:
+	input: Chrom4/Sort/D8-1-D8-22.sort.bam
+	output: Chrom4/MarkDup/D8-1-D8-22.markdup.bam.bai, Chrom4/MarkDup/D8-1-D8-22.metrics, Chrom4/MarkDup/D8-1-D8-22.markdup.bam
+	reason: Missing output files: Chrom4/MarkDup/D8-1-D8-22.markdup.bam; Input files updated by another job: Chrom4/Sort/D8-1-D8-22.sort.bam
+	wildcards: chrom=Chrom4, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og06/pipe/pub/baozhigui/biosoft/picard-2.8.0/picard.jar MarkDuplicates         MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=4000         INPUT=Chrom4/Sort/D8-1-D8-22.sort.bam OUTPUT=Chrom4/MarkDup/D8-1-D8-22.markdup.bam         METRICS_FILE=Chrom4/MarkDup/D8-1-D8-22.metrics &&         /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools index Chrom4/MarkDup/D8-1-D8-22.markdup.bam
+        
+rule picard_markdup:
+	input: Chrom1/Sort/N2-P30.sort.bam
+	output: Chrom1/MarkDup/N2-P30.markdup.bam.bai, Chrom1/MarkDup/N2-P30.metrics, Chrom1/MarkDup/N2-P30.markdup.bam
+	reason: Missing output files: Chrom1/MarkDup/N2-P30.markdup.bam; Input files updated by another job: Chrom1/Sort/N2-P30.sort.bam
+	wildcards: chrom=Chrom1, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og06/pipe/pub/baozhigui/biosoft/picard-2.8.0/picard.jar MarkDuplicates         MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=4000         INPUT=Chrom1/Sort/N2-P30.sort.bam OUTPUT=Chrom1/MarkDup/N2-P30.markdup.bam         METRICS_FILE=Chrom1/MarkDup/N2-P30.metrics &&         /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools index Chrom1/MarkDup/N2-P30.markdup.bam
+        
+rule picard_markdup:
+	input: Chrom4/Sort/N2-P30.sort.bam
+	output: Chrom4/MarkDup/N2-P30.markdup.bam.bai, Chrom4/MarkDup/N2-P30.metrics, Chrom4/MarkDup/N2-P30.markdup.bam
+	reason: Missing output files: Chrom4/MarkDup/N2-P30.markdup.bam; Input files updated by another job: Chrom4/Sort/N2-P30.sort.bam
+	wildcards: chrom=Chrom4, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og06/pipe/pub/baozhigui/biosoft/picard-2.8.0/picard.jar MarkDuplicates         MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=4000         INPUT=Chrom4/Sort/N2-P30.sort.bam OUTPUT=Chrom4/MarkDup/N2-P30.markdup.bam         METRICS_FILE=Chrom4/MarkDup/N2-P30.metrics &&         /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools index Chrom4/MarkDup/N2-P30.markdup.bam
+        
+rule picard_markdup:
+	input: Chrom7/Sort/N2-P30.sort.bam
+	output: Chrom7/MarkDup/N2-P30.markdup.bam.bai, Chrom7/MarkDup/N2-P30.metrics, Chrom7/MarkDup/N2-P30.markdup.bam
+	reason: Missing output files: Chrom7/MarkDup/N2-P30.markdup.bam; Input files updated by another job: Chrom7/Sort/N2-P30.sort.bam
+	wildcards: chrom=Chrom7, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og06/pipe/pub/baozhigui/biosoft/picard-2.8.0/picard.jar MarkDuplicates         MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=4000         INPUT=Chrom7/Sort/N2-P30.sort.bam OUTPUT=Chrom7/MarkDup/N2-P30.markdup.bam         METRICS_FILE=Chrom7/MarkDup/N2-P30.metrics &&         /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools index Chrom7/MarkDup/N2-P30.markdup.bam
+        
+rule picard_markdup:
+	input: Chrom3/Sort/N2-P30.sort.bam
+	output: Chrom3/MarkDup/N2-P30.markdup.bam.bai, Chrom3/MarkDup/N2-P30.metrics, Chrom3/MarkDup/N2-P30.markdup.bam
+	reason: Missing output files: Chrom3/MarkDup/N2-P30.markdup.bam; Input files updated by another job: Chrom3/Sort/N2-P30.sort.bam
+	wildcards: chrom=Chrom3, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og06/pipe/pub/baozhigui/biosoft/picard-2.8.0/picard.jar MarkDuplicates         MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=4000         INPUT=Chrom3/Sort/N2-P30.sort.bam OUTPUT=Chrom3/MarkDup/N2-P30.markdup.bam         METRICS_FILE=Chrom3/MarkDup/N2-P30.metrics &&         /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools index Chrom3/MarkDup/N2-P30.markdup.bam
+        
+rule picard_markdup:
+	input: Chrom1/Sort/C-1-C-22.sort.bam
+	output: Chrom1/MarkDup/C-1-C-22.markdup.bam.bai, Chrom1/MarkDup/C-1-C-22.metrics, Chrom1/MarkDup/C-1-C-22.markdup.bam
+	reason: Missing output files: Chrom1/MarkDup/C-1-C-22.markdup.bam; Input files updated by another job: Chrom1/Sort/C-1-C-22.sort.bam
+	wildcards: chrom=Chrom1, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og06/pipe/pub/baozhigui/biosoft/picard-2.8.0/picard.jar MarkDuplicates         MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=4000         INPUT=Chrom1/Sort/C-1-C-22.sort.bam OUTPUT=Chrom1/MarkDup/C-1-C-22.markdup.bam         METRICS_FILE=Chrom1/MarkDup/C-1-C-22.metrics &&         /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools index Chrom1/MarkDup/C-1-C-22.markdup.bam
+        
+rule picard_markdup:
+	input: Chrom2/Sort/N2-P30.sort.bam
+	output: Chrom2/MarkDup/N2-P30.markdup.bam.bai, Chrom2/MarkDup/N2-P30.metrics, Chrom2/MarkDup/N2-P30.markdup.bam
+	reason: Missing output files: Chrom2/MarkDup/N2-P30.markdup.bam; Input files updated by another job: Chrom2/Sort/N2-P30.sort.bam
+	wildcards: chrom=Chrom2, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og06/pipe/pub/baozhigui/biosoft/picard-2.8.0/picard.jar MarkDuplicates         MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=4000         INPUT=Chrom2/Sort/N2-P30.sort.bam OUTPUT=Chrom2/MarkDup/N2-P30.markdup.bam         METRICS_FILE=Chrom2/MarkDup/N2-P30.metrics &&         /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools index Chrom2/MarkDup/N2-P30.markdup.bam
+        
+rule picard_markdup:
+	input: Chrom2/Sort/D8-1-D8-22.sort.bam
+	output: Chrom2/MarkDup/D8-1-D8-22.markdup.bam.bai, Chrom2/MarkDup/D8-1-D8-22.metrics, Chrom2/MarkDup/D8-1-D8-22.markdup.bam
+	reason: Missing output files: Chrom2/MarkDup/D8-1-D8-22.markdup.bam; Input files updated by another job: Chrom2/Sort/D8-1-D8-22.sort.bam
+	wildcards: chrom=Chrom2, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og06/pipe/pub/baozhigui/biosoft/picard-2.8.0/picard.jar MarkDuplicates         MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=4000         INPUT=Chrom2/Sort/D8-1-D8-22.sort.bam OUTPUT=Chrom2/MarkDup/D8-1-D8-22.markdup.bam         METRICS_FILE=Chrom2/MarkDup/D8-1-D8-22.metrics &&         /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools index Chrom2/MarkDup/D8-1-D8-22.markdup.bam
+        
+rule picard_markdup:
+	input: Chrom2/Sort/C-1-C-22.sort.bam
+	output: Chrom2/MarkDup/C-1-C-22.markdup.bam.bai, Chrom2/MarkDup/C-1-C-22.metrics, Chrom2/MarkDup/C-1-C-22.markdup.bam
+	reason: Missing output files: Chrom2/MarkDup/C-1-C-22.markdup.bam; Input files updated by another job: Chrom2/Sort/C-1-C-22.sort.bam
+	wildcards: chrom=Chrom2, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og06/pipe/pub/baozhigui/biosoft/picard-2.8.0/picard.jar MarkDuplicates         MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=4000         INPUT=Chrom2/Sort/C-1-C-22.sort.bam OUTPUT=Chrom2/MarkDup/C-1-C-22.markdup.bam         METRICS_FILE=Chrom2/MarkDup/C-1-C-22.metrics &&         /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools index Chrom2/MarkDup/C-1-C-22.markdup.bam
+        
+rule picard_markdup:
+	input: Chrom1/Sort/R4-R88.sort.bam
+	output: Chrom1/MarkDup/R4-R88.markdup.bam.bai, Chrom1/MarkDup/R4-R88.metrics, Chrom1/MarkDup/R4-R88.markdup.bam
+	reason: Missing output files: Chrom1/MarkDup/R4-R88.markdup.bam; Input files updated by another job: Chrom1/Sort/R4-R88.sort.bam
+	wildcards: chrom=Chrom1, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og06/pipe/pub/baozhigui/biosoft/picard-2.8.0/picard.jar MarkDuplicates         MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=4000         INPUT=Chrom1/Sort/R4-R88.sort.bam OUTPUT=Chrom1/MarkDup/R4-R88.markdup.bam         METRICS_FILE=Chrom1/MarkDup/R4-R88.metrics &&         /lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools index Chrom1/MarkDup/R4-R88.markdup.bam
+        
+rule gatk_realign:
+	input: Chrom1/Index/Chrom1.fa, Chrom1/MarkDup/C-1-C-22.markdup.bam
+	output: Chrom1/Realign/C-1-C-22.realign.bam, Chrom1/Realign/C-1-C-22.intervals
+	reason: Missing output files: Chrom1/Realign/C-1-C-22.realign.bam; Input files updated by another job: Chrom1/Index/Chrom1.fa, Chrom1/MarkDup/C-1-C-22.markdup.bam
+	wildcards: chrom=Chrom1, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T RealignerTargetCreator -R Chrom1/Index/Chrom1.fa         -I Chrom1/MarkDup/C-1-C-22.markdup.bam -o Chrom1/Realign/C-1-C-22.intervals &&         /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T IndelRealigner -R Chrom1/Index/Chrom1.fa         -I Chrom1/MarkDup/C-1-C-22.markdup.bam -targetIntervals Chrom1/Realign/C-1-C-22.intervals         -o Chrom1/Realign/C-1-C-22.realign.bam
+        
+rule gatk_realign:
+	input: Chrom3/Index/Chrom3.fa, Chrom3/MarkDup/R4-R88.markdup.bam
+	output: Chrom3/Realign/R4-R88.realign.bam, Chrom3/Realign/R4-R88.intervals
+	reason: Missing output files: Chrom3/Realign/R4-R88.realign.bam; Input files updated by another job: Chrom3/Index/Chrom3.fa, Chrom3/MarkDup/R4-R88.markdup.bam
+	wildcards: chrom=Chrom3, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T RealignerTargetCreator -R Chrom3/Index/Chrom3.fa         -I Chrom3/MarkDup/R4-R88.markdup.bam -o Chrom3/Realign/R4-R88.intervals &&         /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T IndelRealigner -R Chrom3/Index/Chrom3.fa         -I Chrom3/MarkDup/R4-R88.markdup.bam -targetIntervals Chrom3/Realign/R4-R88.intervals         -o Chrom3/Realign/R4-R88.realign.bam
+        
+rule gatk_realign:
+	input: Chrom2/Index/Chrom2.fa, Chrom2/MarkDup/C-1-C-22.markdup.bam
+	output: Chrom2/Realign/C-1-C-22.realign.bam, Chrom2/Realign/C-1-C-22.intervals
+	reason: Missing output files: Chrom2/Realign/C-1-C-22.realign.bam; Input files updated by another job: Chrom2/Index/Chrom2.fa, Chrom2/MarkDup/C-1-C-22.markdup.bam
+	wildcards: chrom=Chrom2, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T RealignerTargetCreator -R Chrom2/Index/Chrom2.fa         -I Chrom2/MarkDup/C-1-C-22.markdup.bam -o Chrom2/Realign/C-1-C-22.intervals &&         /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T IndelRealigner -R Chrom2/Index/Chrom2.fa         -I Chrom2/MarkDup/C-1-C-22.markdup.bam -targetIntervals Chrom2/Realign/C-1-C-22.intervals         -o Chrom2/Realign/C-1-C-22.realign.bam
+        
+rule gatk_realign:
+	input: Chrom6/Index/Chrom6.fa, Chrom6/MarkDup/N2-P30.markdup.bam
+	output: Chrom6/Realign/N2-P30.realign.bam, Chrom6/Realign/N2-P30.intervals
+	reason: Missing output files: Chrom6/Realign/N2-P30.realign.bam; Input files updated by another job: Chrom6/MarkDup/N2-P30.markdup.bam, Chrom6/Index/Chrom6.fa
+	wildcards: chrom=Chrom6, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T RealignerTargetCreator -R Chrom6/Index/Chrom6.fa         -I Chrom6/MarkDup/N2-P30.markdup.bam -o Chrom6/Realign/N2-P30.intervals &&         /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T IndelRealigner -R Chrom6/Index/Chrom6.fa         -I Chrom6/MarkDup/N2-P30.markdup.bam -targetIntervals Chrom6/Realign/N2-P30.intervals         -o Chrom6/Realign/N2-P30.realign.bam
+        
+rule gatk_realign:
+	input: Chrom3/Index/Chrom3.fa, Chrom3/MarkDup/N2-P30.markdup.bam
+	output: Chrom3/Realign/N2-P30.realign.bam, Chrom3/Realign/N2-P30.intervals
+	reason: Missing output files: Chrom3/Realign/N2-P30.realign.bam; Input files updated by another job: Chrom3/Index/Chrom3.fa, Chrom3/MarkDup/N2-P30.markdup.bam
+	wildcards: chrom=Chrom3, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T RealignerTargetCreator -R Chrom3/Index/Chrom3.fa         -I Chrom3/MarkDup/N2-P30.markdup.bam -o Chrom3/Realign/N2-P30.intervals &&         /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T IndelRealigner -R Chrom3/Index/Chrom3.fa         -I Chrom3/MarkDup/N2-P30.markdup.bam -targetIntervals Chrom3/Realign/N2-P30.intervals         -o Chrom3/Realign/N2-P30.realign.bam
+        
+rule gatk_realign:
+	input: Chrom4/Index/Chrom4.fa, Chrom4/MarkDup/C-1-C-22.markdup.bam
+	output: Chrom4/Realign/C-1-C-22.realign.bam, Chrom4/Realign/C-1-C-22.intervals
+	reason: Missing output files: Chrom4/Realign/C-1-C-22.realign.bam; Input files updated by another job: Chrom4/Index/Chrom4.fa, Chrom4/MarkDup/C-1-C-22.markdup.bam
+	wildcards: chrom=Chrom4, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T RealignerTargetCreator -R Chrom4/Index/Chrom4.fa         -I Chrom4/MarkDup/C-1-C-22.markdup.bam -o Chrom4/Realign/C-1-C-22.intervals &&         /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T IndelRealigner -R Chrom4/Index/Chrom4.fa         -I Chrom4/MarkDup/C-1-C-22.markdup.bam -targetIntervals Chrom4/Realign/C-1-C-22.intervals         -o Chrom4/Realign/C-1-C-22.realign.bam
+        
+rule gatk_realign:
+	input: Chrom2/Index/Chrom2.fa, Chrom2/MarkDup/R4-R88.markdup.bam
+	output: Chrom2/Realign/R4-R88.realign.bam, Chrom2/Realign/R4-R88.intervals
+	reason: Missing output files: Chrom2/Realign/R4-R88.realign.bam; Input files updated by another job: Chrom2/MarkDup/R4-R88.markdup.bam, Chrom2/Index/Chrom2.fa
+	wildcards: chrom=Chrom2, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T RealignerTargetCreator -R Chrom2/Index/Chrom2.fa         -I Chrom2/MarkDup/R4-R88.markdup.bam -o Chrom2/Realign/R4-R88.intervals &&         /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T IndelRealigner -R Chrom2/Index/Chrom2.fa         -I Chrom2/MarkDup/R4-R88.markdup.bam -targetIntervals Chrom2/Realign/R4-R88.intervals         -o Chrom2/Realign/R4-R88.realign.bam
+        
+rule gatk_realign:
+	input: Chrom3/Index/Chrom3.fa, Chrom3/MarkDup/D8-1-D8-22.markdup.bam
+	output: Chrom3/Realign/D8-1-D8-22.realign.bam, Chrom3/Realign/D8-1-D8-22.intervals
+	reason: Missing output files: Chrom3/Realign/D8-1-D8-22.realign.bam; Input files updated by another job: Chrom3/MarkDup/D8-1-D8-22.markdup.bam, Chrom3/Index/Chrom3.fa
+	wildcards: chrom=Chrom3, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T RealignerTargetCreator -R Chrom3/Index/Chrom3.fa         -I Chrom3/MarkDup/D8-1-D8-22.markdup.bam -o Chrom3/Realign/D8-1-D8-22.intervals &&         /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T IndelRealigner -R Chrom3/Index/Chrom3.fa         -I Chrom3/MarkDup/D8-1-D8-22.markdup.bam -targetIntervals Chrom3/Realign/D8-1-D8-22.intervals         -o Chrom3/Realign/D8-1-D8-22.realign.bam
+        
+rule gatk_realign:
+	input: Chrom6/Index/Chrom6.fa, Chrom6/MarkDup/D8-1-D8-22.markdup.bam
+	output: Chrom6/Realign/D8-1-D8-22.realign.bam, Chrom6/Realign/D8-1-D8-22.intervals
+	reason: Missing output files: Chrom6/Realign/D8-1-D8-22.realign.bam; Input files updated by another job: Chrom6/MarkDup/D8-1-D8-22.markdup.bam, Chrom6/Index/Chrom6.fa
+	wildcards: chrom=Chrom6, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T RealignerTargetCreator -R Chrom6/Index/Chrom6.fa         -I Chrom6/MarkDup/D8-1-D8-22.markdup.bam -o Chrom6/Realign/D8-1-D8-22.intervals &&         /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T IndelRealigner -R Chrom6/Index/Chrom6.fa         -I Chrom6/MarkDup/D8-1-D8-22.markdup.bam -targetIntervals Chrom6/Realign/D8-1-D8-22.intervals         -o Chrom6/Realign/D8-1-D8-22.realign.bam
+        
+rule gatk_realign:
+	input: Chrom4/Index/Chrom4.fa, Chrom4/MarkDup/R4-R88.markdup.bam
+	output: Chrom4/Realign/R4-R88.realign.bam, Chrom4/Realign/R4-R88.intervals
+	reason: Missing output files: Chrom4/Realign/R4-R88.realign.bam; Input files updated by another job: Chrom4/Index/Chrom4.fa, Chrom4/MarkDup/R4-R88.markdup.bam
+	wildcards: chrom=Chrom4, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T RealignerTargetCreator -R Chrom4/Index/Chrom4.fa         -I Chrom4/MarkDup/R4-R88.markdup.bam -o Chrom4/Realign/R4-R88.intervals &&         /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T IndelRealigner -R Chrom4/Index/Chrom4.fa         -I Chrom4/MarkDup/R4-R88.markdup.bam -targetIntervals Chrom4/Realign/R4-R88.intervals         -o Chrom4/Realign/R4-R88.realign.bam
+        
+rule gatk_realign:
+	input: Chrom5/Index/Chrom5.fa, Chrom5/MarkDup/D8-1-D8-22.markdup.bam
+	output: Chrom5/Realign/D8-1-D8-22.realign.bam, Chrom5/Realign/D8-1-D8-22.intervals
+	reason: Missing output files: Chrom5/Realign/D8-1-D8-22.realign.bam; Input files updated by another job: Chrom5/MarkDup/D8-1-D8-22.markdup.bam, Chrom5/Index/Chrom5.fa
+	wildcards: chrom=Chrom5, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T RealignerTargetCreator -R Chrom5/Index/Chrom5.fa         -I Chrom5/MarkDup/D8-1-D8-22.markdup.bam -o Chrom5/Realign/D8-1-D8-22.intervals &&         /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T IndelRealigner -R Chrom5/Index/Chrom5.fa         -I Chrom5/MarkDup/D8-1-D8-22.markdup.bam -targetIntervals Chrom5/Realign/D8-1-D8-22.intervals         -o Chrom5/Realign/D8-1-D8-22.realign.bam
+        
+rule gatk_realign:
+	input: Chrom5/Index/Chrom5.fa, Chrom5/MarkDup/N2-P30.markdup.bam
+	output: Chrom5/Realign/N2-P30.realign.bam, Chrom5/Realign/N2-P30.intervals
+	reason: Missing output files: Chrom5/Realign/N2-P30.realign.bam; Input files updated by another job: Chrom5/Index/Chrom5.fa, Chrom5/MarkDup/N2-P30.markdup.bam
+	wildcards: chrom=Chrom5, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T RealignerTargetCreator -R Chrom5/Index/Chrom5.fa         -I Chrom5/MarkDup/N2-P30.markdup.bam -o Chrom5/Realign/N2-P30.intervals &&         /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T IndelRealigner -R Chrom5/Index/Chrom5.fa         -I Chrom5/MarkDup/N2-P30.markdup.bam -targetIntervals Chrom5/Realign/N2-P30.intervals         -o Chrom5/Realign/N2-P30.realign.bam
+        
+rule gatk_realign:
+	input: Chrom5/Index/Chrom5.fa, Chrom5/MarkDup/R4-R88.markdup.bam
+	output: Chrom5/Realign/R4-R88.realign.bam, Chrom5/Realign/R4-R88.intervals
+	reason: Missing output files: Chrom5/Realign/R4-R88.realign.bam; Input files updated by another job: Chrom5/Index/Chrom5.fa, Chrom5/MarkDup/R4-R88.markdup.bam
+	wildcards: chrom=Chrom5, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T RealignerTargetCreator -R Chrom5/Index/Chrom5.fa         -I Chrom5/MarkDup/R4-R88.markdup.bam -o Chrom5/Realign/R4-R88.intervals &&         /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T IndelRealigner -R Chrom5/Index/Chrom5.fa         -I Chrom5/MarkDup/R4-R88.markdup.bam -targetIntervals Chrom5/Realign/R4-R88.intervals         -o Chrom5/Realign/R4-R88.realign.bam
+        
+rule gatk_realign:
+	input: Chrom2/Index/Chrom2.fa, Chrom2/MarkDup/N2-P30.markdup.bam
+	output: Chrom2/Realign/N2-P30.realign.bam, Chrom2/Realign/N2-P30.intervals
+	reason: Missing output files: Chrom2/Realign/N2-P30.realign.bam; Input files updated by another job: Chrom2/MarkDup/N2-P30.markdup.bam, Chrom2/Index/Chrom2.fa
+	wildcards: chrom=Chrom2, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T RealignerTargetCreator -R Chrom2/Index/Chrom2.fa         -I Chrom2/MarkDup/N2-P30.markdup.bam -o Chrom2/Realign/N2-P30.intervals &&         /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T IndelRealigner -R Chrom2/Index/Chrom2.fa         -I Chrom2/MarkDup/N2-P30.markdup.bam -targetIntervals Chrom2/Realign/N2-P30.intervals         -o Chrom2/Realign/N2-P30.realign.bam
+        
+rule gatk_realign:
+	input: Chrom1/Index/Chrom1.fa, Chrom1/MarkDup/N2-P30.markdup.bam
+	output: Chrom1/Realign/N2-P30.realign.bam, Chrom1/Realign/N2-P30.intervals
+	reason: Missing output files: Chrom1/Realign/N2-P30.realign.bam; Input files updated by another job: Chrom1/MarkDup/N2-P30.markdup.bam, Chrom1/Index/Chrom1.fa
+	wildcards: chrom=Chrom1, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T RealignerTargetCreator -R Chrom1/Index/Chrom1.fa         -I Chrom1/MarkDup/N2-P30.markdup.bam -o Chrom1/Realign/N2-P30.intervals &&         /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T IndelRealigner -R Chrom1/Index/Chrom1.fa         -I Chrom1/MarkDup/N2-P30.markdup.bam -targetIntervals Chrom1/Realign/N2-P30.intervals         -o Chrom1/Realign/N2-P30.realign.bam
+        
+rule gatk_realign:
+	input: Chrom6/Index/Chrom6.fa, Chrom6/MarkDup/C-1-C-22.markdup.bam
+	output: Chrom6/Realign/C-1-C-22.realign.bam, Chrom6/Realign/C-1-C-22.intervals
+	reason: Missing output files: Chrom6/Realign/C-1-C-22.realign.bam; Input files updated by another job: Chrom6/MarkDup/C-1-C-22.markdup.bam, Chrom6/Index/Chrom6.fa
+	wildcards: chrom=Chrom6, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T RealignerTargetCreator -R Chrom6/Index/Chrom6.fa         -I Chrom6/MarkDup/C-1-C-22.markdup.bam -o Chrom6/Realign/C-1-C-22.intervals &&         /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T IndelRealigner -R Chrom6/Index/Chrom6.fa         -I Chrom6/MarkDup/C-1-C-22.markdup.bam -targetIntervals Chrom6/Realign/C-1-C-22.intervals         -o Chrom6/Realign/C-1-C-22.realign.bam
+        
+rule gatk_realign:
+	input: Chrom6/Index/Chrom6.fa, Chrom6/MarkDup/R4-R88.markdup.bam
+	output: Chrom6/Realign/R4-R88.realign.bam, Chrom6/Realign/R4-R88.intervals
+	reason: Missing output files: Chrom6/Realign/R4-R88.realign.bam; Input files updated by another job: Chrom6/Index/Chrom6.fa, Chrom6/MarkDup/R4-R88.markdup.bam
+	wildcards: chrom=Chrom6, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T RealignerTargetCreator -R Chrom6/Index/Chrom6.fa         -I Chrom6/MarkDup/R4-R88.markdup.bam -o Chrom6/Realign/R4-R88.intervals &&         /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T IndelRealigner -R Chrom6/Index/Chrom6.fa         -I Chrom6/MarkDup/R4-R88.markdup.bam -targetIntervals Chrom6/Realign/R4-R88.intervals         -o Chrom6/Realign/R4-R88.realign.bam
+        
+rule gatk_realign:
+	input: Chrom7/Index/Chrom7.fa, Chrom7/MarkDup/D8-1-D8-22.markdup.bam
+	output: Chrom7/Realign/D8-1-D8-22.realign.bam, Chrom7/Realign/D8-1-D8-22.intervals
+	reason: Missing output files: Chrom7/Realign/D8-1-D8-22.realign.bam; Input files updated by another job: Chrom7/Index/Chrom7.fa, Chrom7/MarkDup/D8-1-D8-22.markdup.bam
+	wildcards: chrom=Chrom7, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T RealignerTargetCreator -R Chrom7/Index/Chrom7.fa         -I Chrom7/MarkDup/D8-1-D8-22.markdup.bam -o Chrom7/Realign/D8-1-D8-22.intervals &&         /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T IndelRealigner -R Chrom7/Index/Chrom7.fa         -I Chrom7/MarkDup/D8-1-D8-22.markdup.bam -targetIntervals Chrom7/Realign/D8-1-D8-22.intervals         -o Chrom7/Realign/D8-1-D8-22.realign.bam
+        
+rule gatk_realign:
+	input: Chrom7/Index/Chrom7.fa, Chrom7/MarkDup/R4-R88.markdup.bam
+	output: Chrom7/Realign/R4-R88.realign.bam, Chrom7/Realign/R4-R88.intervals
+	reason: Missing output files: Chrom7/Realign/R4-R88.realign.bam; Input files updated by another job: Chrom7/MarkDup/R4-R88.markdup.bam, Chrom7/Index/Chrom7.fa
+	wildcards: chrom=Chrom7, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T RealignerTargetCreator -R Chrom7/Index/Chrom7.fa         -I Chrom7/MarkDup/R4-R88.markdup.bam -o Chrom7/Realign/R4-R88.intervals &&         /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T IndelRealigner -R Chrom7/Index/Chrom7.fa         -I Chrom7/MarkDup/R4-R88.markdup.bam -targetIntervals Chrom7/Realign/R4-R88.intervals         -o Chrom7/Realign/R4-R88.realign.bam
+        
+rule gatk_realign:
+	input: Chrom2/Index/Chrom2.fa, Chrom2/MarkDup/D8-1-D8-22.markdup.bam
+	output: Chrom2/Realign/D8-1-D8-22.realign.bam, Chrom2/Realign/D8-1-D8-22.intervals
+	reason: Missing output files: Chrom2/Realign/D8-1-D8-22.realign.bam; Input files updated by another job: Chrom2/MarkDup/D8-1-D8-22.markdup.bam, Chrom2/Index/Chrom2.fa
+	wildcards: chrom=Chrom2, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T RealignerTargetCreator -R Chrom2/Index/Chrom2.fa         -I Chrom2/MarkDup/D8-1-D8-22.markdup.bam -o Chrom2/Realign/D8-1-D8-22.intervals &&         /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T IndelRealigner -R Chrom2/Index/Chrom2.fa         -I Chrom2/MarkDup/D8-1-D8-22.markdup.bam -targetIntervals Chrom2/Realign/D8-1-D8-22.intervals         -o Chrom2/Realign/D8-1-D8-22.realign.bam
+        
+rule gatk_realign:
+	input: Chrom7/Index/Chrom7.fa, Chrom7/MarkDup/C-1-C-22.markdup.bam
+	output: Chrom7/Realign/C-1-C-22.realign.bam, Chrom7/Realign/C-1-C-22.intervals
+	reason: Missing output files: Chrom7/Realign/C-1-C-22.realign.bam; Input files updated by another job: Chrom7/MarkDup/C-1-C-22.markdup.bam, Chrom7/Index/Chrom7.fa
+	wildcards: chrom=Chrom7, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T RealignerTargetCreator -R Chrom7/Index/Chrom7.fa         -I Chrom7/MarkDup/C-1-C-22.markdup.bam -o Chrom7/Realign/C-1-C-22.intervals &&         /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T IndelRealigner -R Chrom7/Index/Chrom7.fa         -I Chrom7/MarkDup/C-1-C-22.markdup.bam -targetIntervals Chrom7/Realign/C-1-C-22.intervals         -o Chrom7/Realign/C-1-C-22.realign.bam
+        
+rule gatk_realign:
+	input: Chrom1/Index/Chrom1.fa, Chrom1/MarkDup/D8-1-D8-22.markdup.bam
+	output: Chrom1/Realign/D8-1-D8-22.realign.bam, Chrom1/Realign/D8-1-D8-22.intervals
+	reason: Missing output files: Chrom1/Realign/D8-1-D8-22.realign.bam; Input files updated by another job: Chrom1/Index/Chrom1.fa, Chrom1/MarkDup/D8-1-D8-22.markdup.bam
+	wildcards: chrom=Chrom1, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T RealignerTargetCreator -R Chrom1/Index/Chrom1.fa         -I Chrom1/MarkDup/D8-1-D8-22.markdup.bam -o Chrom1/Realign/D8-1-D8-22.intervals &&         /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T IndelRealigner -R Chrom1/Index/Chrom1.fa         -I Chrom1/MarkDup/D8-1-D8-22.markdup.bam -targetIntervals Chrom1/Realign/D8-1-D8-22.intervals         -o Chrom1/Realign/D8-1-D8-22.realign.bam
+        
+rule gatk_realign:
+	input: Chrom4/Index/Chrom4.fa, Chrom4/MarkDup/D8-1-D8-22.markdup.bam
+	output: Chrom4/Realign/D8-1-D8-22.realign.bam, Chrom4/Realign/D8-1-D8-22.intervals
+	reason: Missing output files: Chrom4/Realign/D8-1-D8-22.realign.bam; Input files updated by another job: Chrom4/Index/Chrom4.fa, Chrom4/MarkDup/D8-1-D8-22.markdup.bam
+	wildcards: chrom=Chrom4, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T RealignerTargetCreator -R Chrom4/Index/Chrom4.fa         -I Chrom4/MarkDup/D8-1-D8-22.markdup.bam -o Chrom4/Realign/D8-1-D8-22.intervals &&         /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T IndelRealigner -R Chrom4/Index/Chrom4.fa         -I Chrom4/MarkDup/D8-1-D8-22.markdup.bam -targetIntervals Chrom4/Realign/D8-1-D8-22.intervals         -o Chrom4/Realign/D8-1-D8-22.realign.bam
+        
+rule gatk_realign:
+	input: Chrom4/Index/Chrom4.fa, Chrom4/MarkDup/N2-P30.markdup.bam
+	output: Chrom4/Realign/N2-P30.realign.bam, Chrom4/Realign/N2-P30.intervals
+	reason: Missing output files: Chrom4/Realign/N2-P30.realign.bam; Input files updated by another job: Chrom4/MarkDup/N2-P30.markdup.bam, Chrom4/Index/Chrom4.fa
+	wildcards: chrom=Chrom4, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T RealignerTargetCreator -R Chrom4/Index/Chrom4.fa         -I Chrom4/MarkDup/N2-P30.markdup.bam -o Chrom4/Realign/N2-P30.intervals &&         /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T IndelRealigner -R Chrom4/Index/Chrom4.fa         -I Chrom4/MarkDup/N2-P30.markdup.bam -targetIntervals Chrom4/Realign/N2-P30.intervals         -o Chrom4/Realign/N2-P30.realign.bam
+        
+rule gatk_realign:
+	input: Chrom3/Index/Chrom3.fa, Chrom3/MarkDup/C-1-C-22.markdup.bam
+	output: Chrom3/Realign/C-1-C-22.realign.bam, Chrom3/Realign/C-1-C-22.intervals
+	reason: Missing output files: Chrom3/Realign/C-1-C-22.realign.bam; Input files updated by another job: Chrom3/Index/Chrom3.fa, Chrom3/MarkDup/C-1-C-22.markdup.bam
+	wildcards: chrom=Chrom3, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T RealignerTargetCreator -R Chrom3/Index/Chrom3.fa         -I Chrom3/MarkDup/C-1-C-22.markdup.bam -o Chrom3/Realign/C-1-C-22.intervals &&         /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T IndelRealigner -R Chrom3/Index/Chrom3.fa         -I Chrom3/MarkDup/C-1-C-22.markdup.bam -targetIntervals Chrom3/Realign/C-1-C-22.intervals         -o Chrom3/Realign/C-1-C-22.realign.bam
+        
+rule gatk_realign:
+	input: Chrom5/Index/Chrom5.fa, Chrom5/MarkDup/C-1-C-22.markdup.bam
+	output: Chrom5/Realign/C-1-C-22.realign.bam, Chrom5/Realign/C-1-C-22.intervals
+	reason: Missing output files: Chrom5/Realign/C-1-C-22.realign.bam; Input files updated by another job: Chrom5/Index/Chrom5.fa, Chrom5/MarkDup/C-1-C-22.markdup.bam
+	wildcards: chrom=Chrom5, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T RealignerTargetCreator -R Chrom5/Index/Chrom5.fa         -I Chrom5/MarkDup/C-1-C-22.markdup.bam -o Chrom5/Realign/C-1-C-22.intervals &&         /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T IndelRealigner -R Chrom5/Index/Chrom5.fa         -I Chrom5/MarkDup/C-1-C-22.markdup.bam -targetIntervals Chrom5/Realign/C-1-C-22.intervals         -o Chrom5/Realign/C-1-C-22.realign.bam
+        
+rule gatk_realign:
+	input: Chrom1/Index/Chrom1.fa, Chrom1/MarkDup/R4-R88.markdup.bam
+	output: Chrom1/Realign/R4-R88.realign.bam, Chrom1/Realign/R4-R88.intervals
+	reason: Missing output files: Chrom1/Realign/R4-R88.realign.bam; Input files updated by another job: Chrom1/MarkDup/R4-R88.markdup.bam, Chrom1/Index/Chrom1.fa
+	wildcards: chrom=Chrom1, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T RealignerTargetCreator -R Chrom1/Index/Chrom1.fa         -I Chrom1/MarkDup/R4-R88.markdup.bam -o Chrom1/Realign/R4-R88.intervals &&         /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T IndelRealigner -R Chrom1/Index/Chrom1.fa         -I Chrom1/MarkDup/R4-R88.markdup.bam -targetIntervals Chrom1/Realign/R4-R88.intervals         -o Chrom1/Realign/R4-R88.realign.bam
+        
+rule gatk_realign:
+	input: Chrom7/Index/Chrom7.fa, Chrom7/MarkDup/N2-P30.markdup.bam
+	output: Chrom7/Realign/N2-P30.realign.bam, Chrom7/Realign/N2-P30.intervals
+	reason: Missing output files: Chrom7/Realign/N2-P30.realign.bam; Input files updated by another job: Chrom7/MarkDup/N2-P30.markdup.bam, Chrom7/Index/Chrom7.fa
+	wildcards: chrom=Chrom7, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T RealignerTargetCreator -R Chrom7/Index/Chrom7.fa         -I Chrom7/MarkDup/N2-P30.markdup.bam -o Chrom7/Realign/N2-P30.intervals &&         /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T IndelRealigner -R Chrom7/Index/Chrom7.fa         -I Chrom7/MarkDup/N2-P30.markdup.bam -targetIntervals Chrom7/Realign/N2-P30.intervals         -o Chrom7/Realign/N2-P30.realign.bam
+        
+rule gatk_gvcf:
+	input: Chrom5/Realign/C-1-C-22.realign.bam, Chrom5/Index/Chrom5.fa
+	output: Chrom5/GVCF/C-1-C-22.g.vcf
+	reason: Missing output files: Chrom5/GVCF/C-1-C-22.g.vcf; Input files updated by another job: Chrom5/Index/Chrom5.fa, Chrom5/Realign/C-1-C-22.realign.bam
+	wildcards: chrom=Chrom5, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T HaplotypeCaller -R Chrom5/Index/Chrom5.fa         -I Chrom5/Realign/C-1-C-22.realign.bam -o Chrom5/GVCF/C-1-C-22.g.vcf -ERC GVCF
+        
+rule gatk_gvcf:
+	input: Chrom6/Realign/D8-1-D8-22.realign.bam, Chrom6/Index/Chrom6.fa
+	output: Chrom6/GVCF/D8-1-D8-22.g.vcf
+	reason: Missing output files: Chrom6/GVCF/D8-1-D8-22.g.vcf; Input files updated by another job: Chrom6/Realign/D8-1-D8-22.realign.bam, Chrom6/Index/Chrom6.fa
+	wildcards: chrom=Chrom6, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T HaplotypeCaller -R Chrom6/Index/Chrom6.fa         -I Chrom6/Realign/D8-1-D8-22.realign.bam -o Chrom6/GVCF/D8-1-D8-22.g.vcf -ERC GVCF
+        
+rule gatk_gvcf:
+	input: Chrom6/Realign/N2-P30.realign.bam, Chrom6/Index/Chrom6.fa
+	output: Chrom6/GVCF/N2-P30.g.vcf
+	reason: Missing output files: Chrom6/GVCF/N2-P30.g.vcf; Input files updated by another job: Chrom6/Realign/N2-P30.realign.bam, Chrom6/Index/Chrom6.fa
+	wildcards: chrom=Chrom6, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T HaplotypeCaller -R Chrom6/Index/Chrom6.fa         -I Chrom6/Realign/N2-P30.realign.bam -o Chrom6/GVCF/N2-P30.g.vcf -ERC GVCF
+        
+rule gatk_gvcf:
+	input: Chrom4/Realign/C-1-C-22.realign.bam, Chrom4/Index/Chrom4.fa
+	output: Chrom4/GVCF/C-1-C-22.g.vcf
+	reason: Missing output files: Chrom4/GVCF/C-1-C-22.g.vcf; Input files updated by another job: Chrom4/Index/Chrom4.fa, Chrom4/Realign/C-1-C-22.realign.bam
+	wildcards: chrom=Chrom4, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T HaplotypeCaller -R Chrom4/Index/Chrom4.fa         -I Chrom4/Realign/C-1-C-22.realign.bam -o Chrom4/GVCF/C-1-C-22.g.vcf -ERC GVCF
+        
+rule gatk_gvcf:
+	input: Chrom7/Realign/N2-P30.realign.bam, Chrom7/Index/Chrom7.fa
+	output: Chrom7/GVCF/N2-P30.g.vcf
+	reason: Missing output files: Chrom7/GVCF/N2-P30.g.vcf; Input files updated by another job: Chrom7/Realign/N2-P30.realign.bam, Chrom7/Index/Chrom7.fa
+	wildcards: chrom=Chrom7, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T HaplotypeCaller -R Chrom7/Index/Chrom7.fa         -I Chrom7/Realign/N2-P30.realign.bam -o Chrom7/GVCF/N2-P30.g.vcf -ERC GVCF
+        
+rule gatk_gvcf:
+	input: Chrom1/Realign/R4-R88.realign.bam, Chrom1/Index/Chrom1.fa
+	output: Chrom1/GVCF/R4-R88.g.vcf
+	reason: Missing output files: Chrom1/GVCF/R4-R88.g.vcf; Input files updated by another job: Chrom1/Index/Chrom1.fa, Chrom1/Realign/R4-R88.realign.bam
+	wildcards: chrom=Chrom1, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T HaplotypeCaller -R Chrom1/Index/Chrom1.fa         -I Chrom1/Realign/R4-R88.realign.bam -o Chrom1/GVCF/R4-R88.g.vcf -ERC GVCF
+        
+rule gatk_gvcf:
+	input: Chrom2/Realign/D8-1-D8-22.realign.bam, Chrom2/Index/Chrom2.fa
+	output: Chrom2/GVCF/D8-1-D8-22.g.vcf
+	reason: Missing output files: Chrom2/GVCF/D8-1-D8-22.g.vcf; Input files updated by another job: Chrom2/Index/Chrom2.fa, Chrom2/Realign/D8-1-D8-22.realign.bam
+	wildcards: chrom=Chrom2, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T HaplotypeCaller -R Chrom2/Index/Chrom2.fa         -I Chrom2/Realign/D8-1-D8-22.realign.bam -o Chrom2/GVCF/D8-1-D8-22.g.vcf -ERC GVCF
+        
+rule gatk_gvcf:
+	input: Chrom7/Realign/R4-R88.realign.bam, Chrom7/Index/Chrom7.fa
+	output: Chrom7/GVCF/R4-R88.g.vcf
+	reason: Missing output files: Chrom7/GVCF/R4-R88.g.vcf; Input files updated by another job: Chrom7/Realign/R4-R88.realign.bam, Chrom7/Index/Chrom7.fa
+	wildcards: chrom=Chrom7, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T HaplotypeCaller -R Chrom7/Index/Chrom7.fa         -I Chrom7/Realign/R4-R88.realign.bam -o Chrom7/GVCF/R4-R88.g.vcf -ERC GVCF
+        
+rule gatk_gvcf:
+	input: Chrom3/Realign/N2-P30.realign.bam, Chrom3/Index/Chrom3.fa
+	output: Chrom3/GVCF/N2-P30.g.vcf
+	reason: Missing output files: Chrom3/GVCF/N2-P30.g.vcf; Input files updated by another job: Chrom3/Index/Chrom3.fa, Chrom3/Realign/N2-P30.realign.bam
+	wildcards: chrom=Chrom3, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T HaplotypeCaller -R Chrom3/Index/Chrom3.fa         -I Chrom3/Realign/N2-P30.realign.bam -o Chrom3/GVCF/N2-P30.g.vcf -ERC GVCF
+        
+rule gatk_gvcf:
+	input: Chrom4/Realign/N2-P30.realign.bam, Chrom4/Index/Chrom4.fa
+	output: Chrom4/GVCF/N2-P30.g.vcf
+	reason: Missing output files: Chrom4/GVCF/N2-P30.g.vcf; Input files updated by another job: Chrom4/Index/Chrom4.fa, Chrom4/Realign/N2-P30.realign.bam
+	wildcards: chrom=Chrom4, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T HaplotypeCaller -R Chrom4/Index/Chrom4.fa         -I Chrom4/Realign/N2-P30.realign.bam -o Chrom4/GVCF/N2-P30.g.vcf -ERC GVCF
+        
+rule gatk_gvcf:
+	input: Chrom1/Realign/D8-1-D8-22.realign.bam, Chrom1/Index/Chrom1.fa
+	output: Chrom1/GVCF/D8-1-D8-22.g.vcf
+	reason: Missing output files: Chrom1/GVCF/D8-1-D8-22.g.vcf; Input files updated by another job: Chrom1/Index/Chrom1.fa, Chrom1/Realign/D8-1-D8-22.realign.bam
+	wildcards: chrom=Chrom1, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T HaplotypeCaller -R Chrom1/Index/Chrom1.fa         -I Chrom1/Realign/D8-1-D8-22.realign.bam -o Chrom1/GVCF/D8-1-D8-22.g.vcf -ERC GVCF
+        
+rule gatk_gvcf:
+	input: Chrom4/Realign/D8-1-D8-22.realign.bam, Chrom4/Index/Chrom4.fa
+	output: Chrom4/GVCF/D8-1-D8-22.g.vcf
+	reason: Missing output files: Chrom4/GVCF/D8-1-D8-22.g.vcf; Input files updated by another job: Chrom4/Realign/D8-1-D8-22.realign.bam, Chrom4/Index/Chrom4.fa
+	wildcards: chrom=Chrom4, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T HaplotypeCaller -R Chrom4/Index/Chrom4.fa         -I Chrom4/Realign/D8-1-D8-22.realign.bam -o Chrom4/GVCF/D8-1-D8-22.g.vcf -ERC GVCF
+        
+rule gatk_gvcf:
+	input: Chrom3/Realign/C-1-C-22.realign.bam, Chrom3/Index/Chrom3.fa
+	output: Chrom3/GVCF/C-1-C-22.g.vcf
+	reason: Missing output files: Chrom3/GVCF/C-1-C-22.g.vcf; Input files updated by another job: Chrom3/Index/Chrom3.fa, Chrom3/Realign/C-1-C-22.realign.bam
+	wildcards: chrom=Chrom3, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T HaplotypeCaller -R Chrom3/Index/Chrom3.fa         -I Chrom3/Realign/C-1-C-22.realign.bam -o Chrom3/GVCF/C-1-C-22.g.vcf -ERC GVCF
+        
+rule gatk_gvcf:
+	input: Chrom6/Realign/C-1-C-22.realign.bam, Chrom6/Index/Chrom6.fa
+	output: Chrom6/GVCF/C-1-C-22.g.vcf
+	reason: Missing output files: Chrom6/GVCF/C-1-C-22.g.vcf; Input files updated by another job: Chrom6/Realign/C-1-C-22.realign.bam, Chrom6/Index/Chrom6.fa
+	wildcards: chrom=Chrom6, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T HaplotypeCaller -R Chrom6/Index/Chrom6.fa         -I Chrom6/Realign/C-1-C-22.realign.bam -o Chrom6/GVCF/C-1-C-22.g.vcf -ERC GVCF
+        
+rule gatk_gvcf:
+	input: Chrom4/Realign/R4-R88.realign.bam, Chrom4/Index/Chrom4.fa
+	output: Chrom4/GVCF/R4-R88.g.vcf
+	reason: Missing output files: Chrom4/GVCF/R4-R88.g.vcf; Input files updated by another job: Chrom4/Realign/R4-R88.realign.bam, Chrom4/Index/Chrom4.fa
+	wildcards: chrom=Chrom4, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T HaplotypeCaller -R Chrom4/Index/Chrom4.fa         -I Chrom4/Realign/R4-R88.realign.bam -o Chrom4/GVCF/R4-R88.g.vcf -ERC GVCF
+        
+rule gatk_gvcf:
+	input: Chrom7/Realign/D8-1-D8-22.realign.bam, Chrom7/Index/Chrom7.fa
+	output: Chrom7/GVCF/D8-1-D8-22.g.vcf
+	reason: Missing output files: Chrom7/GVCF/D8-1-D8-22.g.vcf; Input files updated by another job: Chrom7/Index/Chrom7.fa, Chrom7/Realign/D8-1-D8-22.realign.bam
+	wildcards: chrom=Chrom7, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T HaplotypeCaller -R Chrom7/Index/Chrom7.fa         -I Chrom7/Realign/D8-1-D8-22.realign.bam -o Chrom7/GVCF/D8-1-D8-22.g.vcf -ERC GVCF
+        
+rule gatk_gvcf:
+	input: Chrom5/Realign/N2-P30.realign.bam, Chrom5/Index/Chrom5.fa
+	output: Chrom5/GVCF/N2-P30.g.vcf
+	reason: Missing output files: Chrom5/GVCF/N2-P30.g.vcf; Input files updated by another job: Chrom5/Index/Chrom5.fa, Chrom5/Realign/N2-P30.realign.bam
+	wildcards: chrom=Chrom5, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T HaplotypeCaller -R Chrom5/Index/Chrom5.fa         -I Chrom5/Realign/N2-P30.realign.bam -o Chrom5/GVCF/N2-P30.g.vcf -ERC GVCF
+        
+rule gatk_gvcf:
+	input: Chrom1/Realign/N2-P30.realign.bam, Chrom1/Index/Chrom1.fa
+	output: Chrom1/GVCF/N2-P30.g.vcf
+	reason: Missing output files: Chrom1/GVCF/N2-P30.g.vcf; Input files updated by another job: Chrom1/Realign/N2-P30.realign.bam, Chrom1/Index/Chrom1.fa
+	wildcards: chrom=Chrom1, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T HaplotypeCaller -R Chrom1/Index/Chrom1.fa         -I Chrom1/Realign/N2-P30.realign.bam -o Chrom1/GVCF/N2-P30.g.vcf -ERC GVCF
+        
+rule gatk_gvcf:
+	input: Chrom2/Realign/N2-P30.realign.bam, Chrom2/Index/Chrom2.fa
+	output: Chrom2/GVCF/N2-P30.g.vcf
+	reason: Missing output files: Chrom2/GVCF/N2-P30.g.vcf; Input files updated by another job: Chrom2/Index/Chrom2.fa, Chrom2/Realign/N2-P30.realign.bam
+	wildcards: chrom=Chrom2, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T HaplotypeCaller -R Chrom2/Index/Chrom2.fa         -I Chrom2/Realign/N2-P30.realign.bam -o Chrom2/GVCF/N2-P30.g.vcf -ERC GVCF
+        
+rule gatk_gvcf:
+	input: Chrom2/Realign/R4-R88.realign.bam, Chrom2/Index/Chrom2.fa
+	output: Chrom2/GVCF/R4-R88.g.vcf
+	reason: Missing output files: Chrom2/GVCF/R4-R88.g.vcf; Input files updated by another job: Chrom2/Realign/R4-R88.realign.bam, Chrom2/Index/Chrom2.fa
+	wildcards: chrom=Chrom2, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T HaplotypeCaller -R Chrom2/Index/Chrom2.fa         -I Chrom2/Realign/R4-R88.realign.bam -o Chrom2/GVCF/R4-R88.g.vcf -ERC GVCF
+        
+rule gatk_gvcf:
+	input: Chrom3/Realign/D8-1-D8-22.realign.bam, Chrom3/Index/Chrom3.fa
+	output: Chrom3/GVCF/D8-1-D8-22.g.vcf
+	reason: Missing output files: Chrom3/GVCF/D8-1-D8-22.g.vcf; Input files updated by another job: Chrom3/Index/Chrom3.fa, Chrom3/Realign/D8-1-D8-22.realign.bam
+	wildcards: chrom=Chrom3, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T HaplotypeCaller -R Chrom3/Index/Chrom3.fa         -I Chrom3/Realign/D8-1-D8-22.realign.bam -o Chrom3/GVCF/D8-1-D8-22.g.vcf -ERC GVCF
+        
+rule gatk_gvcf:
+	input: Chrom1/Realign/C-1-C-22.realign.bam, Chrom1/Index/Chrom1.fa
+	output: Chrom1/GVCF/C-1-C-22.g.vcf
+	reason: Missing output files: Chrom1/GVCF/C-1-C-22.g.vcf; Input files updated by another job: Chrom1/Index/Chrom1.fa, Chrom1/Realign/C-1-C-22.realign.bam
+	wildcards: chrom=Chrom1, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T HaplotypeCaller -R Chrom1/Index/Chrom1.fa         -I Chrom1/Realign/C-1-C-22.realign.bam -o Chrom1/GVCF/C-1-C-22.g.vcf -ERC GVCF
+        
+rule gatk_gvcf:
+	input: Chrom5/Realign/R4-R88.realign.bam, Chrom5/Index/Chrom5.fa
+	output: Chrom5/GVCF/R4-R88.g.vcf
+	reason: Missing output files: Chrom5/GVCF/R4-R88.g.vcf; Input files updated by another job: Chrom5/Index/Chrom5.fa, Chrom5/Realign/R4-R88.realign.bam
+	wildcards: chrom=Chrom5, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T HaplotypeCaller -R Chrom5/Index/Chrom5.fa         -I Chrom5/Realign/R4-R88.realign.bam -o Chrom5/GVCF/R4-R88.g.vcf -ERC GVCF
+        
+rule gatk_gvcf:
+	input: Chrom7/Realign/C-1-C-22.realign.bam, Chrom7/Index/Chrom7.fa
+	output: Chrom7/GVCF/C-1-C-22.g.vcf
+	reason: Missing output files: Chrom7/GVCF/C-1-C-22.g.vcf; Input files updated by another job: Chrom7/Realign/C-1-C-22.realign.bam, Chrom7/Index/Chrom7.fa
+	wildcards: chrom=Chrom7, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T HaplotypeCaller -R Chrom7/Index/Chrom7.fa         -I Chrom7/Realign/C-1-C-22.realign.bam -o Chrom7/GVCF/C-1-C-22.g.vcf -ERC GVCF
+        
+rule gatk_gvcf:
+	input: Chrom2/Realign/C-1-C-22.realign.bam, Chrom2/Index/Chrom2.fa
+	output: Chrom2/GVCF/C-1-C-22.g.vcf
+	reason: Missing output files: Chrom2/GVCF/C-1-C-22.g.vcf; Input files updated by another job: Chrom2/Index/Chrom2.fa, Chrom2/Realign/C-1-C-22.realign.bam
+	wildcards: chrom=Chrom2, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T HaplotypeCaller -R Chrom2/Index/Chrom2.fa         -I Chrom2/Realign/C-1-C-22.realign.bam -o Chrom2/GVCF/C-1-C-22.g.vcf -ERC GVCF
+        
+rule gatk_gvcf:
+	input: Chrom6/Realign/R4-R88.realign.bam, Chrom6/Index/Chrom6.fa
+	output: Chrom6/GVCF/R4-R88.g.vcf
+	reason: Missing output files: Chrom6/GVCF/R4-R88.g.vcf; Input files updated by another job: Chrom6/Index/Chrom6.fa, Chrom6/Realign/R4-R88.realign.bam
+	wildcards: chrom=Chrom6, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T HaplotypeCaller -R Chrom6/Index/Chrom6.fa         -I Chrom6/Realign/R4-R88.realign.bam -o Chrom6/GVCF/R4-R88.g.vcf -ERC GVCF
+        
+rule gatk_gvcf:
+	input: Chrom5/Realign/D8-1-D8-22.realign.bam, Chrom5/Index/Chrom5.fa
+	output: Chrom5/GVCF/D8-1-D8-22.g.vcf
+	reason: Missing output files: Chrom5/GVCF/D8-1-D8-22.g.vcf; Input files updated by another job: Chrom5/Index/Chrom5.fa, Chrom5/Realign/D8-1-D8-22.realign.bam
+	wildcards: chrom=Chrom5, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T HaplotypeCaller -R Chrom5/Index/Chrom5.fa         -I Chrom5/Realign/D8-1-D8-22.realign.bam -o Chrom5/GVCF/D8-1-D8-22.g.vcf -ERC GVCF
+        
+rule gatk_gvcf:
+	input: Chrom3/Realign/R4-R88.realign.bam, Chrom3/Index/Chrom3.fa
+	output: Chrom3/GVCF/R4-R88.g.vcf
+	reason: Missing output files: Chrom3/GVCF/R4-R88.g.vcf; Input files updated by another job: Chrom3/Index/Chrom3.fa, Chrom3/Realign/R4-R88.realign.bam
+	wildcards: chrom=Chrom3, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=40000
+
+        /p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java -Xmx30G -jar /p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar -T HaplotypeCaller -R Chrom3/Index/Chrom3.fa         -I Chrom3/Realign/R4-R88.realign.bam -o Chrom3/GVCF/R4-R88.g.vcf -ERC GVCF
+        
+localrule GATK_pipe_all:
+	input: Data/C-1-C-22_R1.fastq.gz, Data/D8-1-D8-22_R1.fastq.gz, Data/R4-R88_R1.fastq.gz, Data/N2-P30_R1.fastq.gz, Data/C-1-C-22_R2.fastq.gz, Data/D8-1-D8-22_R2.fastq.gz, Data/R4-R88_R2.fastq.gz, Data/N2-P30_R2.fastq.gz, Chrom1/Index/Chrom1.fa, Chrom2/Index/Chrom2.fa, Chrom3/Index/Chrom3.fa, Chrom4/Index/Chrom4.fa, Chrom5/Index/Chrom5.fa, Chrom6/Index/Chrom6.fa, Chrom7/Index/Chrom7.fa, Chrom1/Index/Chrom1.fa.amb, Chrom2/Index/Chrom2.fa.amb, Chrom3/Index/Chrom3.fa.amb, Chrom4/Index/Chrom4.fa.amb, Chrom5/Index/Chrom5.fa.amb, Chrom6/Index/Chrom6.fa.amb, Chrom7/Index/Chrom7.fa.amb, Chrom1/Index/Chrom1.fa.ann, Chrom2/Index/Chrom2.fa.ann, Chrom3/Index/Chrom3.fa.ann, Chrom4/Index/Chrom4.fa.ann, Chrom5/Index/Chrom5.fa.ann, Chrom6/Index/Chrom6.fa.ann, Chrom7/Index/Chrom7.fa.ann, Chrom1/Index/Chrom1.fa.bwt, Chrom2/Index/Chrom2.fa.bwt, Chrom3/Index/Chrom3.fa.bwt, Chrom4/Index/Chrom4.fa.bwt, Chrom5/Index/Chrom5.fa.bwt, Chrom6/Index/Chrom6.fa.bwt, Chrom7/Index/Chrom7.fa.bwt, Chrom1/Index/Chrom1.fa.pac, Chrom2/Index/Chrom2.fa.pac, Chrom3/Index/Chrom3.fa.pac, Chrom4/Index/Chrom4.fa.pac, Chrom5/Index/Chrom5.fa.pac, Chrom6/Index/Chrom6.fa.pac, Chrom7/Index/Chrom7.fa.pac, Chrom1/Index/Chrom1.fa.sa, Chrom2/Index/Chrom2.fa.sa, Chrom3/Index/Chrom3.fa.sa, Chrom4/Index/Chrom4.fa.sa, Chrom5/Index/Chrom5.fa.sa, Chrom6/Index/Chrom6.fa.sa, Chrom7/Index/Chrom7.fa.sa, Chrom1/Index/Chrom1.fa.fai, Chrom2/Index/Chrom2.fa.fai, Chrom3/Index/Chrom3.fa.fai, Chrom4/Index/Chrom4.fa.fai, Chrom5/Index/Chrom5.fa.fai, Chrom6/Index/Chrom6.fa.fai, Chrom7/Index/Chrom7.fa.fai, Chrom1/Index/Chrom1.dict, Chrom2/Index/Chrom2.dict, Chrom3/Index/Chrom3.dict, Chrom4/Index/Chrom4.dict, Chrom5/Index/Chrom5.dict, Chrom6/Index/Chrom6.dict, Chrom7/Index/Chrom7.dict, Chrom1/Align/C-1-C-22.bam, Chrom1/Align/D8-1-D8-22.bam, Chrom1/Align/R4-R88.bam, Chrom1/Align/N2-P30.bam, Chrom2/Align/C-1-C-22.bam, Chrom2/Align/D8-1-D8-22.bam, Chrom2/Align/R4-R88.bam, Chrom2/Align/N2-P30.bam, Chrom3/Align/C-1-C-22.bam, Chrom3/Align/D8-1-D8-22.bam, Chrom3/Align/R4-R88.bam, Chrom3/Align/N2-P30.bam, Chrom4/Align/C-1-C-22.bam, Chrom4/Align/D8-1-D8-22.bam, Chrom4/Align/R4-R88.bam, Chrom4/Align/N2-P30.bam, Chrom5/Align/C-1-C-22.bam, Chrom5/Align/D8-1-D8-22.bam, Chrom5/Align/R4-R88.bam, Chrom5/Align/N2-P30.bam, Chrom6/Align/C-1-C-22.bam, Chrom6/Align/D8-1-D8-22.bam, Chrom6/Align/R4-R88.bam, Chrom6/Align/N2-P30.bam, Chrom7/Align/C-1-C-22.bam, Chrom7/Align/D8-1-D8-22.bam, Chrom7/Align/R4-R88.bam, Chrom7/Align/N2-P30.bam, Chrom1/Sort/C-1-C-22.sort.bam, Chrom1/Sort/D8-1-D8-22.sort.bam, Chrom1/Sort/R4-R88.sort.bam, Chrom1/Sort/N2-P30.sort.bam, Chrom2/Sort/C-1-C-22.sort.bam, Chrom2/Sort/D8-1-D8-22.sort.bam, Chrom2/Sort/R4-R88.sort.bam, Chrom2/Sort/N2-P30.sort.bam, Chrom3/Sort/C-1-C-22.sort.bam, Chrom3/Sort/D8-1-D8-22.sort.bam, Chrom3/Sort/R4-R88.sort.bam, Chrom3/Sort/N2-P30.sort.bam, Chrom4/Sort/C-1-C-22.sort.bam, Chrom4/Sort/D8-1-D8-22.sort.bam, Chrom4/Sort/R4-R88.sort.bam, Chrom4/Sort/N2-P30.sort.bam, Chrom5/Sort/C-1-C-22.sort.bam, Chrom5/Sort/D8-1-D8-22.sort.bam, Chrom5/Sort/R4-R88.sort.bam, Chrom5/Sort/N2-P30.sort.bam, Chrom6/Sort/C-1-C-22.sort.bam, Chrom6/Sort/D8-1-D8-22.sort.bam, Chrom6/Sort/R4-R88.sort.bam, Chrom6/Sort/N2-P30.sort.bam, Chrom7/Sort/C-1-C-22.sort.bam, Chrom7/Sort/D8-1-D8-22.sort.bam, Chrom7/Sort/R4-R88.sort.bam, Chrom7/Sort/N2-P30.sort.bam, Chrom1/MarkDup/C-1-C-22.markdup.bam, Chrom1/MarkDup/D8-1-D8-22.markdup.bam, Chrom1/MarkDup/R4-R88.markdup.bam, Chrom1/MarkDup/N2-P30.markdup.bam, Chrom2/MarkDup/C-1-C-22.markdup.bam, Chrom2/MarkDup/D8-1-D8-22.markdup.bam, Chrom2/MarkDup/R4-R88.markdup.bam, Chrom2/MarkDup/N2-P30.markdup.bam, Chrom3/MarkDup/C-1-C-22.markdup.bam, Chrom3/MarkDup/D8-1-D8-22.markdup.bam, Chrom3/MarkDup/R4-R88.markdup.bam, Chrom3/MarkDup/N2-P30.markdup.bam, Chrom4/MarkDup/C-1-C-22.markdup.bam, Chrom4/MarkDup/D8-1-D8-22.markdup.bam, Chrom4/MarkDup/R4-R88.markdup.bam, Chrom4/MarkDup/N2-P30.markdup.bam, Chrom5/MarkDup/C-1-C-22.markdup.bam, Chrom5/MarkDup/D8-1-D8-22.markdup.bam, Chrom5/MarkDup/R4-R88.markdup.bam, Chrom5/MarkDup/N2-P30.markdup.bam, Chrom6/MarkDup/C-1-C-22.markdup.bam, Chrom6/MarkDup/D8-1-D8-22.markdup.bam, Chrom6/MarkDup/R4-R88.markdup.bam, Chrom6/MarkDup/N2-P30.markdup.bam, Chrom7/MarkDup/C-1-C-22.markdup.bam, Chrom7/MarkDup/D8-1-D8-22.markdup.bam, Chrom7/MarkDup/R4-R88.markdup.bam, Chrom7/MarkDup/N2-P30.markdup.bam, Chrom1/Realign/C-1-C-22.realign.bam, Chrom1/Realign/D8-1-D8-22.realign.bam, Chrom1/Realign/R4-R88.realign.bam, Chrom1/Realign/N2-P30.realign.bam, Chrom2/Realign/C-1-C-22.realign.bam, Chrom2/Realign/D8-1-D8-22.realign.bam, Chrom2/Realign/R4-R88.realign.bam, Chrom2/Realign/N2-P30.realign.bam, Chrom3/Realign/C-1-C-22.realign.bam, Chrom3/Realign/D8-1-D8-22.realign.bam, Chrom3/Realign/R4-R88.realign.bam, Chrom3/Realign/N2-P30.realign.bam, Chrom4/Realign/C-1-C-22.realign.bam, Chrom4/Realign/D8-1-D8-22.realign.bam, Chrom4/Realign/R4-R88.realign.bam, Chrom4/Realign/N2-P30.realign.bam, Chrom5/Realign/C-1-C-22.realign.bam, Chrom5/Realign/D8-1-D8-22.realign.bam, Chrom5/Realign/R4-R88.realign.bam, Chrom5/Realign/N2-P30.realign.bam, Chrom6/Realign/C-1-C-22.realign.bam, Chrom6/Realign/D8-1-D8-22.realign.bam, Chrom6/Realign/R4-R88.realign.bam, Chrom6/Realign/N2-P30.realign.bam, Chrom7/Realign/C-1-C-22.realign.bam, Chrom7/Realign/D8-1-D8-22.realign.bam, Chrom7/Realign/R4-R88.realign.bam, Chrom7/Realign/N2-P30.realign.bam, Chrom1/GVCF/C-1-C-22.g.vcf, Chrom1/GVCF/D8-1-D8-22.g.vcf, Chrom1/GVCF/R4-R88.g.vcf, Chrom1/GVCF/N2-P30.g.vcf, Chrom2/GVCF/C-1-C-22.g.vcf, Chrom2/GVCF/D8-1-D8-22.g.vcf, Chrom2/GVCF/R4-R88.g.vcf, Chrom2/GVCF/N2-P30.g.vcf, Chrom3/GVCF/C-1-C-22.g.vcf, Chrom3/GVCF/D8-1-D8-22.g.vcf, Chrom3/GVCF/R4-R88.g.vcf, Chrom3/GVCF/N2-P30.g.vcf, Chrom4/GVCF/C-1-C-22.g.vcf, Chrom4/GVCF/D8-1-D8-22.g.vcf, Chrom4/GVCF/R4-R88.g.vcf, Chrom4/GVCF/N2-P30.g.vcf, Chrom5/GVCF/C-1-C-22.g.vcf, Chrom5/GVCF/D8-1-D8-22.g.vcf, Chrom5/GVCF/R4-R88.g.vcf, Chrom5/GVCF/N2-P30.g.vcf, Chrom6/GVCF/C-1-C-22.g.vcf, Chrom6/GVCF/D8-1-D8-22.g.vcf, Chrom6/GVCF/R4-R88.g.vcf, Chrom6/GVCF/N2-P30.g.vcf, Chrom7/GVCF/C-1-C-22.g.vcf, Chrom7/GVCF/D8-1-D8-22.g.vcf, Chrom7/GVCF/R4-R88.g.vcf, Chrom7/GVCF/N2-P30.g.vcf
+	reason: Input files updated by another job: Chrom3/MarkDup/D8-1-D8-22.markdup.bam, Chrom6/Realign/C-1-C-22.realign.bam, Chrom2/Align/C-1-C-22.bam, Chrom7/GVCF/C-1-C-22.g.vcf, Chrom5/Realign/R4-R88.realign.bam, Chrom2/GVCF/C-1-C-22.g.vcf, Chrom6/GVCF/R4-R88.g.vcf, Chrom7/Sort/R4-R88.sort.bam, Chrom2/Index/Chrom2.fa.amb, Chrom3/MarkDup/R4-R88.markdup.bam, Chrom4/Sort/R4-R88.sort.bam, Chrom3/GVCF/C-1-C-22.g.vcf, Chrom7/Realign/C-1-C-22.realign.bam, Chrom4/Align/D8-1-D8-22.bam, Chrom1/Sort/C-1-C-22.sort.bam, Chrom1/GVCF/D8-1-D8-22.g.vcf, Chrom4/Index/Chrom4.fa.fai, Chrom2/Sort/R4-R88.sort.bam, Chrom3/MarkDup/N2-P30.markdup.bam, Chrom2/Sort/N2-P30.sort.bam, Chrom3/Index/Chrom3.fa.pac, Chrom2/MarkDup/N2-P30.markdup.bam, Chrom1/Sort/R4-R88.sort.bam, Chrom2/Realign/C-1-C-22.realign.bam, Chrom5/GVCF/N2-P30.g.vcf, Chrom6/MarkDup/N2-P30.markdup.bam, Chrom7/Index/Chrom7.fa.sa, Chrom1/Sort/N2-P30.sort.bam, Chrom2/Index/Chrom2.fa, Chrom6/MarkDup/R4-R88.markdup.bam, Chrom5/Sort/R4-R88.sort.bam, Chrom2/Index/Chrom2.fa.sa, Chrom2/Index/Chrom2.fa.fai, Chrom5/Align/N2-P30.bam, Chrom6/Index/Chrom6.dict, Chrom7/Index/Chrom7.fa, Chrom3/Align/R4-R88.bam, Chrom7/Align/N2-P30.bam, Chrom7/Realign/D8-1-D8-22.realign.bam, Chrom1/Index/Chrom1.fa.pac, Chrom1/Index/Chrom1.fa, Chrom7/Index/Chrom7.dict, Chrom2/Align/R4-R88.bam, Chrom2/MarkDup/R4-R88.markdup.bam, Chrom7/Align/D8-1-D8-22.bam, Chrom6/Sort/N2-P30.sort.bam, Chrom7/MarkDup/N2-P30.markdup.bam, Chrom4/Index/Chrom4.fa.ann, Chrom6/Sort/C-1-C-22.sort.bam, Chrom7/Realign/N2-P30.realign.bam, Chrom7/MarkDup/D8-1-D8-22.markdup.bam, Chrom3/Realign/D8-1-D8-22.realign.bam, Chrom3/Sort/D8-1-D8-22.sort.bam, Chrom7/Realign/R4-R88.realign.bam, Chrom4/Sort/D8-1-D8-22.sort.bam, Chrom5/GVCF/R4-R88.g.vcf, Chrom7/Index/Chrom7.fa.pac, Chrom6/Index/Chrom6.fa.ann, Chrom3/Align/D8-1-D8-22.bam, Chrom2/Sort/C-1-C-22.sort.bam, Chrom6/Sort/D8-1-D8-22.sort.bam, Chrom3/Realign/N2-P30.realign.bam, Chrom6/MarkDup/D8-1-D8-22.markdup.bam, Chrom5/GVCF/D8-1-D8-22.g.vcf, Chrom7/Align/R4-R88.bam, Chrom6/GVCF/C-1-C-22.g.vcf, Chrom4/Align/C-1-C-22.bam, Chrom3/Align/N2-P30.bam, Chrom4/MarkDup/C-1-C-22.markdup.bam, Chrom5/MarkDup/C-1-C-22.markdup.bam, Chrom6/Index/Chrom6.fa.pac, Chrom7/GVCF/D8-1-D8-22.g.vcf, Chrom6/Index/Chrom6.fa.sa, Chrom5/Realign/N2-P30.realign.bam, Chrom2/GVCF/N2-P30.g.vcf, Chrom3/Index/Chrom3.fa.amb, Chrom5/MarkDup/R4-R88.markdup.bam, Chrom1/Realign/N2-P30.realign.bam, Chrom3/Realign/C-1-C-22.realign.bam, Chrom1/GVCF/N2-P30.g.vcf, Chrom2/Index/Chrom2.fa.bwt, Chrom1/Align/D8-1-D8-22.bam, Chrom4/Index/Chrom4.fa.pac, Chrom2/Align/N2-P30.bam, Chrom1/MarkDup/N2-P30.markdup.bam, Chrom5/Sort/D8-1-D8-22.sort.bam, Chrom5/Align/C-1-C-22.bam, Chrom5/MarkDup/D8-1-D8-22.markdup.bam, Chrom1/Align/C-1-C-22.bam, Chrom6/Realign/D8-1-D8-22.realign.bam, Chrom6/Align/D8-1-D8-22.bam, Chrom6/GVCF/N2-P30.g.vcf, Chrom1/MarkDup/C-1-C-22.markdup.bam, Chrom2/Index/Chrom2.fa.ann, Chrom6/GVCF/D8-1-D8-22.g.vcf, Chrom5/Index/Chrom5.fa.amb, Chrom4/Index/Chrom4.fa, Chrom5/Index/Chrom5.fa, Chrom1/GVCF/R4-R88.g.vcf, Chrom2/GVCF/R4-R88.g.vcf, Chrom3/GVCF/D8-1-D8-22.g.vcf, Chrom5/Index/Chrom5.fa.ann, Chrom4/MarkDup/R4-R88.markdup.bam, Chrom6/Sort/R4-R88.sort.bam, Chrom5/Index/Chrom5.fa.sa, Chrom3/Sort/R4-R88.sort.bam, Chrom6/Align/C-1-C-22.bam, Chrom4/Sort/C-1-C-22.sort.bam, Chrom6/MarkDup/C-1-C-22.markdup.bam, Chrom1/Index/Chrom1.fa.fai, Chrom4/Sort/N2-P30.sort.bam, Chrom3/Align/C-1-C-22.bam, Chrom1/MarkDup/D8-1-D8-22.markdup.bam, Chrom7/MarkDup/C-1-C-22.markdup.bam, Chrom1/Align/N2-P30.bam, Chrom7/Index/Chrom7.fa.fai, Chrom4/MarkDup/N2-P30.markdup.bam, Chrom2/Realign/N2-P30.realign.bam, Chrom4/GVCF/D8-1-D8-22.g.vcf, Chrom4/GVCF/R4-R88.g.vcf, Chrom5/Sort/C-1-C-22.sort.bam, Chrom1/Index/Chrom1.dict, Chrom5/Align/R4-R88.bam, Chrom2/Sort/D8-1-D8-22.sort.bam, Chrom2/Realign/D8-1-D8-22.realign.bam, Chrom4/Realign/D8-1-D8-22.realign.bam, Chrom4/Align/R4-R88.bam, Chrom7/GVCF/R4-R88.g.vcf, Chrom1/Align/R4-R88.bam, Chrom1/MarkDup/R4-R88.markdup.bam, Chrom1/Realign/D8-1-D8-22.realign.bam, Chrom4/GVCF/N2-P30.g.vcf, Chrom6/Realign/N2-P30.realign.bam, Chrom2/Realign/R4-R88.realign.bam, Chrom5/Index/Chrom5.dict, Chrom5/GVCF/C-1-C-22.g.vcf, Chrom7/Index/Chrom7.fa.ann, Chrom2/Index/Chrom2.dict, Chrom5/Align/D8-1-D8-22.bam, Chrom1/Index/Chrom1.fa.ann, Chrom4/GVCF/C-1-C-22.g.vcf, Chrom6/Index/Chrom6.fa, Chrom7/Align/C-1-C-22.bam, Chrom1/Index/Chrom1.fa.sa, Chrom4/MarkDup/D8-1-D8-22.markdup.bam, Chrom1/GVCF/C-1-C-22.g.vcf, Chrom5/MarkDup/N2-P30.markdup.bam, Chrom4/Realign/C-1-C-22.realign.bam, Chrom5/Index/Chrom5.fa.bwt, Chrom1/Index/Chrom1.fa.bwt, Chrom6/Align/N2-P30.bam, Chrom1/Sort/D8-1-D8-22.sort.bam, Chrom5/Index/Chrom5.fa.fai, Chrom2/Index/Chrom2.fa.pac, Chrom7/MarkDup/R4-R88.markdup.bam, Chrom5/Realign/D8-1-D8-22.realign.bam, Chrom6/Index/Chrom6.fa.bwt, Chrom1/Realign/R4-R88.realign.bam, Chrom3/GVCF/R4-R88.g.vcf, Chrom6/Index/Chrom6.fa.fai, Chrom7/Sort/D8-1-D8-22.sort.bam, Chrom3/Index/Chrom3.fa.bwt, Chrom6/Index/Chrom6.fa.amb, Chrom3/Index/Chrom3.fa.sa, Chrom4/Index/Chrom4.fa.sa, Chrom3/Index/Chrom3.fa, Chrom4/Index/Chrom4.fa.bwt, Chrom5/Index/Chrom5.fa.pac, Chrom6/Align/R4-R88.bam, Chrom3/MarkDup/C-1-C-22.markdup.bam, Chrom7/Sort/C-1-C-22.sort.bam, Chrom1/Realign/C-1-C-22.realign.bam, Chrom1/Index/Chrom1.fa.amb, Chrom3/Index/Chrom3.dict, Chrom3/Index/Chrom3.fa.fai, Chrom2/Align/D8-1-D8-22.bam, Chrom7/Index/Chrom7.fa.amb, Chrom3/Sort/N2-P30.sort.bam, Chrom3/GVCF/N2-P30.g.vcf, Chrom4/Align/N2-P30.bam, Chrom3/Index/Chrom3.fa.ann, Chrom2/MarkDup/D8-1-D8-22.markdup.bam, Chrom4/Realign/R4-R88.realign.bam, Chrom5/Realign/C-1-C-22.realign.bam, Chrom6/Realign/R4-R88.realign.bam, Chrom3/Sort/C-1-C-22.sort.bam, Chrom4/Index/Chrom4.fa.amb, Chrom2/MarkDup/C-1-C-22.markdup.bam, Chrom4/Index/Chrom4.dict, Chrom5/Sort/N2-P30.sort.bam, Chrom7/Index/Chrom7.fa.bwt, Chrom7/GVCF/N2-P30.g.vcf, Chrom7/Sort/N2-P30.sort.bam, Chrom3/Realign/R4-R88.realign.bam, Chrom2/GVCF/D8-1-D8-22.g.vcf, Chrom4/Realign/N2-P30.realign.bam
+Job counts:
+	count	jobs
+	1	GATK_pipe_all
+	28	bwa_align
+	7	bwa_index
+	28	bwa_sort
+	1	combine_pseudo
+	28	gatk_gvcf
+	28	gatk_realign
+	7	picard_index
+	28	picard_markdup
+	7	samtools_index
+	1	split_ref
+	164

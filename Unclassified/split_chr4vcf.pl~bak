@@ -1,0 +1,58 @@
+use strict;
+use warnings;
+
+my ($vcf) = @ARGV;
+die "perl $0 <.vcf>" if @ARGV==0;
+#
+#========================================
+my $pre_id = "";
+my @arr;
+my @file;
+open FI,"$vcf" or die $!;
+open HE,">head" or die $!;
+while (<FI>) {
+	chomp;
+	if (/^#/){
+		print HE "$_\n";
+		next;
+	}else{
+
+		my($id,$info) = split(/\t/,$_,2);
+		if ($pre_id ne $id){
+			output();
+			push(@file,$id);
+		}
+		push(@arr,$info);
+		$pre_id = $id;
+	}
+	
+}
+
+output();
+#push(@file,$pre_id);
+close FI;
+
+# combine head and split.vcf
+#======================================
+foreach (@file) {
+	#print "$_\n";
+	my $name = "$_\.vcf";
+	`cat head $_ > $name`;
+	`rm $_`;
+}
+
+# sub function
+#======================================
+sub output{
+	return if (@arr == 0);
+	
+	open FO,">$pre_id" or die $!;
+	
+	foreach (@arr) {
+		print FO "$pre_id\t$_\n";
+	}
+	
+	close FO;
+
+	@arr = ();
+}

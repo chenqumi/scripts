@@ -1,0 +1,1 @@
+/nfs2/pipe/Re/Software/bin/snakemake -s ./gatk.all.rules -T --stats ./snakejob.$(date +%Y%m%d%H%M%S).stats -c 'qsub -cwd -S /bin/sh -q dna.q,rna.q,reseq.q,all.q -l vf={resources.qsub_vf}G,p={resources.qsub_p}' -j 40 -k 2>>./snakedetail.log.$(date +%Y%m%d%H%M%S)

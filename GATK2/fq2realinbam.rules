@@ -1,0 +1,343 @@
+# cleandata 2 realign.bam rules
+
+# software
+# ===========================
+configfile: "./rules/snp.config.json"
+BWA = config["biosoft"]["bwa"]
+GATK = config["biosoft"]["gatk"]
+ITOOLS = config["biosoft"]["itools"]
+JAVA = config["biosoft"]["java"]
+PICARD = config["biosoft"]["picard"]
+SAMTOOLS = config["biosoft"]["samtools"]
+SPLIT = config["biosoft"]["split"]
+BWASTAT = config["biosoft"]["bwastat"]
+
+# input info
+# ==========================================
+samples = config["samples"]
+pseudochrom_num = config["pseudochrom_num"]
+split_blocks_num = config["split_blocks_num"]
+pseudochroms = ["Chrom{}".format(i+1) for i in range(int(split_blocks_num))]
+split_ref_file = ["{0}/Index/{0}.fa".format(i) for i in  pseudochroms]
+bam_files = ["{0}/Align/{{sample}}.bam".format(i) for i in pseudochroms]
+#
+# ==========================================
+rule fq2realin:
+    input:
+        "Reference/ref.merge.fa.amb",
+        "Reference/ref.merge.fa.ann",
+        "Reference/ref.merge.fa.bwt",
+        "Reference/ref.merge.fa.pac",
+        "Reference/ref.merge.fa.sa",
+        expand("Data/Clean/{sample}_R1.fastq.gz", sample = samples),
+        expand("Data/Clean/{sample}_R2.fastq.gz", sample = samples),
+        expand("{chrom}/Index/{chrom}.fa", chrom = pseudochroms),
+        expand("{chrom}/Index/{chrom}.fa.bwt", chrom = pseudochroms),
+        expand("{chrom}/Index/{chrom}.fa.amb", chrom = pseudochroms),
+        expand("{chrom}/Index/{chrom}.fa.ann", chrom = pseudochroms),
+        expand("{chrom}/Index/{chrom}.fa.pac", chrom = pseudochroms),
+        expand("{chrom}/Index/{chrom}.fa.sa", chrom = pseudochroms),
+        expand("{chrom}/Index/{chrom}.fa.fai", chrom = pseudochroms),
+        expand("{chrom}/Index/{chrom}.dict", chrom = pseudochroms),
+        expand("{chrom}/Align/{sample}.bam", chrom=pseudochroms,sample=samples),
+        expand("{chrom}/Sort/{sample}.sort.bam", chrom=pseudochroms,sample=samples),
+        expand("Stat/{sample}.merge.bam",sample=samples),
+        expand("Stat/{sample}.merge.sort.bam", sample=samples),
+        "Stat/bwa_stat.xls",
+        expand(bam_files,sample=samples),
+        expand("{chrom}/MarkDup/{sample}.markdup.bam", chrom=pseudochroms,sample=samples),
+        expand("{chrom}/Realign/{sample}.realign.bam", chrom=pseudochroms,sample=samples),
+#
+# ==========================================
+rule combine_pseudo:
+    input:
+        "Reference/ref.fa"
+
+    output:
+        #"Reference/ref.merge.fa.chrlist",
+        #"Reference/ref.merge.fa.gz.chrlist",
+        "Reference/ref.merge.fa.merlist",
+        merge = "Reference/ref.merge.fa"
+
+    resources:
+        qsub_vf = 2, qsub_p = 2
+
+    shell:
+        """
+        {ITOOLS} Fatools regenerate -InPut {input} -OutPut {output.merge} \
+        -InsertN 500 -NumSeq {pseudochrom_num} -NoOutgz
+        """
+#
+# ==========================================
+rule pseudo_index:
+    input:
+        "Reference/ref.merge.fa"
+
+    output:
+        "Reference/ref.merge.fa.amb",
+        "Reference/ref.merge.fa.ann",
+        "Reference/ref.merge.fa.bwt",
+        "Reference/ref.merge.fa.pac",
+        "Reference/ref.merge.fa.sa"
+
+    resources:
+        qsub_vf = 8, qsub_p = 4
+
+    shell:
+        """
+        {BWA} index {input}
+        """
+#
+# ==========================================
+rule split_ref:
+    input:
+        "Reference/ref.merge.fa"
+
+    output:
+        split_ref_file
+
+    resources:
+        qsub_vf = 5, qsub_p = 2
+
+    shell:
+        """
+        {SPLIT} {input} {pseudochrom_num} {split_blocks_num} Reference
+        """
+#
+# ==========================================
+rule bwa_index:
+    input:
+        "{chrom}/Index/{chrom}.fa"
+
+    output:
+        "{chrom}/Index/{chrom}.fa.amb",
+        "{chrom}/Index/{chrom}.fa.ann",
+        "{chrom}/Index/{chrom}.fa.bwt",
+        "{chrom}/Index/{chrom}.fa.pac",
+        "{chrom}/Index/{chrom}.fa.sa"
+
+    resources:
+        qsub_vf = 8, qsub_p = 4
+
+    shell:
+        """
+        {BWA} index {input}
+        """
+
+
+#
+# ==========================================
+rule samtools_index:
+    input:
+        "{chrom}/Index/{chrom}.fa"
+
+    output:
+        "{chrom}/Index/{chrom}.fa.fai"
+
+    resources:
+        qsub_vf = 5, qsub_p = 2
+
+    shell:
+        """
+        {SAMTOOLS} faidx {input}
+        """
+
+#
+# ==========================================
+rule picard_index:
+    input:
+        "{chrom}/Index/{chrom}.fa"
+
+    output:
+        "{chrom}/Index/{chrom}.dict"
+
+    resources:
+        qsub_vf = 10, qsub_p = 2
+
+    shell:
+        """
+        {JAVA} -Xmx10G -jar {PICARD} CreateSequenceDictionary \
+        R={input} O={output}
+        """
+#
+# ==========================================
+rule bwa_align:
+    input:
+        "{chrom}/Index/{chrom}.fa.amb",
+        "{chrom}/Index/{chrom}.fa.ann",
+        "{chrom}/Index/{chrom}.fa.bwt",
+        "{chrom}/Index/{chrom}.fa.pac",
+        "{chrom}/Index/{chrom}.fa.sa",
+        "{chrom}/Index/{chrom}.dict",
+        "{chrom}/Index/{chrom}.fa.fai",
+        ref = "{chrom}/Index/{chrom}.fa",
+        rd1 = "Data/Clean/{sample}_R1.fastq.gz",
+        rd2 = "Data/Clean/{sample}_R2.fastq.gz"
+
+    output:
+        temp("{chrom}/Align/{sample}.bam")
+
+    resources:
+        qsub_vf = 8, qsub_p = 4
+
+    params:
+        "\"@RG\\tID:{sample}\\tLB:{sample}\\tSM:{sample}\\tPL:ILLUMINA\""
+    shell:
+        """
+        {BWA} mem -M -t 8 -k 32 -R {params} {input.ref} {input.rd1} \
+        {input.rd2} | {SAMTOOLS} view -bS > {output}
+        """
+#
+# ==========================================
+rule bwa_sort:
+    input:
+        "{chrom}/Align/{sample}.bam"
+
+    output:
+        temp("{chrom}/Sort/{sample}.sort.bam")
+
+    resources:
+        qsub_vf = 8, qsub_p = 4
+
+    shell:
+        """
+        {SAMTOOLS} sort -o {output} {input}
+        """
+#
+# ==========================================
+rule merge_bam:
+    input:
+        bam_files
+
+    output:
+        "Stat/{sample}.merge.bam"
+
+    resources:
+        qsub_vf = 10, qsub_p = 4
+
+    shell:
+        """
+        {SAMTOOLS} merge {output} {input} -@ 4
+        """
+#
+# ==========================================
+rule sort_mergedbam:
+    input:
+        "Stat/{sample}.merge.bam"
+
+    output:
+        "Stat/{sample}.merge.sort.bam"
+
+    resources:
+        qsub_vf = 10, qsub_p = 4
+
+    shell:
+        """
+        {SAMTOOLS} sort -o {output} {input}
+        """
+
+#
+# ==========================================
+rule samtool_stat:
+    input:
+        "Stat/{sample}.merge.sort.bam"
+
+    output:
+        "Stat/{sample}.samtools.stat"
+
+    resources:
+        qsub_vf = 5, qsub_p = 2
+
+    shell:
+        """
+        {SAMTOOLS} flagstat {input} > {output}
+        """
+#
+# ==========================================
+rule itool_stat:
+    input:
+        "Reference/ref.merge.fa.amb",
+        "Reference/ref.merge.fa.ann",
+        "Reference/ref.merge.fa.bwt",
+        "Reference/ref.merge.fa.pac",
+        "Reference/ref.merge.fa.sa",
+        bam = "Stat/{sample}.merge.sort.bam",
+        ref = "Reference/ref.merge.fa"
+
+    output:
+        "Stat/{sample}.itools.stat"
+
+    resources:
+        qsub_vf = 5, qsub_p = 2
+
+    shell:
+        """
+        {ITOOLS} Xamtools stat -InFile {input.bam} -Ref {input.ref} \
+        -OutStat {output} -Bam || echo done
+        """
+#
+# ==========================================
+rule bwa_stat:
+    input:
+        samtool = expand("Stat/{sample}.samtools.stat", sample=samples),
+        itool = expand("Stat/{sample}.itools.stat", sample=samples),
+        # samtool = "Stat/{sample}.samtool.stat",
+        # itool = "Stat/{sample}.itool.stat"
+
+    output:
+        "Stat/bwa_stat.xls"
+
+    resources:
+        qsub_vf = 3, qsub_p = 1
+
+    shell:
+        """
+        {BWASTAT} {output} {input.samtool} {input.itool}
+        """
+
+#
+# ==========================================
+rule picard_markdup:
+    input:
+        "{chrom}/Sort/{sample}.sort.bam"
+
+    output:
+        markdup = temp("{chrom}/MarkDup/{sample}.markdup.bam"),
+        metrics = "{chrom}/MarkDup/{sample}.metrics",
+        bai = "{chrom}/MarkDup/{sample}.markdup.bam.bai"
+
+    resources:
+        qsub_vf = 40, qsub_p = 4
+
+    shell:
+        """
+        {JAVA} -Xmx30G -jar {PICARD} MarkDuplicates \
+        MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=4000 \
+        INPUT={input} OUTPUT={output.markdup} \
+        METRICS_FILE={output.metrics} && \
+        {SAMTOOLS} index {output.markdup}
+        """
+#
+# ==========================================
+rule gatk_realign:
+    input:
+        ref = "{chrom}/Index/{chrom}.fa",
+        markdup = "{chrom}/MarkDup/{sample}.markdup.bam",
+
+    output:
+        intervals = "{chrom}/Realign/{sample}.intervals",
+        realign = "{chrom}/Realign/{sample}.realign.bam",
+
+    resources:
+        qsub_vf = 40, qsub_p = 4
+
+    shell:
+        """
+        {JAVA} -Xmx30G -jar {GATK} -T RealignerTargetCreator -R {input.ref} \
+        -I {input.markdup} -o {output.intervals} && \
+        {JAVA} -Xmx30G -jar {GATK} -T IndelRealigner -R {input.ref} \
+        -I {input.markdup} -targetIntervals {output.intervals} \
+        -o {output.realign}
+        """
+#
+# ==========================================

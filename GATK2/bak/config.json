@@ -1,0 +1,15 @@
+{
+  "biosoft":{
+    "bwa" : "/lustre/project/og04/shichunwei/biosoft/bwa-0.7.13/bwa",
+    "gatk" : "/p299/user/og03/chenquan1609/Bin/GATK_v3.8/GenomeAnalysisTK.jar",
+    "itools" : "/p299/user/og06/pipe/pub/baozhigui/biosoft/iTools_Code/iTools",
+    "java" : "/p299/user/og07/baozhigui/reseq/biosoft/jre1.8.0_101/bin/java",
+    "picard" : "/p299/user/og06/pipe/pub/baozhigui/biosoft/picard-2.8.0/picard.jar",
+    "samtools" : "/lustre/project/og04/shichunwei/biosoft/samtools-1.3/samtools",
+    "split" : "perl /p299/user/og03/chenquan1609/Resequencing/script/GATK2/split.pl",
+    "combinevcf" : "python /p299/user/og03/chenquan1609/Resequencing/script/GATK2/CombineVCF.py"
+  },
+  "pseudochrom_num": 7,
+  "split_blocks_num": 7,
+  "samples":["C-1-C-22","D8-1-D8-22","R4-R88","N2-P30"]
+}

@@ -1,0 +1,93 @@
+# Samtools realign2vcf rules
+
+# software
+# ===========================
+configfile: "./rules/snp.config.json"
+BCFTOOLS = config["biosoft"]["bcftools"]
+BWA = config["biosoft"]["bwa"]
+GATK = config["biosoft"]["gatk"]
+ITOOLS = config["biosoft"]["itools"]
+JAVA = config["biosoft"]["java"]
+PICARD = config["biosoft"]["picard"]
+SAMTOOLS = config["biosoft"]["samtools"]
+SPLIT = config["biosoft"]["split"]
+COMBINEVCF = config["biosoft"]["combinevcf"]
+
+# input info
+# ==========================================
+samples = config["samples"]
+pseudochrom_num = config["pseudochrom_num"]
+split_blocks_num = config["split_blocks_num"]
+pseudochroms = ["Chrom{}".format(i+1) for i in range(int(split_blocks_num))]
+realignbam_files = ["{{chrom}}/Realign/{}.realign.bam".format(i) for i in samples]
+vcf_files = ["{0}/VCF/{0}.sam.vcf".format(i) for i in pseudochroms]
+#
+# ==========================================
+include:
+    "./fq2realinbam.rules"
+localrules:
+    vcf_files_lst
+#
+# ==========================================
+rule samtools_realign2vcf_all:
+    input:
+        expand(realignbam_files, chrom=pseudochroms),
+        "AllChr/sam_vcf.lst",
+        "AllChr/AllChr.sam.raw.vcf"
+
+#
+# ==========================================
+rule call_vcf:
+    input:
+        realignbam_files,
+        ref = "{chrom}/Index/{chrom}.fa",
+
+    output:
+        vcf = "{chrom}/VCF/{chrom}.sam.vcf"
+
+    params:
+        " ".join(["{}".format(i) for i in realignbam_files])
+
+    resources:
+        qsub_vf = 30, qsub_p = 4
+
+    shell:
+        """
+        {SAMTOOLS} mpileup -C 50 -f {input.ref} {params} \
+        -t AD -ug -Q 20 | {BCFTOOLS} call -vmO z -o {output} -O v
+        """
+
+#
+# ==========================================
+rule vcf_files_lst:
+    input:
+        lst = expand("{chrom}/VCF/{chrom}.sam.vcf",chrom=pseudochroms)
+        # "expand" in a specific rule, all expanded file will be push
+        # into a list;
+        # while "expand" in the first "all rule", file will expand as
+        # many file;
+    output:
+        "AllChr/sam_vcf.lst"
+
+    run:
+        with open("AllChr/sam_vcf.lst","w") as fd:
+            for i in vcf_files:
+                fd.write(i+"\n")
+
+#
+# ==========================================
+rule combine_vcf:
+    input:
+        lst = "AllChr/sam_vcf.lst"
+
+    output:
+        "AllChr/AllChr.sam.raw.vcf"
+
+
+    resources:
+        qsub_vf = 2, qsub_p = 2
+
+    shell:
+        """
+        {COMBINEVCF} {input.lst} > {output}
+        """

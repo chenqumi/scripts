@@ -1,0 +1,1049 @@
+[Thu Nov 30 11:27:33 2017] Provided cluster nodes: 40
+[Thu Nov 30 11:27:33 2017] Ignored resources: qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf, qsub_p, qsub_vf
+[Thu Nov 30 11:27:33 2017] Job counts:
+	count	jobs
+	1	GATK_pipe_all
+	28	bwa_align
+	7	bwa_index
+	28	bwa_sort
+	1	combine_pseudo
+	1	combine_vcf
+	28	gatk_gvcf
+	28	gatk_realign
+	7	gatk_vcf
+	7	picard_index
+	28	picard_markdup
+	7	samtools_index
+	1	split_ref
+	1	vcf_files_lst
+	173
+[Thu Nov 30 11:27:33 2017] rule combine_pseudo:
+	input: Reference/ref.fa
+	output: Reference/ref.merge.fa.merlist, Reference/ref.merge.fa
+	resources: qsub_p=2, qsub_vf=2
+[Thu Nov 30 11:28:43 2017] 1 of 173 steps (0.58%) done
+[Thu Nov 30 11:28:43 2017] rule split_ref:
+	input: Reference/ref.merge.fa
+	output: Chrom1/Index/Chrom1.fa, Chrom2/Index/Chrom2.fa, Chrom3/Index/Chrom3.fa, Chrom4/Index/Chrom4.fa, Chrom5/Index/Chrom5.fa, Chrom6/Index/Chrom6.fa, Chrom7/Index/Chrom7.fa
+	resources: qsub_p=2, qsub_vf=5
+[Thu Nov 30 11:28:49 2017] 2 of 173 steps (1%) done
+[Thu Nov 30 11:28:49 2017] rule bwa_index:
+	input: Chrom7/Index/Chrom7.fa
+	output: Chrom7/Index/Chrom7.fa.amb, Chrom7/Index/Chrom7.fa.ann, Chrom7/Index/Chrom7.fa.bwt, Chrom7/Index/Chrom7.fa.pac, Chrom7/Index/Chrom7.fa.sa
+	wildcards: chrom=Chrom7
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:28:50 2017] rule samtools_index:
+	input: Chrom5/Index/Chrom5.fa
+	output: Chrom5/Index/Chrom5.fa.fai
+	wildcards: chrom=Chrom5
+	resources: qsub_p=2, qsub_vf=5
+[Thu Nov 30 11:28:50 2017] rule bwa_index:
+	input: Chrom3/Index/Chrom3.fa
+	output: Chrom3/Index/Chrom3.fa.amb, Chrom3/Index/Chrom3.fa.ann, Chrom3/Index/Chrom3.fa.bwt, Chrom3/Index/Chrom3.fa.pac, Chrom3/Index/Chrom3.fa.sa
+	wildcards: chrom=Chrom3
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:28:50 2017] rule bwa_index:
+	input: Chrom2/Index/Chrom2.fa
+	output: Chrom2/Index/Chrom2.fa.amb, Chrom2/Index/Chrom2.fa.ann, Chrom2/Index/Chrom2.fa.bwt, Chrom2/Index/Chrom2.fa.pac, Chrom2/Index/Chrom2.fa.sa
+	wildcards: chrom=Chrom2
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:28:50 2017] rule bwa_index:
+	input: Chrom1/Index/Chrom1.fa
+	output: Chrom1/Index/Chrom1.fa.amb, Chrom1/Index/Chrom1.fa.ann, Chrom1/Index/Chrom1.fa.bwt, Chrom1/Index/Chrom1.fa.pac, Chrom1/Index/Chrom1.fa.sa
+	wildcards: chrom=Chrom1
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:28:50 2017] rule picard_index:
+	input: Chrom4/Index/Chrom4.fa
+	output: Chrom4/Index/Chrom4.dict
+	wildcards: chrom=Chrom4
+	resources: qsub_p=2, qsub_vf=10
+[Thu Nov 30 11:28:50 2017] rule samtools_index:
+	input: Chrom2/Index/Chrom2.fa
+	output: Chrom2/Index/Chrom2.fa.fai
+	wildcards: chrom=Chrom2
+	resources: qsub_p=2, qsub_vf=5
+[Thu Nov 30 11:28:50 2017] rule samtools_index:
+	input: Chrom7/Index/Chrom7.fa
+	output: Chrom7/Index/Chrom7.fa.fai
+	wildcards: chrom=Chrom7
+	resources: qsub_p=2, qsub_vf=5
+[Thu Nov 30 11:28:50 2017] rule bwa_index:
+	input: Chrom6/Index/Chrom6.fa
+	output: Chrom6/Index/Chrom6.fa.amb, Chrom6/Index/Chrom6.fa.ann, Chrom6/Index/Chrom6.fa.bwt, Chrom6/Index/Chrom6.fa.pac, Chrom6/Index/Chrom6.fa.sa
+	wildcards: chrom=Chrom6
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:28:50 2017] rule picard_index:
+	input: Chrom6/Index/Chrom6.fa
+	output: Chrom6/Index/Chrom6.dict
+	wildcards: chrom=Chrom6
+	resources: qsub_p=2, qsub_vf=10
+[Thu Nov 30 11:28:50 2017] rule bwa_index:
+	input: Chrom4/Index/Chrom4.fa
+	output: Chrom4/Index/Chrom4.fa.amb, Chrom4/Index/Chrom4.fa.ann, Chrom4/Index/Chrom4.fa.bwt, Chrom4/Index/Chrom4.fa.pac, Chrom4/Index/Chrom4.fa.sa
+	wildcards: chrom=Chrom4
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:28:50 2017] rule bwa_index:
+	input: Chrom5/Index/Chrom5.fa
+	output: Chrom5/Index/Chrom5.fa.amb, Chrom5/Index/Chrom5.fa.ann, Chrom5/Index/Chrom5.fa.bwt, Chrom5/Index/Chrom5.fa.pac, Chrom5/Index/Chrom5.fa.sa
+	wildcards: chrom=Chrom5
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:28:50 2017] rule samtools_index:
+	input: Chrom4/Index/Chrom4.fa
+	output: Chrom4/Index/Chrom4.fa.fai
+	wildcards: chrom=Chrom4
+	resources: qsub_p=2, qsub_vf=5
+[Thu Nov 30 11:28:50 2017] rule picard_index:
+	input: Chrom7/Index/Chrom7.fa
+	output: Chrom7/Index/Chrom7.dict
+	wildcards: chrom=Chrom7
+	resources: qsub_p=2, qsub_vf=10
+[Thu Nov 30 11:28:50 2017] rule picard_index:
+	input: Chrom5/Index/Chrom5.fa
+	output: Chrom5/Index/Chrom5.dict
+	wildcards: chrom=Chrom5
+	resources: qsub_p=2, qsub_vf=10
+[Thu Nov 30 11:28:50 2017] rule samtools_index:
+	input: Chrom6/Index/Chrom6.fa
+	output: Chrom6/Index/Chrom6.fa.fai
+	wildcards: chrom=Chrom6
+	resources: qsub_p=2, qsub_vf=5
+[Thu Nov 30 11:28:50 2017] rule samtools_index:
+	input: Chrom1/Index/Chrom1.fa
+	output: Chrom1/Index/Chrom1.fa.fai
+	wildcards: chrom=Chrom1
+	resources: qsub_p=2, qsub_vf=5
+[Thu Nov 30 11:28:50 2017] rule picard_index:
+	input: Chrom3/Index/Chrom3.fa
+	output: Chrom3/Index/Chrom3.dict
+	wildcards: chrom=Chrom3
+	resources: qsub_p=2, qsub_vf=10
+[Thu Nov 30 11:28:51 2017] rule picard_index:
+	input: Chrom2/Index/Chrom2.fa
+	output: Chrom2/Index/Chrom2.dict
+	wildcards: chrom=Chrom2
+	resources: qsub_p=2, qsub_vf=10
+[Thu Nov 30 11:28:51 2017] rule picard_index:
+	input: Chrom1/Index/Chrom1.fa
+	output: Chrom1/Index/Chrom1.dict
+	wildcards: chrom=Chrom1
+	resources: qsub_p=2, qsub_vf=10
+[Thu Nov 30 11:28:51 2017] rule samtools_index:
+	input: Chrom3/Index/Chrom3.fa
+	output: Chrom3/Index/Chrom3.fa.fai
+	wildcards: chrom=Chrom3
+	resources: qsub_p=2, qsub_vf=5
+[Thu Nov 30 11:28:52 2017] 3 of 173 steps (2%) done
+[Thu Nov 30 11:28:52 2017] 4 of 173 steps (2%) done
+[Thu Nov 30 11:28:52 2017] 5 of 173 steps (3%) done
+[Thu Nov 30 11:28:52 2017] 6 of 173 steps (3%) done
+[Thu Nov 30 11:28:52 2017] 7 of 173 steps (4%) done
+[Thu Nov 30 11:28:52 2017] 8 of 173 steps (5%) done
+[Thu Nov 30 11:28:53 2017] 9 of 173 steps (5%) done
+[Thu Nov 30 11:28:53 2017] 10 of 173 steps (6%) done
+[Thu Nov 30 11:28:53 2017] 11 of 173 steps (6%) done
+[Thu Nov 30 11:28:54 2017] 12 of 173 steps (7%) done
+[Thu Nov 30 11:28:54 2017] 13 of 173 steps (8%) done
+[Thu Nov 30 11:28:54 2017] rule bwa_align:
+	input: Chrom6/Index/Chrom6.fa.amb, Chrom6/Index/Chrom6.fa.ann, Chrom6/Index/Chrom6.fa.bwt, Chrom6/Index/Chrom6.fa.pac, Chrom6/Index/Chrom6.fa.sa, Chrom6/Index/Chrom6.dict, Chrom6/Index/Chrom6.fa.fai, Data/C-1-C-22_R2.fastq.gz, Data/C-1-C-22_R1.fastq.gz, Chrom6/Index/Chrom6.fa
+	output: Chrom6/Align/C-1-C-22.bam
+	wildcards: chrom=Chrom6, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:28:54 2017] 14 of 173 steps (8%) done
+[Thu Nov 30 11:28:54 2017] rule bwa_align:
+	input: Chrom6/Index/Chrom6.fa.amb, Chrom6/Index/Chrom6.fa.ann, Chrom6/Index/Chrom6.fa.bwt, Chrom6/Index/Chrom6.fa.pac, Chrom6/Index/Chrom6.fa.sa, Chrom6/Index/Chrom6.dict, Chrom6/Index/Chrom6.fa.fai, Data/D8-1-D8-22_R2.fastq.gz, Data/D8-1-D8-22_R1.fastq.gz, Chrom6/Index/Chrom6.fa
+	output: Chrom6/Align/D8-1-D8-22.bam
+	wildcards: chrom=Chrom6, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:28:54 2017] rule bwa_align:
+	input: Chrom6/Index/Chrom6.fa.amb, Chrom6/Index/Chrom6.fa.ann, Chrom6/Index/Chrom6.fa.bwt, Chrom6/Index/Chrom6.fa.pac, Chrom6/Index/Chrom6.fa.sa, Chrom6/Index/Chrom6.dict, Chrom6/Index/Chrom6.fa.fai, Data/N2-P30_R2.fastq.gz, Data/N2-P30_R1.fastq.gz, Chrom6/Index/Chrom6.fa
+	output: Chrom6/Align/N2-P30.bam
+	wildcards: chrom=Chrom6, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:28:54 2017] rule bwa_align:
+	input: Chrom6/Index/Chrom6.fa.amb, Chrom6/Index/Chrom6.fa.ann, Chrom6/Index/Chrom6.fa.bwt, Chrom6/Index/Chrom6.fa.pac, Chrom6/Index/Chrom6.fa.sa, Chrom6/Index/Chrom6.dict, Chrom6/Index/Chrom6.fa.fai, Data/R4-R88_R2.fastq.gz, Data/R4-R88_R1.fastq.gz, Chrom6/Index/Chrom6.fa
+	output: Chrom6/Align/R4-R88.bam
+	wildcards: chrom=Chrom6, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:28:54 2017] rule bwa_align:
+	input: Chrom7/Index/Chrom7.fa.amb, Chrom7/Index/Chrom7.fa.ann, Chrom7/Index/Chrom7.fa.bwt, Chrom7/Index/Chrom7.fa.pac, Chrom7/Index/Chrom7.fa.sa, Chrom7/Index/Chrom7.dict, Chrom7/Index/Chrom7.fa.fai, Data/R4-R88_R2.fastq.gz, Data/R4-R88_R1.fastq.gz, Chrom7/Index/Chrom7.fa
+	output: Chrom7/Align/R4-R88.bam
+	wildcards: chrom=Chrom7, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:28:54 2017] rule bwa_align:
+	input: Chrom7/Index/Chrom7.fa.amb, Chrom7/Index/Chrom7.fa.ann, Chrom7/Index/Chrom7.fa.bwt, Chrom7/Index/Chrom7.fa.pac, Chrom7/Index/Chrom7.fa.sa, Chrom7/Index/Chrom7.dict, Chrom7/Index/Chrom7.fa.fai, Data/D8-1-D8-22_R2.fastq.gz, Data/D8-1-D8-22_R1.fastq.gz, Chrom7/Index/Chrom7.fa
+	output: Chrom7/Align/D8-1-D8-22.bam
+	wildcards: chrom=Chrom7, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:28:54 2017] rule bwa_align:
+	input: Chrom7/Index/Chrom7.fa.amb, Chrom7/Index/Chrom7.fa.ann, Chrom7/Index/Chrom7.fa.bwt, Chrom7/Index/Chrom7.fa.pac, Chrom7/Index/Chrom7.fa.sa, Chrom7/Index/Chrom7.dict, Chrom7/Index/Chrom7.fa.fai, Data/C-1-C-22_R2.fastq.gz, Data/C-1-C-22_R1.fastq.gz, Chrom7/Index/Chrom7.fa
+	output: Chrom7/Align/C-1-C-22.bam
+	wildcards: chrom=Chrom7, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:28:54 2017] rule bwa_align:
+	input: Chrom7/Index/Chrom7.fa.amb, Chrom7/Index/Chrom7.fa.ann, Chrom7/Index/Chrom7.fa.bwt, Chrom7/Index/Chrom7.fa.pac, Chrom7/Index/Chrom7.fa.sa, Chrom7/Index/Chrom7.dict, Chrom7/Index/Chrom7.fa.fai, Data/N2-P30_R2.fastq.gz, Data/N2-P30_R1.fastq.gz, Chrom7/Index/Chrom7.fa
+	output: Chrom7/Align/N2-P30.bam
+	wildcards: chrom=Chrom7, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:28:56 2017] 15 of 173 steps (9%) done
+[Thu Nov 30 11:28:56 2017] 16 of 173 steps (9%) done
+[Thu Nov 30 11:28:56 2017] 17 of 173 steps (10%) done
+[Thu Nov 30 11:28:56 2017] 18 of 173 steps (10%) done
+[Thu Nov 30 11:28:56 2017] rule bwa_sort:
+	input: Chrom6/Align/C-1-C-22.bam
+	output: Chrom6/Sort/C-1-C-22.sort.bam
+	wildcards: chrom=Chrom6, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:28:56 2017] 19 of 173 steps (11%) done
+[Thu Nov 30 11:28:56 2017] 20 of 173 steps (12%) done
+[Thu Nov 30 11:28:57 2017] 21 of 173 steps (12%) done
+[Thu Nov 30 11:28:57 2017] 22 of 173 steps (13%) done
+[Thu Nov 30 11:28:57 2017] 23 of 173 steps (13%) done
+[Thu Nov 30 11:28:57 2017] 24 of 173 steps (14%) done
+[Thu Nov 30 11:28:57 2017] 25 of 173 steps (14%) done
+[Thu Nov 30 11:28:57 2017] rule bwa_sort:
+	input: Chrom7/Align/D8-1-D8-22.bam
+	output: Chrom7/Sort/D8-1-D8-22.sort.bam
+	wildcards: chrom=Chrom7, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:28:57 2017] rule bwa_sort:
+	input: Chrom7/Align/C-1-C-22.bam
+	output: Chrom7/Sort/C-1-C-22.sort.bam
+	wildcards: chrom=Chrom7, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:28:57 2017] rule bwa_sort:
+	input: Chrom6/Align/N2-P30.bam
+	output: Chrom6/Sort/N2-P30.sort.bam
+	wildcards: chrom=Chrom6, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:28:57 2017] rule bwa_sort:
+	input: Chrom7/Align/N2-P30.bam
+	output: Chrom7/Sort/N2-P30.sort.bam
+	wildcards: chrom=Chrom7, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:28:57 2017] rule bwa_sort:
+	input: Chrom6/Align/D8-1-D8-22.bam
+	output: Chrom6/Sort/D8-1-D8-22.sort.bam
+	wildcards: chrom=Chrom6, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:28:57 2017] rule bwa_sort:
+	input: Chrom7/Align/R4-R88.bam
+	output: Chrom7/Sort/R4-R88.sort.bam
+	wildcards: chrom=Chrom7, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:28:57 2017] rule bwa_sort:
+	input: Chrom6/Align/R4-R88.bam
+	output: Chrom6/Sort/R4-R88.sort.bam
+	wildcards: chrom=Chrom6, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:28:58 2017] 26 of 173 steps (15%) done
+[Thu Nov 30 11:29:00 2017] 27 of 173 steps (16%) done
+[Thu Nov 30 11:29:00 2017] rule bwa_align:
+	input: Chrom2/Index/Chrom2.fa.amb, Chrom2/Index/Chrom2.fa.ann, Chrom2/Index/Chrom2.fa.bwt, Chrom2/Index/Chrom2.fa.pac, Chrom2/Index/Chrom2.fa.sa, Chrom2/Index/Chrom2.dict, Chrom2/Index/Chrom2.fa.fai, Data/C-1-C-22_R2.fastq.gz, Data/C-1-C-22_R1.fastq.gz, Chrom2/Index/Chrom2.fa
+	output: Chrom2/Align/C-1-C-22.bam
+	wildcards: chrom=Chrom2, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:29:01 2017] 28 of 173 steps (16%) done
+[Thu Nov 30 11:29:01 2017] 29 of 173 steps (17%) done
+[Thu Nov 30 11:29:01 2017] 30 of 173 steps (17%) done
+[Thu Nov 30 11:29:01 2017] 31 of 173 steps (18%) done
+[Thu Nov 30 11:29:01 2017] 32 of 173 steps (18%) done
+[Thu Nov 30 11:29:01 2017] 33 of 173 steps (19%) done
+[Thu Nov 30 11:29:01 2017] 34 of 173 steps (20%) done
+[Thu Nov 30 11:29:01 2017] 35 of 173 steps (20%) done
+[Thu Nov 30 11:29:01 2017] 36 of 173 steps (21%) done
+[Thu Nov 30 11:29:01 2017] rule bwa_align:
+	input: Chrom2/Index/Chrom2.fa.amb, Chrom2/Index/Chrom2.fa.ann, Chrom2/Index/Chrom2.fa.bwt, Chrom2/Index/Chrom2.fa.pac, Chrom2/Index/Chrom2.fa.sa, Chrom2/Index/Chrom2.dict, Chrom2/Index/Chrom2.fa.fai, Data/R4-R88_R2.fastq.gz, Data/R4-R88_R1.fastq.gz, Chrom2/Index/Chrom2.fa
+	output: Chrom2/Align/R4-R88.bam
+	wildcards: chrom=Chrom2, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:29:01 2017] rule bwa_align:
+	input: Chrom2/Index/Chrom2.fa.amb, Chrom2/Index/Chrom2.fa.ann, Chrom2/Index/Chrom2.fa.bwt, Chrom2/Index/Chrom2.fa.pac, Chrom2/Index/Chrom2.fa.sa, Chrom2/Index/Chrom2.dict, Chrom2/Index/Chrom2.fa.fai, Data/N2-P30_R2.fastq.gz, Data/N2-P30_R1.fastq.gz, Chrom2/Index/Chrom2.fa
+	output: Chrom2/Align/N2-P30.bam
+	wildcards: chrom=Chrom2, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:29:01 2017] rule bwa_align:
+	input: Chrom2/Index/Chrom2.fa.amb, Chrom2/Index/Chrom2.fa.ann, Chrom2/Index/Chrom2.fa.bwt, Chrom2/Index/Chrom2.fa.pac, Chrom2/Index/Chrom2.fa.sa, Chrom2/Index/Chrom2.dict, Chrom2/Index/Chrom2.fa.fai, Data/D8-1-D8-22_R2.fastq.gz, Data/D8-1-D8-22_R1.fastq.gz, Chrom2/Index/Chrom2.fa
+	output: Chrom2/Align/D8-1-D8-22.bam
+	wildcards: chrom=Chrom2, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:29:01 2017] rule picard_markdup:
+	input: Chrom6/Sort/D8-1-D8-22.sort.bam
+	output: Chrom6/MarkDup/D8-1-D8-22.markdup.bam.bai, Chrom6/MarkDup/D8-1-D8-22.markdup.bam, Chrom6/MarkDup/D8-1-D8-22.metrics
+	wildcards: chrom=Chrom6, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:01 2017] rule bwa_align:
+	input: Chrom4/Index/Chrom4.fa.amb, Chrom4/Index/Chrom4.fa.ann, Chrom4/Index/Chrom4.fa.bwt, Chrom4/Index/Chrom4.fa.pac, Chrom4/Index/Chrom4.fa.sa, Chrom4/Index/Chrom4.dict, Chrom4/Index/Chrom4.fa.fai, Data/D8-1-D8-22_R2.fastq.gz, Data/D8-1-D8-22_R1.fastq.gz, Chrom4/Index/Chrom4.fa
+	output: Chrom4/Align/D8-1-D8-22.bam
+	wildcards: chrom=Chrom4, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:29:01 2017] rule picard_markdup:
+	input: Chrom6/Sort/R4-R88.sort.bam
+	output: Chrom6/MarkDup/R4-R88.markdup.bam.bai, Chrom6/MarkDup/R4-R88.markdup.bam, Chrom6/MarkDup/R4-R88.metrics
+	wildcards: chrom=Chrom6, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:01 2017] rule picard_markdup:
+	input: Chrom6/Sort/N2-P30.sort.bam
+	output: Chrom6/MarkDup/N2-P30.markdup.bam.bai, Chrom6/MarkDup/N2-P30.markdup.bam, Chrom6/MarkDup/N2-P30.metrics
+	wildcards: chrom=Chrom6, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:02 2017] rule bwa_align:
+	input: Chrom4/Index/Chrom4.fa.amb, Chrom4/Index/Chrom4.fa.ann, Chrom4/Index/Chrom4.fa.bwt, Chrom4/Index/Chrom4.fa.pac, Chrom4/Index/Chrom4.fa.sa, Chrom4/Index/Chrom4.dict, Chrom4/Index/Chrom4.fa.fai, Data/C-1-C-22_R2.fastq.gz, Data/C-1-C-22_R1.fastq.gz, Chrom4/Index/Chrom4.fa
+	output: Chrom4/Align/C-1-C-22.bam
+	wildcards: chrom=Chrom4, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:29:02 2017] rule picard_markdup:
+	input: Chrom7/Sort/C-1-C-22.sort.bam
+	output: Chrom7/MarkDup/C-1-C-22.markdup.bam.bai, Chrom7/MarkDup/C-1-C-22.markdup.bam, Chrom7/MarkDup/C-1-C-22.metrics
+	wildcards: chrom=Chrom7, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:02 2017] rule picard_markdup:
+	input: Chrom6/Sort/C-1-C-22.sort.bam
+	output: Chrom6/MarkDup/C-1-C-22.markdup.bam.bai, Chrom6/MarkDup/C-1-C-22.markdup.bam, Chrom6/MarkDup/C-1-C-22.metrics
+	wildcards: chrom=Chrom6, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:02 2017] rule picard_markdup:
+	input: Chrom7/Sort/N2-P30.sort.bam
+	output: Chrom7/MarkDup/N2-P30.markdup.bam.bai, Chrom7/MarkDup/N2-P30.markdup.bam, Chrom7/MarkDup/N2-P30.metrics
+	wildcards: chrom=Chrom7, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:02 2017] rule bwa_align:
+	input: Chrom4/Index/Chrom4.fa.amb, Chrom4/Index/Chrom4.fa.ann, Chrom4/Index/Chrom4.fa.bwt, Chrom4/Index/Chrom4.fa.pac, Chrom4/Index/Chrom4.fa.sa, Chrom4/Index/Chrom4.dict, Chrom4/Index/Chrom4.fa.fai, Data/R4-R88_R2.fastq.gz, Data/R4-R88_R1.fastq.gz, Chrom4/Index/Chrom4.fa
+	output: Chrom4/Align/R4-R88.bam
+	wildcards: chrom=Chrom4, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:29:02 2017] rule bwa_align:
+	input: Chrom4/Index/Chrom4.fa.amb, Chrom4/Index/Chrom4.fa.ann, Chrom4/Index/Chrom4.fa.bwt, Chrom4/Index/Chrom4.fa.pac, Chrom4/Index/Chrom4.fa.sa, Chrom4/Index/Chrom4.dict, Chrom4/Index/Chrom4.fa.fai, Data/N2-P30_R2.fastq.gz, Data/N2-P30_R1.fastq.gz, Chrom4/Index/Chrom4.fa
+	output: Chrom4/Align/N2-P30.bam
+	wildcards: chrom=Chrom4, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:29:02 2017] rule picard_markdup:
+	input: Chrom7/Sort/D8-1-D8-22.sort.bam
+	output: Chrom7/MarkDup/D8-1-D8-22.markdup.bam.bai, Chrom7/MarkDup/D8-1-D8-22.markdup.bam, Chrom7/MarkDup/D8-1-D8-22.metrics
+	wildcards: chrom=Chrom7, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:02 2017] rule picard_markdup:
+	input: Chrom7/Sort/R4-R88.sort.bam
+	output: Chrom7/MarkDup/R4-R88.markdup.bam.bai, Chrom7/MarkDup/R4-R88.markdup.bam, Chrom7/MarkDup/R4-R88.metrics
+	wildcards: chrom=Chrom7, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:02 2017] 37 of 173 steps (21%) done
+[Thu Nov 30 11:29:02 2017] rule bwa_align:
+	input: Chrom3/Index/Chrom3.fa.amb, Chrom3/Index/Chrom3.fa.ann, Chrom3/Index/Chrom3.fa.bwt, Chrom3/Index/Chrom3.fa.pac, Chrom3/Index/Chrom3.fa.sa, Chrom3/Index/Chrom3.dict, Chrom3/Index/Chrom3.fa.fai, Data/N2-P30_R2.fastq.gz, Data/N2-P30_R1.fastq.gz, Chrom3/Index/Chrom3.fa
+	output: Chrom3/Align/N2-P30.bam
+	wildcards: chrom=Chrom3, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:29:03 2017] rule bwa_align:
+	input: Chrom3/Index/Chrom3.fa.amb, Chrom3/Index/Chrom3.fa.ann, Chrom3/Index/Chrom3.fa.bwt, Chrom3/Index/Chrom3.fa.pac, Chrom3/Index/Chrom3.fa.sa, Chrom3/Index/Chrom3.dict, Chrom3/Index/Chrom3.fa.fai, Data/C-1-C-22_R2.fastq.gz, Data/C-1-C-22_R1.fastq.gz, Chrom3/Index/Chrom3.fa
+	output: Chrom3/Align/C-1-C-22.bam
+	wildcards: chrom=Chrom3, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:29:03 2017] rule bwa_align:
+	input: Chrom3/Index/Chrom3.fa.amb, Chrom3/Index/Chrom3.fa.ann, Chrom3/Index/Chrom3.fa.bwt, Chrom3/Index/Chrom3.fa.pac, Chrom3/Index/Chrom3.fa.sa, Chrom3/Index/Chrom3.dict, Chrom3/Index/Chrom3.fa.fai, Data/R4-R88_R2.fastq.gz, Data/R4-R88_R1.fastq.gz, Chrom3/Index/Chrom3.fa
+	output: Chrom3/Align/R4-R88.bam
+	wildcards: chrom=Chrom3, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:29:03 2017] rule bwa_align:
+	input: Chrom3/Index/Chrom3.fa.amb, Chrom3/Index/Chrom3.fa.ann, Chrom3/Index/Chrom3.fa.bwt, Chrom3/Index/Chrom3.fa.pac, Chrom3/Index/Chrom3.fa.sa, Chrom3/Index/Chrom3.dict, Chrom3/Index/Chrom3.fa.fai, Data/D8-1-D8-22_R2.fastq.gz, Data/D8-1-D8-22_R1.fastq.gz, Chrom3/Index/Chrom3.fa
+	output: Chrom3/Align/D8-1-D8-22.bam
+	wildcards: chrom=Chrom3, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:29:05 2017] 38 of 173 steps (22%) done
+[Thu Nov 30 11:29:05 2017] rule bwa_sort:
+	input: Chrom2/Align/C-1-C-22.bam
+	output: Chrom2/Sort/C-1-C-22.sort.bam
+	wildcards: chrom=Chrom2, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:29:05 2017] 39 of 173 steps (23%) done
+[Thu Nov 30 11:29:05 2017] 40 of 173 steps (23%) done
+[Thu Nov 30 11:29:05 2017] 41 of 173 steps (24%) done
+[Thu Nov 30 11:29:05 2017] 42 of 173 steps (24%) done
+[Thu Nov 30 11:29:05 2017] 43 of 173 steps (25%) done
+[Thu Nov 30 11:29:05 2017] 44 of 173 steps (25%) done
+[Thu Nov 30 11:29:05 2017] 45 of 173 steps (26%) done
+[Thu Nov 30 11:29:05 2017] rule bwa_sort:
+	input: Chrom4/Align/N2-P30.bam
+	output: Chrom4/Sort/N2-P30.sort.bam
+	wildcards: chrom=Chrom4, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:29:05 2017] rule bwa_sort:
+	input: Chrom2/Align/R4-R88.bam
+	output: Chrom2/Sort/R4-R88.sort.bam
+	wildcards: chrom=Chrom2, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:29:05 2017] rule bwa_sort:
+	input: Chrom2/Align/N2-P30.bam
+	output: Chrom2/Sort/N2-P30.sort.bam
+	wildcards: chrom=Chrom2, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:29:05 2017] rule bwa_sort:
+	input: Chrom4/Align/R4-R88.bam
+	output: Chrom4/Sort/R4-R88.sort.bam
+	wildcards: chrom=Chrom4, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:29:05 2017] rule bwa_sort:
+	input: Chrom2/Align/D8-1-D8-22.bam
+	output: Chrom2/Sort/D8-1-D8-22.sort.bam
+	wildcards: chrom=Chrom2, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:29:05 2017] rule bwa_sort:
+	input: Chrom4/Align/C-1-C-22.bam
+	output: Chrom4/Sort/C-1-C-22.sort.bam
+	wildcards: chrom=Chrom4, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:29:05 2017] rule bwa_sort:
+	input: Chrom4/Align/D8-1-D8-22.bam
+	output: Chrom4/Sort/D8-1-D8-22.sort.bam
+	wildcards: chrom=Chrom4, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:29:08 2017] 46 of 173 steps (27%) done
+[Thu Nov 30 11:29:08 2017] rule bwa_align:
+	input: Chrom5/Index/Chrom5.fa.amb, Chrom5/Index/Chrom5.fa.ann, Chrom5/Index/Chrom5.fa.bwt, Chrom5/Index/Chrom5.fa.pac, Chrom5/Index/Chrom5.fa.sa, Chrom5/Index/Chrom5.dict, Chrom5/Index/Chrom5.fa.fai, Data/D8-1-D8-22_R2.fastq.gz, Data/D8-1-D8-22_R1.fastq.gz, Chrom5/Index/Chrom5.fa
+	output: Chrom5/Align/D8-1-D8-22.bam
+	wildcards: chrom=Chrom5, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:29:09 2017] 47 of 173 steps (27%) done
+[Thu Nov 30 11:29:09 2017] 48 of 173 steps (28%) done
+[Thu Nov 30 11:29:09 2017] 49 of 173 steps (28%) done
+[Thu Nov 30 11:29:09 2017] 50 of 173 steps (29%) done
+[Thu Nov 30 11:29:09 2017] 51 of 173 steps (29%) done
+[Thu Nov 30 11:29:09 2017] 52 of 173 steps (30%) done
+[Thu Nov 30 11:29:09 2017] 53 of 173 steps (31%) done
+[Thu Nov 30 11:29:09 2017] 54 of 173 steps (31%) done
+[Thu Nov 30 11:29:09 2017] 55 of 173 steps (32%) done
+[Thu Nov 30 11:29:09 2017] 56 of 173 steps (32%) done
+[Thu Nov 30 11:29:09 2017] 57 of 173 steps (33%) done
+[Thu Nov 30 11:29:09 2017] 58 of 173 steps (34%) done
+[Thu Nov 30 11:29:10 2017] 59 of 173 steps (34%) done
+[Thu Nov 30 11:29:10 2017] 60 of 173 steps (35%) done
+[Thu Nov 30 11:29:10 2017] rule bwa_align:
+	input: Chrom5/Index/Chrom5.fa.amb, Chrom5/Index/Chrom5.fa.ann, Chrom5/Index/Chrom5.fa.bwt, Chrom5/Index/Chrom5.fa.pac, Chrom5/Index/Chrom5.fa.sa, Chrom5/Index/Chrom5.dict, Chrom5/Index/Chrom5.fa.fai, Data/R4-R88_R2.fastq.gz, Data/R4-R88_R1.fastq.gz, Chrom5/Index/Chrom5.fa
+	output: Chrom5/Align/R4-R88.bam
+	wildcards: chrom=Chrom5, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:29:10 2017] rule bwa_align:
+	input: Chrom5/Index/Chrom5.fa.amb, Chrom5/Index/Chrom5.fa.ann, Chrom5/Index/Chrom5.fa.bwt, Chrom5/Index/Chrom5.fa.pac, Chrom5/Index/Chrom5.fa.sa, Chrom5/Index/Chrom5.dict, Chrom5/Index/Chrom5.fa.fai, Data/N2-P30_R2.fastq.gz, Data/N2-P30_R1.fastq.gz, Chrom5/Index/Chrom5.fa
+	output: Chrom5/Align/N2-P30.bam
+	wildcards: chrom=Chrom5, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:29:10 2017] rule bwa_align:
+	input: Chrom5/Index/Chrom5.fa.amb, Chrom5/Index/Chrom5.fa.ann, Chrom5/Index/Chrom5.fa.bwt, Chrom5/Index/Chrom5.fa.pac, Chrom5/Index/Chrom5.fa.sa, Chrom5/Index/Chrom5.dict, Chrom5/Index/Chrom5.fa.fai, Data/C-1-C-22_R2.fastq.gz, Data/C-1-C-22_R1.fastq.gz, Chrom5/Index/Chrom5.fa
+	output: Chrom5/Align/C-1-C-22.bam
+	wildcards: chrom=Chrom5, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:29:10 2017] rule bwa_sort:
+	input: Chrom3/Align/R4-R88.bam
+	output: Chrom3/Sort/R4-R88.sort.bam
+	wildcards: chrom=Chrom3, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:29:10 2017] rule picard_markdup:
+	input: Chrom4/Sort/R4-R88.sort.bam
+	output: Chrom4/MarkDup/R4-R88.markdup.bam.bai, Chrom4/MarkDup/R4-R88.markdup.bam, Chrom4/MarkDup/R4-R88.metrics
+	wildcards: chrom=Chrom4, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:10 2017] rule picard_markdup:
+	input: Chrom4/Sort/N2-P30.sort.bam
+	output: Chrom4/MarkDup/N2-P30.markdup.bam.bai, Chrom4/MarkDup/N2-P30.markdup.bam, Chrom4/MarkDup/N2-P30.metrics
+	wildcards: chrom=Chrom4, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:10 2017] rule bwa_sort:
+	input: Chrom3/Align/D8-1-D8-22.bam
+	output: Chrom3/Sort/D8-1-D8-22.sort.bam
+	wildcards: chrom=Chrom3, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:29:10 2017] rule picard_markdup:
+	input: Chrom2/Sort/R4-R88.sort.bam
+	output: Chrom2/MarkDup/R4-R88.markdup.bam.bai, Chrom2/MarkDup/R4-R88.markdup.bam, Chrom2/MarkDup/R4-R88.metrics
+	wildcards: chrom=Chrom2, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:10 2017] rule picard_markdup:
+	input: Chrom2/Sort/D8-1-D8-22.sort.bam
+	output: Chrom2/MarkDup/D8-1-D8-22.markdup.bam.bai, Chrom2/MarkDup/D8-1-D8-22.markdup.bam, Chrom2/MarkDup/D8-1-D8-22.metrics
+	wildcards: chrom=Chrom2, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:10 2017] rule picard_markdup:
+	input: Chrom4/Sort/D8-1-D8-22.sort.bam
+	output: Chrom4/MarkDup/D8-1-D8-22.markdup.bam.bai, Chrom4/MarkDup/D8-1-D8-22.markdup.bam, Chrom4/MarkDup/D8-1-D8-22.metrics
+	wildcards: chrom=Chrom4, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:10 2017] rule picard_markdup:
+	input: Chrom2/Sort/C-1-C-22.sort.bam
+	output: Chrom2/MarkDup/C-1-C-22.markdup.bam.bai, Chrom2/MarkDup/C-1-C-22.markdup.bam, Chrom2/MarkDup/C-1-C-22.metrics
+	wildcards: chrom=Chrom2, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:10 2017] rule gatk_realign:
+	input: Chrom6/MarkDup/N2-P30.markdup.bam, Chrom6/Index/Chrom6.fa
+	output: Chrom6/Realign/N2-P30.intervals, Chrom6/Realign/N2-P30.realign.bam
+	wildcards: chrom=Chrom6, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:10 2017] rule picard_markdup:
+	input: Chrom2/Sort/N2-P30.sort.bam
+	output: Chrom2/MarkDup/N2-P30.markdup.bam.bai, Chrom2/MarkDup/N2-P30.markdup.bam, Chrom2/MarkDup/N2-P30.metrics
+	wildcards: chrom=Chrom2, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:10 2017] rule bwa_sort:
+	input: Chrom3/Align/C-1-C-22.bam
+	output: Chrom3/Sort/C-1-C-22.sort.bam
+	wildcards: chrom=Chrom3, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:29:10 2017] rule gatk_realign:
+	input: Chrom6/MarkDup/R4-R88.markdup.bam, Chrom6/Index/Chrom6.fa
+	output: Chrom6/Realign/R4-R88.intervals, Chrom6/Realign/R4-R88.realign.bam
+	wildcards: chrom=Chrom6, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:10 2017] rule picard_markdup:
+	input: Chrom4/Sort/C-1-C-22.sort.bam
+	output: Chrom4/MarkDup/C-1-C-22.markdup.bam.bai, Chrom4/MarkDup/C-1-C-22.markdup.bam, Chrom4/MarkDup/C-1-C-22.metrics
+	wildcards: chrom=Chrom4, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:10 2017] rule bwa_sort:
+	input: Chrom3/Align/N2-P30.bam
+	output: Chrom3/Sort/N2-P30.sort.bam
+	wildcards: chrom=Chrom3, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:29:11 2017] 61 of 173 steps (35%) done
+[Thu Nov 30 11:29:11 2017] rule bwa_align:
+	input: Chrom1/Index/Chrom1.fa.amb, Chrom1/Index/Chrom1.fa.ann, Chrom1/Index/Chrom1.fa.bwt, Chrom1/Index/Chrom1.fa.pac, Chrom1/Index/Chrom1.fa.sa, Chrom1/Index/Chrom1.dict, Chrom1/Index/Chrom1.fa.fai, Data/N2-P30_R2.fastq.gz, Data/N2-P30_R1.fastq.gz, Chrom1/Index/Chrom1.fa
+	output: Chrom1/Align/N2-P30.bam
+	wildcards: chrom=Chrom1, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:29:11 2017] 62 of 173 steps (36%) done
+[Thu Nov 30 11:29:11 2017] rule bwa_align:
+	input: Chrom1/Index/Chrom1.fa.amb, Chrom1/Index/Chrom1.fa.ann, Chrom1/Index/Chrom1.fa.bwt, Chrom1/Index/Chrom1.fa.pac, Chrom1/Index/Chrom1.fa.sa, Chrom1/Index/Chrom1.dict, Chrom1/Index/Chrom1.fa.fai, Data/R4-R88_R2.fastq.gz, Data/R4-R88_R1.fastq.gz, Chrom1/Index/Chrom1.fa
+	output: Chrom1/Align/R4-R88.bam
+	wildcards: chrom=Chrom1, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:29:11 2017] rule bwa_align:
+	input: Chrom1/Index/Chrom1.fa.amb, Chrom1/Index/Chrom1.fa.ann, Chrom1/Index/Chrom1.fa.bwt, Chrom1/Index/Chrom1.fa.pac, Chrom1/Index/Chrom1.fa.sa, Chrom1/Index/Chrom1.dict, Chrom1/Index/Chrom1.fa.fai, Data/D8-1-D8-22_R2.fastq.gz, Data/D8-1-D8-22_R1.fastq.gz, Chrom1/Index/Chrom1.fa
+	output: Chrom1/Align/D8-1-D8-22.bam
+	wildcards: chrom=Chrom1, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:29:11 2017] rule bwa_align:
+	input: Chrom1/Index/Chrom1.fa.amb, Chrom1/Index/Chrom1.fa.ann, Chrom1/Index/Chrom1.fa.bwt, Chrom1/Index/Chrom1.fa.pac, Chrom1/Index/Chrom1.fa.sa, Chrom1/Index/Chrom1.dict, Chrom1/Index/Chrom1.fa.fai, Data/C-1-C-22_R2.fastq.gz, Data/C-1-C-22_R1.fastq.gz, Chrom1/Index/Chrom1.fa
+	output: Chrom1/Align/C-1-C-22.bam
+	wildcards: chrom=Chrom1, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:29:11 2017] rule gatk_realign:
+	input: Chrom7/MarkDup/C-1-C-22.markdup.bam, Chrom7/Index/Chrom7.fa
+	output: Chrom7/Realign/C-1-C-22.intervals, Chrom7/Realign/C-1-C-22.realign.bam
+	wildcards: chrom=Chrom7, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:12 2017] 63 of 173 steps (36%) done
+[Thu Nov 30 11:29:12 2017] rule picard_markdup:
+	input: Chrom3/Sort/R4-R88.sort.bam
+	output: Chrom3/MarkDup/R4-R88.markdup.bam.bai, Chrom3/MarkDup/R4-R88.markdup.bam, Chrom3/MarkDup/R4-R88.metrics
+	wildcards: chrom=Chrom3, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:12 2017] 64 of 173 steps (37%) done
+[Thu Nov 30 11:29:12 2017] 65 of 173 steps (38%) done
+[Thu Nov 30 11:29:12 2017] 66 of 173 steps (38%) done
+[Thu Nov 30 11:29:12 2017] rule picard_markdup:
+	input: Chrom3/Sort/D8-1-D8-22.sort.bam
+	output: Chrom3/MarkDup/D8-1-D8-22.markdup.bam.bai, Chrom3/MarkDup/D8-1-D8-22.markdup.bam, Chrom3/MarkDup/D8-1-D8-22.metrics
+	wildcards: chrom=Chrom3, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:12 2017] rule picard_markdup:
+	input: Chrom3/Sort/N2-P30.sort.bam
+	output: Chrom3/MarkDup/N2-P30.markdup.bam.bai, Chrom3/MarkDup/N2-P30.markdup.bam, Chrom3/MarkDup/N2-P30.metrics
+	wildcards: chrom=Chrom3, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:13 2017] rule picard_markdup:
+	input: Chrom3/Sort/C-1-C-22.sort.bam
+	output: Chrom3/MarkDup/C-1-C-22.markdup.bam.bai, Chrom3/MarkDup/C-1-C-22.markdup.bam, Chrom3/MarkDup/C-1-C-22.metrics
+	wildcards: chrom=Chrom3, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:14 2017] 67 of 173 steps (39%) done
+[Thu Nov 30 11:29:14 2017] rule bwa_sort:
+	input: Chrom5/Align/D8-1-D8-22.bam
+	output: Chrom5/Sort/D8-1-D8-22.sort.bam
+	wildcards: chrom=Chrom5, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:29:14 2017] 68 of 173 steps (39%) done
+[Thu Nov 30 11:29:14 2017] 69 of 173 steps (40%) done
+[Thu Nov 30 11:29:14 2017] 70 of 173 steps (40%) done
+[Thu Nov 30 11:29:14 2017] rule bwa_sort:
+	input: Chrom5/Align/R4-R88.bam
+	output: Chrom5/Sort/R4-R88.sort.bam
+	wildcards: chrom=Chrom5, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:29:14 2017] rule bwa_sort:
+	input: Chrom5/Align/C-1-C-22.bam
+	output: Chrom5/Sort/C-1-C-22.sort.bam
+	wildcards: chrom=Chrom5, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:29:14 2017] rule bwa_sort:
+	input: Chrom5/Align/N2-P30.bam
+	output: Chrom5/Sort/N2-P30.sort.bam
+	wildcards: chrom=Chrom5, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:29:16 2017] 71 of 173 steps (41%) done
+[Thu Nov 30 11:29:16 2017] rule gatk_realign:
+	input: Chrom6/MarkDup/D8-1-D8-22.markdup.bam, Chrom6/Index/Chrom6.fa
+	output: Chrom6/Realign/D8-1-D8-22.intervals, Chrom6/Realign/D8-1-D8-22.realign.bam
+	wildcards: chrom=Chrom6, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:16 2017] 72 of 173 steps (42%) done
+[Thu Nov 30 11:29:17 2017] 73 of 173 steps (42%) done
+[Thu Nov 30 11:29:17 2017] 74 of 173 steps (43%) done
+[Thu Nov 30 11:29:17 2017] 75 of 173 steps (43%) done
+[Thu Nov 30 11:29:17 2017] 76 of 173 steps (44%) done
+[Thu Nov 30 11:29:17 2017] 77 of 173 steps (45%) done
+[Thu Nov 30 11:29:17 2017] 78 of 173 steps (45%) done
+[Thu Nov 30 11:29:17 2017] 79 of 173 steps (46%) done
+[Thu Nov 30 11:29:17 2017] 80 of 173 steps (46%) done
+[Thu Nov 30 11:29:17 2017] 81 of 173 steps (47%) done
+[Thu Nov 30 11:29:18 2017] 82 of 173 steps (47%) done
+[Thu Nov 30 11:29:18 2017] 83 of 173 steps (48%) done
+[Thu Nov 30 11:29:18 2017] 84 of 173 steps (49%) done
+[Thu Nov 30 11:29:18 2017] 85 of 173 steps (49%) done
+[Thu Nov 30 11:29:18 2017] rule picard_markdup:
+	input: Chrom5/Sort/N2-P30.sort.bam
+	output: Chrom5/MarkDup/N2-P30.markdup.bam.bai, Chrom5/MarkDup/N2-P30.markdup.bam, Chrom5/MarkDup/N2-P30.metrics
+	wildcards: chrom=Chrom5, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:18 2017] rule gatk_gvcf:
+	input: Chrom6/Realign/N2-P30.realign.bam, Chrom6/Index/Chrom6.fa
+	output: Chrom6/GVCF/N2-P30.g.vcf
+	wildcards: chrom=Chrom6, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:18 2017] rule gatk_realign:
+	input: Chrom6/MarkDup/C-1-C-22.markdup.bam, Chrom6/Index/Chrom6.fa
+	output: Chrom6/Realign/C-1-C-22.intervals, Chrom6/Realign/C-1-C-22.realign.bam
+	wildcards: chrom=Chrom6, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:18 2017] rule bwa_sort:
+	input: Chrom1/Align/D8-1-D8-22.bam
+	output: Chrom1/Sort/D8-1-D8-22.sort.bam
+	wildcards: chrom=Chrom1, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:29:18 2017] rule picard_markdup:
+	input: Chrom5/Sort/C-1-C-22.sort.bam
+	output: Chrom5/MarkDup/C-1-C-22.markdup.bam.bai, Chrom5/MarkDup/C-1-C-22.markdup.bam, Chrom5/MarkDup/C-1-C-22.metrics
+	wildcards: chrom=Chrom5, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:18 2017] rule gatk_realign:
+	input: Chrom4/MarkDup/N2-P30.markdup.bam, Chrom4/Index/Chrom4.fa
+	output: Chrom4/Realign/N2-P30.intervals, Chrom4/Realign/N2-P30.realign.bam
+	wildcards: chrom=Chrom4, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:18 2017] rule gatk_gvcf:
+	input: Chrom6/Realign/R4-R88.realign.bam, Chrom6/Index/Chrom6.fa
+	output: Chrom6/GVCF/R4-R88.g.vcf
+	wildcards: chrom=Chrom6, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:18 2017] rule picard_markdup:
+	input: Chrom5/Sort/R4-R88.sort.bam
+	output: Chrom5/MarkDup/R4-R88.markdup.bam.bai, Chrom5/MarkDup/R4-R88.markdup.bam, Chrom5/MarkDup/R4-R88.metrics
+	wildcards: chrom=Chrom5, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:18 2017] rule picard_markdup:
+	input: Chrom5/Sort/D8-1-D8-22.sort.bam
+	output: Chrom5/MarkDup/D8-1-D8-22.markdup.bam.bai, Chrom5/MarkDup/D8-1-D8-22.markdup.bam, Chrom5/MarkDup/D8-1-D8-22.metrics
+	wildcards: chrom=Chrom5, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:18 2017] rule bwa_sort:
+	input: Chrom1/Align/C-1-C-22.bam
+	output: Chrom1/Sort/C-1-C-22.sort.bam
+	wildcards: chrom=Chrom1, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:29:18 2017] rule bwa_sort:
+	input: Chrom1/Align/R4-R88.bam
+	output: Chrom1/Sort/R4-R88.sort.bam
+	wildcards: chrom=Chrom1, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:29:18 2017] rule bwa_sort:
+	input: Chrom1/Align/N2-P30.bam
+	output: Chrom1/Sort/N2-P30.sort.bam
+	wildcards: chrom=Chrom1, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=8
+[Thu Nov 30 11:29:19 2017] rule gatk_realign:
+	input: Chrom2/MarkDup/R4-R88.markdup.bam, Chrom2/Index/Chrom2.fa
+	output: Chrom2/Realign/R4-R88.intervals, Chrom2/Realign/R4-R88.realign.bam
+	wildcards: chrom=Chrom2, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:19 2017] rule gatk_realign:
+	input: Chrom4/MarkDup/R4-R88.markdup.bam, Chrom4/Index/Chrom4.fa
+	output: Chrom4/Realign/R4-R88.intervals, Chrom4/Realign/R4-R88.realign.bam
+	wildcards: chrom=Chrom4, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:20 2017] 86 of 173 steps (50%) done
+[Thu Nov 30 11:29:20 2017] rule picard_markdup:
+	input: Chrom1/Sort/D8-1-D8-22.sort.bam
+	output: Chrom1/MarkDup/D8-1-D8-22.markdup.bam.bai, Chrom1/MarkDup/D8-1-D8-22.markdup.bam, Chrom1/MarkDup/D8-1-D8-22.metrics
+	wildcards: chrom=Chrom1, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:20 2017] 87 of 173 steps (50%) done
+[Thu Nov 30 11:29:20 2017] 88 of 173 steps (51%) done
+[Thu Nov 30 11:29:20 2017] rule picard_markdup:
+	input: Chrom1/Sort/R4-R88.sort.bam
+	output: Chrom1/MarkDup/R4-R88.markdup.bam.bai, Chrom1/MarkDup/R4-R88.markdup.bam, Chrom1/MarkDup/R4-R88.metrics
+	wildcards: chrom=Chrom1, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:20 2017] rule picard_markdup:
+	input: Chrom1/Sort/C-1-C-22.sort.bam
+	output: Chrom1/MarkDup/C-1-C-22.markdup.bam.bai, Chrom1/MarkDup/C-1-C-22.markdup.bam, Chrom1/MarkDup/C-1-C-22.metrics
+	wildcards: chrom=Chrom1, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:21 2017] 89 of 173 steps (51%) done
+[Thu Nov 30 11:29:21 2017] rule gatk_gvcf:
+	input: Chrom7/Realign/C-1-C-22.realign.bam, Chrom7/Index/Chrom7.fa
+	output: Chrom7/GVCF/C-1-C-22.g.vcf
+	wildcards: chrom=Chrom7, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:22 2017] 90 of 173 steps (52%) done
+[Thu Nov 30 11:29:22 2017] 91 of 173 steps (53%) done
+[Thu Nov 30 11:29:22 2017] rule gatk_realign:
+	input: Chrom3/MarkDup/R4-R88.markdup.bam, Chrom3/Index/Chrom3.fa
+	output: Chrom3/Realign/R4-R88.intervals, Chrom3/Realign/R4-R88.realign.bam
+	wildcards: chrom=Chrom3, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:22 2017] rule gatk_realign:
+	input: Chrom3/MarkDup/C-1-C-22.markdup.bam, Chrom3/Index/Chrom3.fa
+	output: Chrom3/Realign/C-1-C-22.intervals, Chrom3/Realign/C-1-C-22.realign.bam
+	wildcards: chrom=Chrom3, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:24 2017] 92 of 173 steps (53%) done
+[Thu Nov 30 11:29:24 2017] rule gatk_realign:
+	input: Chrom5/MarkDup/N2-P30.markdup.bam, Chrom5/Index/Chrom5.fa
+	output: Chrom5/Realign/N2-P30.intervals, Chrom5/Realign/N2-P30.realign.bam
+	wildcards: chrom=Chrom5, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:24 2017] 93 of 173 steps (54%) done
+[Thu Nov 30 11:29:24 2017] rule picard_markdup:
+	input: Chrom1/Sort/N2-P30.sort.bam
+	output: Chrom1/MarkDup/N2-P30.markdup.bam.bai, Chrom1/MarkDup/N2-P30.markdup.bam, Chrom1/MarkDup/N2-P30.metrics
+	wildcards: chrom=Chrom1, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:25 2017] 94 of 173 steps (54%) done
+[Thu Nov 30 11:29:25 2017] rule gatk_gvcf:
+	input: Chrom6/Realign/D8-1-D8-22.realign.bam, Chrom6/Index/Chrom6.fa
+	output: Chrom6/GVCF/D8-1-D8-22.g.vcf
+	wildcards: chrom=Chrom6, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:25 2017] 95 of 173 steps (55%) done
+[Thu Nov 30 11:29:26 2017] 96 of 173 steps (55%) done
+[Thu Nov 30 11:29:26 2017] 97 of 173 steps (56%) done
+[Thu Nov 30 11:29:26 2017] rule gatk_gvcf:
+	input: Chrom6/Realign/C-1-C-22.realign.bam, Chrom6/Index/Chrom6.fa
+	output: Chrom6/GVCF/C-1-C-22.g.vcf
+	wildcards: chrom=Chrom6, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:28 2017] 98 of 173 steps (57%) done
+[Thu Nov 30 11:29:28 2017] rule gatk_gvcf:
+	input: Chrom4/Realign/N2-P30.realign.bam, Chrom4/Index/Chrom4.fa
+	output: Chrom4/GVCF/N2-P30.g.vcf
+	wildcards: chrom=Chrom4, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:28 2017] 99 of 173 steps (57%) done
+[Thu Nov 30 11:29:28 2017] 100 of 173 steps (58%) done
+[Thu Nov 30 11:29:28 2017] 101 of 173 steps (58%) done
+[Thu Nov 30 11:29:29 2017] 102 of 173 steps (59%) done
+[Thu Nov 30 11:29:29 2017] rule gatk_realign:
+	input: Chrom1/MarkDup/C-1-C-22.markdup.bam, Chrom1/Index/Chrom1.fa
+	output: Chrom1/Realign/C-1-C-22.intervals, Chrom1/Realign/C-1-C-22.realign.bam
+	wildcards: chrom=Chrom1, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:29 2017] rule gatk_realign:
+	input: Chrom1/MarkDup/D8-1-D8-22.markdup.bam, Chrom1/Index/Chrom1.fa
+	output: Chrom1/Realign/D8-1-D8-22.intervals, Chrom1/Realign/D8-1-D8-22.realign.bam
+	wildcards: chrom=Chrom1, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:29 2017] rule gatk_realign:
+	input: Chrom1/MarkDup/R4-R88.markdup.bam, Chrom1/Index/Chrom1.fa
+	output: Chrom1/Realign/R4-R88.intervals, Chrom1/Realign/R4-R88.realign.bam
+	wildcards: chrom=Chrom1, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:29 2017] rule gatk_realign:
+	input: Chrom5/MarkDup/R4-R88.markdup.bam, Chrom5/Index/Chrom5.fa
+	output: Chrom5/Realign/R4-R88.intervals, Chrom5/Realign/R4-R88.realign.bam
+	wildcards: chrom=Chrom5, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:31 2017] 103 of 173 steps (60%) done
+[Thu Nov 30 11:29:34 2017] 104 of 173 steps (60%) done
+[Thu Nov 30 11:29:34 2017] rule gatk_realign:
+	input: Chrom2/MarkDup/N2-P30.markdup.bam, Chrom2/Index/Chrom2.fa
+	output: Chrom2/Realign/N2-P30.intervals, Chrom2/Realign/N2-P30.realign.bam
+	wildcards: chrom=Chrom2, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:34 2017] 105 of 173 steps (61%) done
+[Thu Nov 30 11:29:34 2017] 106 of 173 steps (61%) done
+[Thu Nov 30 11:29:35 2017] 107 of 173 steps (62%) done
+[Thu Nov 30 11:29:35 2017] 108 of 173 steps (62%) done
+[Thu Nov 30 11:29:35 2017] rule gatk_vcf:
+	input: Chrom6/GVCF/C-1-C-22.g.vcf, Chrom6/GVCF/D8-1-D8-22.g.vcf, Chrom6/GVCF/R4-R88.g.vcf, Chrom6/GVCF/N2-P30.g.vcf, Chrom6/Index/Chrom6.fa
+	output: Chrom6/VCF/Chrom6.vcf
+	wildcards: chrom=Chrom6
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:35 2017] rule gatk_gvcf:
+	input: Chrom2/Realign/R4-R88.realign.bam, Chrom2/Index/Chrom2.fa
+	output: Chrom2/GVCF/R4-R88.g.vcf
+	wildcards: chrom=Chrom2, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:35 2017] rule gatk_gvcf:
+	input: Chrom4/Realign/R4-R88.realign.bam, Chrom4/Index/Chrom4.fa
+	output: Chrom4/GVCF/R4-R88.g.vcf
+	wildcards: chrom=Chrom4, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:36 2017] 109 of 173 steps (63%) done
+[Thu Nov 30 11:29:36 2017] rule gatk_realign:
+	input: Chrom1/MarkDup/N2-P30.markdup.bam, Chrom1/Index/Chrom1.fa
+	output: Chrom1/Realign/N2-P30.intervals, Chrom1/Realign/N2-P30.realign.bam
+	wildcards: chrom=Chrom1, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:37 2017] 110 of 173 steps (64%) done
+[Thu Nov 30 11:29:37 2017] rule gatk_gvcf:
+	input: Chrom3/Realign/R4-R88.realign.bam, Chrom3/Index/Chrom3.fa
+	output: Chrom3/GVCF/R4-R88.g.vcf
+	wildcards: chrom=Chrom3, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:38 2017] 111 of 173 steps (64%) done
+[Thu Nov 30 11:29:38 2017] rule gatk_gvcf:
+	input: Chrom5/Realign/N2-P30.realign.bam, Chrom5/Index/Chrom5.fa
+	output: Chrom5/GVCF/N2-P30.g.vcf
+	wildcards: chrom=Chrom5, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:43 2017] 112 of 173 steps (65%) done
+[Thu Nov 30 11:29:43 2017] rule gatk_gvcf:
+	input: Chrom5/Realign/R4-R88.realign.bam, Chrom5/Index/Chrom5.fa
+	output: Chrom5/GVCF/R4-R88.g.vcf
+	wildcards: chrom=Chrom5, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:44 2017] 113 of 173 steps (65%) done
+[Thu Nov 30 11:29:44 2017] rule gatk_gvcf:
+	input: Chrom1/Realign/C-1-C-22.realign.bam, Chrom1/Index/Chrom1.fa
+	output: Chrom1/GVCF/C-1-C-22.g.vcf
+	wildcards: chrom=Chrom1, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:44 2017] 114 of 173 steps (66%) done
+[Thu Nov 30 11:29:45 2017] 115 of 173 steps (66%) done
+[Thu Nov 30 11:29:45 2017] rule gatk_gvcf:
+	input: Chrom1/Realign/R4-R88.realign.bam, Chrom1/Index/Chrom1.fa
+	output: Chrom1/GVCF/R4-R88.g.vcf
+	wildcards: chrom=Chrom1, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:45 2017] 116 of 173 steps (67%) done
+[Thu Nov 30 11:29:45 2017] rule gatk_gvcf:
+	input: Chrom2/Realign/N2-P30.realign.bam, Chrom2/Index/Chrom2.fa
+	output: Chrom2/GVCF/N2-P30.g.vcf
+	wildcards: chrom=Chrom2, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:46 2017] 117 of 173 steps (68%) done
+[Thu Nov 30 11:29:46 2017] rule gatk_gvcf:
+	input: Chrom3/Realign/C-1-C-22.realign.bam, Chrom3/Index/Chrom3.fa
+	output: Chrom3/GVCF/C-1-C-22.g.vcf
+	wildcards: chrom=Chrom3, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:49 2017] 118 of 173 steps (68%) done
+[Thu Nov 30 11:29:49 2017] rule gatk_realign:
+	input: Chrom7/MarkDup/R4-R88.markdup.bam, Chrom7/Index/Chrom7.fa
+	output: Chrom7/Realign/R4-R88.intervals, Chrom7/Realign/R4-R88.realign.bam
+	wildcards: chrom=Chrom7, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:49 2017] 119 of 173 steps (69%) done
+[Thu Nov 30 11:29:49 2017] rule gatk_realign:
+	input: Chrom5/MarkDup/C-1-C-22.markdup.bam, Chrom5/Index/Chrom5.fa
+	output: Chrom5/Realign/C-1-C-22.intervals, Chrom5/Realign/C-1-C-22.realign.bam
+	wildcards: chrom=Chrom5, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:50 2017] 120 of 173 steps (69%) done
+[Thu Nov 30 11:29:50 2017] rule gatk_realign:
+	input: Chrom4/MarkDup/D8-1-D8-22.markdup.bam, Chrom4/Index/Chrom4.fa
+	output: Chrom4/Realign/D8-1-D8-22.intervals, Chrom4/Realign/D8-1-D8-22.realign.bam
+	wildcards: chrom=Chrom4, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:52 2017] 121 of 173 steps (70%) done
+[Thu Nov 30 11:29:52 2017] rule gatk_gvcf:
+	input: Chrom1/Realign/N2-P30.realign.bam, Chrom1/Index/Chrom1.fa
+	output: Chrom1/GVCF/N2-P30.g.vcf
+	wildcards: chrom=Chrom1, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:29:57 2017] 122 of 173 steps (71%) done
+[Thu Nov 30 11:29:57 2017] rule gatk_gvcf:
+	input: Chrom7/Realign/R4-R88.realign.bam, Chrom7/Index/Chrom7.fa
+	output: Chrom7/GVCF/R4-R88.g.vcf
+	wildcards: chrom=Chrom7, sample=R4-R88
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:30:00 2017] 123 of 173 steps (71%) done
+[Thu Nov 30 11:30:00 2017] rule gatk_realign:
+	input: Chrom5/MarkDup/D8-1-D8-22.markdup.bam, Chrom5/Index/Chrom5.fa
+	output: Chrom5/Realign/D8-1-D8-22.intervals, Chrom5/Realign/D8-1-D8-22.realign.bam
+	wildcards: chrom=Chrom5, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:30:01 2017] 124 of 173 steps (72%) done
+[Thu Nov 30 11:30:02 2017] 125 of 173 steps (72%) done
+[Thu Nov 30 11:30:03 2017] rule gatk_gvcf:
+	input: Chrom5/Realign/C-1-C-22.realign.bam, Chrom5/Index/Chrom5.fa
+	output: Chrom5/GVCF/C-1-C-22.g.vcf
+	wildcards: chrom=Chrom5, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:30:03 2017] 126 of 173 steps (73%) done
+[Thu Nov 30 11:30:03 2017] rule gatk_gvcf:
+	input: Chrom4/Realign/D8-1-D8-22.realign.bam, Chrom4/Index/Chrom4.fa
+	output: Chrom4/GVCF/D8-1-D8-22.g.vcf
+	wildcards: chrom=Chrom4, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:30:05 2017] 127 of 173 steps (73%) done
+[Thu Nov 30 11:30:05 2017] rule gatk_realign:
+	input: Chrom7/MarkDup/D8-1-D8-22.markdup.bam, Chrom7/Index/Chrom7.fa
+	output: Chrom7/Realign/D8-1-D8-22.intervals, Chrom7/Realign/D8-1-D8-22.realign.bam
+	wildcards: chrom=Chrom7, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:30:05 2017] 128 of 173 steps (74%) done
+[Thu Nov 30 11:30:05 2017] 129 of 173 steps (75%) done
+[Thu Nov 30 11:30:08 2017] 130 of 173 steps (75%) done
+[Thu Nov 30 11:30:08 2017] rule gatk_realign:
+	input: Chrom2/MarkDup/C-1-C-22.markdup.bam, Chrom2/Index/Chrom2.fa
+	output: Chrom2/Realign/C-1-C-22.intervals, Chrom2/Realign/C-1-C-22.realign.bam
+	wildcards: chrom=Chrom2, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:30:09 2017] 131 of 173 steps (76%) done
+[Thu Nov 30 11:30:09 2017] rule gatk_realign:
+	input: Chrom3/MarkDup/D8-1-D8-22.markdup.bam, Chrom3/Index/Chrom3.fa
+	output: Chrom3/Realign/D8-1-D8-22.intervals, Chrom3/Realign/D8-1-D8-22.realign.bam
+	wildcards: chrom=Chrom3, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:30:11 2017] 132 of 173 steps (76%) done
+[Thu Nov 30 11:30:11 2017] rule gatk_gvcf:
+	input: Chrom1/Realign/D8-1-D8-22.realign.bam, Chrom1/Index/Chrom1.fa
+	output: Chrom1/GVCF/D8-1-D8-22.g.vcf
+	wildcards: chrom=Chrom1, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:30:15 2017] 133 of 173 steps (77%) done
+[Thu Nov 30 11:30:15 2017] rule gatk_gvcf:
+	input: Chrom7/Realign/D8-1-D8-22.realign.bam, Chrom7/Index/Chrom7.fa
+	output: Chrom7/GVCF/D8-1-D8-22.g.vcf
+	wildcards: chrom=Chrom7, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:30:16 2017] 134 of 173 steps (77%) done
+[Thu Nov 30 11:30:18 2017] 135 of 173 steps (78%) done
+[Thu Nov 30 11:30:20 2017] 136 of 173 steps (79%) done
+[Thu Nov 30 11:30:22 2017] 137 of 173 steps (79%) done
+[Thu Nov 30 11:30:22 2017] rule gatk_realign:
+	input: Chrom2/MarkDup/D8-1-D8-22.markdup.bam, Chrom2/Index/Chrom2.fa
+	output: Chrom2/Realign/D8-1-D8-22.intervals, Chrom2/Realign/D8-1-D8-22.realign.bam
+	wildcards: chrom=Chrom2, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:30:22 2017] 138 of 173 steps (80%) done
+[Thu Nov 30 11:30:22 2017] 139 of 173 steps (80%) done
+[Thu Nov 30 11:30:22 2017] rule gatk_gvcf:
+	input: Chrom3/Realign/D8-1-D8-22.realign.bam, Chrom3/Index/Chrom3.fa
+	output: Chrom3/GVCF/D8-1-D8-22.g.vcf
+	wildcards: chrom=Chrom3, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:30:22 2017] rule gatk_gvcf:
+	input: Chrom2/Realign/C-1-C-22.realign.bam, Chrom2/Index/Chrom2.fa
+	output: Chrom2/GVCF/C-1-C-22.g.vcf
+	wildcards: chrom=Chrom2, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:30:23 2017] 140 of 173 steps (81%) done
+[Thu Nov 30 11:30:28 2017] 141 of 173 steps (82%) done
+[Thu Nov 30 11:30:30 2017] 142 of 173 steps (82%) done
+[Thu Nov 30 11:30:31 2017] 143 of 173 steps (83%) done
+[Thu Nov 30 11:30:31 2017] 144 of 173 steps (83%) done
+[Thu Nov 30 11:30:36 2017] 145 of 173 steps (84%) done
+[Thu Nov 30 11:30:36 2017] rule gatk_realign:
+	input: Chrom3/MarkDup/N2-P30.markdup.bam, Chrom3/Index/Chrom3.fa
+	output: Chrom3/Realign/N2-P30.intervals, Chrom3/Realign/N2-P30.realign.bam
+	wildcards: chrom=Chrom3, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:30:36 2017] 146 of 173 steps (84%) done
+[Thu Nov 30 11:30:36 2017] 147 of 173 steps (85%) done
+[Thu Nov 30 11:30:36 2017] 148 of 173 steps (86%) done
+[Thu Nov 30 11:30:36 2017] rule gatk_gvcf:
+	input: Chrom2/Realign/D8-1-D8-22.realign.bam, Chrom2/Index/Chrom2.fa
+	output: Chrom2/GVCF/D8-1-D8-22.g.vcf
+	wildcards: chrom=Chrom2, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:30:42 2017] 149 of 173 steps (86%) done
+[Thu Nov 30 11:30:48 2017] 150 of 173 steps (87%) done
+[Thu Nov 30 11:30:48 2017] rule gatk_gvcf:
+	input: Chrom3/Realign/N2-P30.realign.bam, Chrom3/Index/Chrom3.fa
+	output: Chrom3/GVCF/N2-P30.g.vcf
+	wildcards: chrom=Chrom3, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:30:50 2017] 151 of 173 steps (87%) done
+[Thu Nov 30 11:30:50 2017] rule gatk_gvcf:
+	input: Chrom5/Realign/D8-1-D8-22.realign.bam, Chrom5/Index/Chrom5.fa
+	output: Chrom5/GVCF/D8-1-D8-22.g.vcf
+	wildcards: chrom=Chrom5, sample=D8-1-D8-22
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:30:58 2017] 152 of 173 steps (88%) done
+[Thu Nov 30 11:31:05 2017] 153 of 173 steps (88%) done
+[Thu Nov 30 11:31:05 2017] rule gatk_vcf:
+	input: Chrom1/GVCF/C-1-C-22.g.vcf, Chrom1/GVCF/D8-1-D8-22.g.vcf, Chrom1/GVCF/R4-R88.g.vcf, Chrom1/GVCF/N2-P30.g.vcf, Chrom1/Index/Chrom1.fa
+	output: Chrom1/VCF/Chrom1.vcf
+	wildcards: chrom=Chrom1
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:31:10 2017] 154 of 173 steps (89%) done
+[Thu Nov 30 11:31:18 2017] 155 of 173 steps (90%) done
+[Thu Nov 30 11:31:19 2017] 156 of 173 steps (90%) done
+[Thu Nov 30 11:31:19 2017] rule gatk_vcf:
+	input: Chrom2/GVCF/C-1-C-22.g.vcf, Chrom2/GVCF/D8-1-D8-22.g.vcf, Chrom2/GVCF/R4-R88.g.vcf, Chrom2/GVCF/N2-P30.g.vcf, Chrom2/Index/Chrom2.fa
+	output: Chrom2/VCF/Chrom2.vcf
+	wildcards: chrom=Chrom2
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:31:29 2017] 157 of 173 steps (91%) done
+[Thu Nov 30 11:31:29 2017] rule gatk_realign:
+	input: Chrom7/MarkDup/N2-P30.markdup.bam, Chrom7/Index/Chrom7.fa
+	output: Chrom7/Realign/N2-P30.intervals, Chrom7/Realign/N2-P30.realign.bam
+	wildcards: chrom=Chrom7, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:31:29 2017] 158 of 173 steps (91%) done
+[Thu Nov 30 11:31:29 2017] rule gatk_vcf:
+	input: Chrom3/GVCF/C-1-C-22.g.vcf, Chrom3/GVCF/D8-1-D8-22.g.vcf, Chrom3/GVCF/R4-R88.g.vcf, Chrom3/GVCF/N2-P30.g.vcf, Chrom3/Index/Chrom3.fa
+	output: Chrom3/VCF/Chrom3.vcf
+	wildcards: chrom=Chrom3
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:31:30 2017] 159 of 173 steps (92%) done
+[Thu Nov 30 11:31:30 2017] rule gatk_vcf:
+	input: Chrom5/GVCF/C-1-C-22.g.vcf, Chrom5/GVCF/D8-1-D8-22.g.vcf, Chrom5/GVCF/R4-R88.g.vcf, Chrom5/GVCF/N2-P30.g.vcf, Chrom5/Index/Chrom5.fa
+	output: Chrom5/VCF/Chrom5.vcf
+	wildcards: chrom=Chrom5
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:31:38 2017] 160 of 173 steps (92%) done
+[Thu Nov 30 11:31:38 2017] rule gatk_gvcf:
+	input: Chrom7/Realign/N2-P30.realign.bam, Chrom7/Index/Chrom7.fa
+	output: Chrom7/GVCF/N2-P30.g.vcf
+	wildcards: chrom=Chrom7, sample=N2-P30
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:31:47 2017] 161 of 173 steps (93%) done
+[Thu Nov 30 11:31:47 2017] rule gatk_vcf:
+	input: Chrom7/GVCF/C-1-C-22.g.vcf, Chrom7/GVCF/D8-1-D8-22.g.vcf, Chrom7/GVCF/R4-R88.g.vcf, Chrom7/GVCF/N2-P30.g.vcf, Chrom7/Index/Chrom7.fa
+	output: Chrom7/VCF/Chrom7.vcf
+	wildcards: chrom=Chrom7
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:31:55 2017] 162 of 173 steps (94%) done
+[Thu Nov 30 11:31:56 2017] 163 of 173 steps (94%) done
+[Thu Nov 30 11:31:59 2017] 164 of 173 steps (95%) done
+[Thu Nov 30 11:32:00 2017] 165 of 173 steps (95%) done
+[Thu Nov 30 11:32:00 2017] rule gatk_realign:
+	input: Chrom4/MarkDup/C-1-C-22.markdup.bam, Chrom4/Index/Chrom4.fa
+	output: Chrom4/Realign/C-1-C-22.intervals, Chrom4/Realign/C-1-C-22.realign.bam
+	wildcards: chrom=Chrom4, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:32:10 2017] 166 of 173 steps (96%) done
+[Thu Nov 30 11:32:14 2017] 167 of 173 steps (97%) done
+[Thu Nov 30 11:32:14 2017] rule gatk_gvcf:
+	input: Chrom4/Realign/C-1-C-22.realign.bam, Chrom4/Index/Chrom4.fa
+	output: Chrom4/GVCF/C-1-C-22.g.vcf
+	wildcards: chrom=Chrom4, sample=C-1-C-22
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:32:20 2017] 168 of 173 steps (97%) done
+[Thu Nov 30 11:32:48 2017] 169 of 173 steps (98%) done
+[Thu Nov 30 11:32:48 2017] rule gatk_vcf:
+	input: Chrom4/GVCF/C-1-C-22.g.vcf, Chrom4/GVCF/D8-1-D8-22.g.vcf, Chrom4/GVCF/R4-R88.g.vcf, Chrom4/GVCF/N2-P30.g.vcf, Chrom4/Index/Chrom4.fa
+	output: Chrom4/VCF/Chrom4.vcf
+	wildcards: chrom=Chrom4
+	resources: qsub_p=4, qsub_vf=40
+[Thu Nov 30 11:33:26 2017] 170 of 173 steps (98%) done
+[Thu Nov 30 11:33:26 2017] localrule vcf_files_lst:
+	input: Chrom1/VCF/Chrom1.vcf, Chrom2/VCF/Chrom2.vcf, Chrom3/VCF/Chrom3.vcf, Chrom4/VCF/Chrom4.vcf, Chrom5/VCF/Chrom5.vcf, Chrom6/VCF/Chrom6.vcf, Chrom7/VCF/Chrom7.vcf
+	output: AllChr/vcf.lst
+[Thu Nov 30 11:33:26 2017] 171 of 173 steps (99%) done
+[Thu Nov 30 11:33:26 2017] rule combine_vcf:
+	input: AllChr/vcf.lst
+	output: AllChr/AllChr.raw.vcf
+	resources: qsub_p=2, qsub_vf=2
+[Thu Nov 30 11:33:30 2017] 172 of 173 steps (99%) done
+[Thu Nov 30 11:33:30 2017] localrule GATK_pipe_all:
+	input: Data/C-1-C-22_R1.fastq.gz, Data/D8-1-D8-22_R1.fastq.gz, Data/R4-R88_R1.fastq.gz, Data/N2-P30_R1.fastq.gz, Data/C-1-C-22_R2.fastq.gz, Data/D8-1-D8-22_R2.fastq.gz, Data/R4-R88_R2.fastq.gz, Data/N2-P30_R2.fastq.gz, Chrom1/Index/Chrom1.fa, Chrom2/Index/Chrom2.fa, Chrom3/Index/Chrom3.fa, Chrom4/Index/Chrom4.fa, Chrom5/Index/Chrom5.fa, Chrom6/Index/Chrom6.fa, Chrom7/Index/Chrom7.fa, Chrom1/Index/Chrom1.fa.bwt, Chrom2/Index/Chrom2.fa.bwt, Chrom3/Index/Chrom3.fa.bwt, Chrom4/Index/Chrom4.fa.bwt, Chrom5/Index/Chrom5.fa.bwt, Chrom6/Index/Chrom6.fa.bwt, Chrom7/Index/Chrom7.fa.bwt, Chrom1/Index/Chrom1.fa.amb, Chrom2/Index/Chrom2.fa.amb, Chrom3/Index/Chrom3.fa.amb, Chrom4/Index/Chrom4.fa.amb, Chrom5/Index/Chrom5.fa.amb, Chrom6/Index/Chrom6.fa.amb, Chrom7/Index/Chrom7.fa.amb, Chrom1/Index/Chrom1.fa.ann, Chrom2/Index/Chrom2.fa.ann, Chrom3/Index/Chrom3.fa.ann, Chrom4/Index/Chrom4.fa.ann, Chrom5/Index/Chrom5.fa.ann, Chrom6/Index/Chrom6.fa.ann, Chrom7/Index/Chrom7.fa.ann, Chrom1/Index/Chrom1.fa.pac, Chrom2/Index/Chrom2.fa.pac, Chrom3/Index/Chrom3.fa.pac, Chrom4/Index/Chrom4.fa.pac, Chrom5/Index/Chrom5.fa.pac, Chrom6/Index/Chrom6.fa.pac, Chrom7/Index/Chrom7.fa.pac, Chrom1/Index/Chrom1.fa.sa, Chrom2/Index/Chrom2.fa.sa, Chrom3/Index/Chrom3.fa.sa, Chrom4/Index/Chrom4.fa.sa, Chrom5/Index/Chrom5.fa.sa, Chrom6/Index/Chrom6.fa.sa, Chrom7/Index/Chrom7.fa.sa, Chrom1/Index/Chrom1.fa.fai, Chrom2/Index/Chrom2.fa.fai, Chrom3/Index/Chrom3.fa.fai, Chrom4/Index/Chrom4.fa.fai, Chrom5/Index/Chrom5.fa.fai, Chrom6/Index/Chrom6.fa.fai, Chrom7/Index/Chrom7.fa.fai, Chrom1/Index/Chrom1.dict, Chrom2/Index/Chrom2.dict, Chrom3/Index/Chrom3.dict, Chrom4/Index/Chrom4.dict, Chrom5/Index/Chrom5.dict, Chrom6/Index/Chrom6.dict, Chrom7/Index/Chrom7.dict, Chrom1/Align/C-1-C-22.bam, Chrom1/Align/D8-1-D8-22.bam, Chrom1/Align/R4-R88.bam, Chrom1/Align/N2-P30.bam, Chrom2/Align/C-1-C-22.bam, Chrom2/Align/D8-1-D8-22.bam, Chrom2/Align/R4-R88.bam, Chrom2/Align/N2-P30.bam, Chrom3/Align/C-1-C-22.bam, Chrom3/Align/D8-1-D8-22.bam, Chrom3/Align/R4-R88.bam, Chrom3/Align/N2-P30.bam, Chrom4/Align/C-1-C-22.bam, Chrom4/Align/D8-1-D8-22.bam, Chrom4/Align/R4-R88.bam, Chrom4/Align/N2-P30.bam, Chrom5/Align/C-1-C-22.bam, Chrom5/Align/D8-1-D8-22.bam, Chrom5/Align/R4-R88.bam, Chrom5/Align/N2-P30.bam, Chrom6/Align/C-1-C-22.bam, Chrom6/Align/D8-1-D8-22.bam, Chrom6/Align/R4-R88.bam, Chrom6/Align/N2-P30.bam, Chrom7/Align/C-1-C-22.bam, Chrom7/Align/D8-1-D8-22.bam, Chrom7/Align/R4-R88.bam, Chrom7/Align/N2-P30.bam, Chrom1/Sort/C-1-C-22.sort.bam, Chrom1/Sort/D8-1-D8-22.sort.bam, Chrom1/Sort/R4-R88.sort.bam, Chrom1/Sort/N2-P30.sort.bam, Chrom2/Sort/C-1-C-22.sort.bam, Chrom2/Sort/D8-1-D8-22.sort.bam, Chrom2/Sort/R4-R88.sort.bam, Chrom2/Sort/N2-P30.sort.bam, Chrom3/Sort/C-1-C-22.sort.bam, Chrom3/Sort/D8-1-D8-22.sort.bam, Chrom3/Sort/R4-R88.sort.bam, Chrom3/Sort/N2-P30.sort.bam, Chrom4/Sort/C-1-C-22.sort.bam, Chrom4/Sort/D8-1-D8-22.sort.bam, Chrom4/Sort/R4-R88.sort.bam, Chrom4/Sort/N2-P30.sort.bam, Chrom5/Sort/C-1-C-22.sort.bam, Chrom5/Sort/D8-1-D8-22.sort.bam, Chrom5/Sort/R4-R88.sort.bam, Chrom5/Sort/N2-P30.sort.bam, Chrom6/Sort/C-1-C-22.sort.bam, Chrom6/Sort/D8-1-D8-22.sort.bam, Chrom6/Sort/R4-R88.sort.bam, Chrom6/Sort/N2-P30.sort.bam, Chrom7/Sort/C-1-C-22.sort.bam, Chrom7/Sort/D8-1-D8-22.sort.bam, Chrom7/Sort/R4-R88.sort.bam, Chrom7/Sort/N2-P30.sort.bam, Chrom1/MarkDup/C-1-C-22.markdup.bam, Chrom1/MarkDup/D8-1-D8-22.markdup.bam, Chrom1/MarkDup/R4-R88.markdup.bam, Chrom1/MarkDup/N2-P30.markdup.bam, Chrom2/MarkDup/C-1-C-22.markdup.bam, Chrom2/MarkDup/D8-1-D8-22.markdup.bam, Chrom2/MarkDup/R4-R88.markdup.bam, Chrom2/MarkDup/N2-P30.markdup.bam, Chrom3/MarkDup/C-1-C-22.markdup.bam, Chrom3/MarkDup/D8-1-D8-22.markdup.bam, Chrom3/MarkDup/R4-R88.markdup.bam, Chrom3/MarkDup/N2-P30.markdup.bam, Chrom4/MarkDup/C-1-C-22.markdup.bam, Chrom4/MarkDup/D8-1-D8-22.markdup.bam, Chrom4/MarkDup/R4-R88.markdup.bam, Chrom4/MarkDup/N2-P30.markdup.bam, Chrom5/MarkDup/C-1-C-22.markdup.bam, Chrom5/MarkDup/D8-1-D8-22.markdup.bam, Chrom5/MarkDup/R4-R88.markdup.bam, Chrom5/MarkDup/N2-P30.markdup.bam, Chrom6/MarkDup/C-1-C-22.markdup.bam, Chrom6/MarkDup/D8-1-D8-22.markdup.bam, Chrom6/MarkDup/R4-R88.markdup.bam, Chrom6/MarkDup/N2-P30.markdup.bam, Chrom7/MarkDup/C-1-C-22.markdup.bam, Chrom7/MarkDup/D8-1-D8-22.markdup.bam, Chrom7/MarkDup/R4-R88.markdup.bam, Chrom7/MarkDup/N2-P30.markdup.bam, Chrom1/Realign/C-1-C-22.realign.bam, Chrom1/Realign/D8-1-D8-22.realign.bam, Chrom1/Realign/R4-R88.realign.bam, Chrom1/Realign/N2-P30.realign.bam, Chrom2/Realign/C-1-C-22.realign.bam, Chrom2/Realign/D8-1-D8-22.realign.bam, Chrom2/Realign/R4-R88.realign.bam, Chrom2/Realign/N2-P30.realign.bam, Chrom3/Realign/C-1-C-22.realign.bam, Chrom3/Realign/D8-1-D8-22.realign.bam, Chrom3/Realign/R4-R88.realign.bam, Chrom3/Realign/N2-P30.realign.bam, Chrom4/Realign/C-1-C-22.realign.bam, Chrom4/Realign/D8-1-D8-22.realign.bam, Chrom4/Realign/R4-R88.realign.bam, Chrom4/Realign/N2-P30.realign.bam, Chrom5/Realign/C-1-C-22.realign.bam, Chrom5/Realign/D8-1-D8-22.realign.bam, Chrom5/Realign/R4-R88.realign.bam, Chrom5/Realign/N2-P30.realign.bam, Chrom6/Realign/C-1-C-22.realign.bam, Chrom6/Realign/D8-1-D8-22.realign.bam, Chrom6/Realign/R4-R88.realign.bam, Chrom6/Realign/N2-P30.realign.bam, Chrom7/Realign/C-1-C-22.realign.bam, Chrom7/Realign/D8-1-D8-22.realign.bam, Chrom7/Realign/R4-R88.realign.bam, Chrom7/Realign/N2-P30.realign.bam, Chrom1/GVCF/C-1-C-22.g.vcf, Chrom1/GVCF/D8-1-D8-22.g.vcf, Chrom1/GVCF/R4-R88.g.vcf, Chrom1/GVCF/N2-P30.g.vcf, Chrom2/GVCF/C-1-C-22.g.vcf, Chrom2/GVCF/D8-1-D8-22.g.vcf, Chrom2/GVCF/R4-R88.g.vcf, Chrom2/GVCF/N2-P30.g.vcf, Chrom3/GVCF/C-1-C-22.g.vcf, Chrom3/GVCF/D8-1-D8-22.g.vcf, Chrom3/GVCF/R4-R88.g.vcf, Chrom3/GVCF/N2-P30.g.vcf, Chrom4/GVCF/C-1-C-22.g.vcf, Chrom4/GVCF/D8-1-D8-22.g.vcf, Chrom4/GVCF/R4-R88.g.vcf, Chrom4/GVCF/N2-P30.g.vcf, Chrom5/GVCF/C-1-C-22.g.vcf, Chrom5/GVCF/D8-1-D8-22.g.vcf, Chrom5/GVCF/R4-R88.g.vcf, Chrom5/GVCF/N2-P30.g.vcf, Chrom6/GVCF/C-1-C-22.g.vcf, Chrom6/GVCF/D8-1-D8-22.g.vcf, Chrom6/GVCF/R4-R88.g.vcf, Chrom6/GVCF/N2-P30.g.vcf, Chrom7/GVCF/C-1-C-22.g.vcf, Chrom7/GVCF/D8-1-D8-22.g.vcf, Chrom7/GVCF/R4-R88.g.vcf, Chrom7/GVCF/N2-P30.g.vcf, AllChr/vcf.lst, AllChr/AllChr.raw.vcf
+[Thu Nov 30 11:33:30 2017] 173 of 173 steps (100%) done
